@@ -1,7 +1,38 @@
 # Release validation
 
-Release gates are recorded here after execution; qualification is in progress.
-Do not treat this draft as a passed GPU release.
+Local release preparation on 5 November 2026:
+
+| Gate | Observed result |
+|---|---|
+| Independent scientific/boundary/resource suite | 215 discovered; 207 passed, 8 explicit skips |
+| Fresh clone in CPU-only Python environment | Same 207 passes; NumPy/SciPy only, no Torch |
+| Scan/ROI display retention | 7 behavioral cases passed |
+| Histogram/display transfer | 5 valid + 12 rejection cases passed |
+| Offline full-world preparation | 9,314,217,887 bytes verified; all 27 codes; 150.44 s |
+| Actual GPU/public-HTTP acquisition | Focus, stigmation, XYZ, zoom, ROI and native 1024 passed |
+| Within-raster focus change | Same 1024 acquisition contains both applied-focus segments |
+| Actual GUI/API isolation | All 7 integration tests passed |
+| Fixture shutdown | Launcher exit 0; owned children absent |
+| Fresh clone + empty GPU environment | Full GPU/HTTP gate passed; 1024 acquisition 121.72 s; clean shutdown |
+| Source/content review | No retained run credentials, large artifacts or external image assets |
+| Scientific source scope | 77 engine ASTs unchanged except explicit device configuration |
+
+The 1024 acquisition with a focus change took 126.83 seconds in the first release
+fixture, including preparation/rendering. It was not delivered ahead of exposure.
+Focused 64-pixel contrast standard deviation was 101.36 counts versus 84.37 when
+defocused; Z defocus was 83.70. These are measured smoke-test observations, not
+calibration claims or hardware-independent performance guarantees.
+
+The supported GPU/dependency installation also succeeded in an empty virtual
+environment. The fresh clone passed the full GPU/HTTP gate, including signed
+stage displacement (correlation 0.9115) and both within-raster focus segments.
+Its implementation commit is `9cf689f8d01f2f95e58d511841f1156866f0ff58`;
+subsequent release changes record documentation and provenance only.
+See [first fixture](release-validation.json) and
+[fresh-install fixture](fresh-install-validation.json) for the measured results.
+Hardware: RTX 3090 Ti, 24 GB; WSL2 Ubuntu, Python 3.10.12, NumPy 1.26.4,
+SciPy 1.15.3, Torch 2.3.1+cu121, Triton 2.3.1. See the pinned requirements and
+constraints files for the transitive dependency versions.
 
 ## Reproduce CPU and display gates
 

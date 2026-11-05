@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "checks": {
+    "separate_authenticated_api": true,
+    "visible_focus": true,
+    "stage_z_prefocus": true,
+    "stigmation_signal": true,
+    "stage_displacement": true,
+    "zoom": true,
+    "roi_acquisition": true,
+    "native1024": true,
+    "within_raster_parameter_segments": true,
+    "observable_boundary": true,
+    "stop_beam_blank": true
+  },
+  "images": {
+    "focused": {
+      "sha256": "6597f4de3f34f891098f62e223d2b6ec5e99d095c55cdac8eaef893631857e77",
+      "pixels": 64,
+      "mean": 1015.09033203125,
+      "std": 101.2782109824795,
+      "seconds": 14.159750709999912,
+      "segments": 1
+    },
+    "defocused": {
+      "sha256": "318e555adc59792c9d3179aefd30e4c09555605003f713cba3448f8f7e0b74f0",
+      "pixels": 64,
+      "mean": 1014.44482421875,
+      "std": 83.14974597925368,
+      "seconds": 0.6143543590000036,
+      "segments": 1
+    },
+    "height_defocused": {
+      "sha256": "6dfed45b9b127f9a3fa61f0ec833c26743224b16bac3e23d98f508ab8d488b30",
+      "pixels": 64,
+      "mean": 1015.732421875,
+      "std": 84.89219486857006,
+      "seconds": 1.019043938999971,
+      "segments": 1
+    },
+    "astigmatic": {
+      "sha256": "70d55c73e4d1caebf823e31adbe1b49b62aed37c1f490811b79b8677d9064143",
+      "pixels": 64,
+      "mean": 1014.56396484375,
+      "std": 85.57199722619552,
+      "seconds": 0.6152899449999722,
+      "segments": 1
+    },
+    "stage_shift": {
+      "sha256": "b04021850fc77fbf6c1ef5307029e8a3e6fb848f0e5515304a11303c78676796",
+      "pixels": 64,
+      "mean": 1020.651611328125,
+      "std": 100.65222585066206,
+      "seconds": 2.233620524999992,
+      "segments": 1
+    },
+    "zoomed": {
+      "sha256": "0048fde4e0d52c3c278caac13a9b2ae97ce1ba7363d4c58971c2ed3ff7c0740a",
+      "pixels": 64,
+      "mean": 1051.998291015625,
+      "std": 118.93843497977744,
+      "seconds": 1.8300327650000554,
+      "segments": 1
+    },
+    "roi": {
+      "sha256": "1606525317e4169926c7d55017ec4e5fb7d1b19616f04e5ec6aed3e71b034612",
+      "pixels": 64,
+      "mean": 1105.488037109375,
+      "std": 130.05993342559614,
+      "seconds": 0.8161973900000703,
+      "segments": 1
+    },
+    "native1024_mid_scan_focus": {
+      "sha256": "56483f1e2742825ed3d58f37ffc49e9e00f8202bc73fb7cdcc85b1d56e952ae5",
+      "pixels": 1024,
+      "mean": 1014.7897911071777,
+      "std": 85.48855879987819,
+      "seconds": 121.71665495699995,
+      "segments": 2
+    }
+  },
+  "stage_shift_correlation": 0.9114596136540978,
+  "launcher_exit_code": 0,
+  "owned_children_absent": true,
+  "implementation_commit": "9cf689f8d01f2f95e58d511841f1156866f0ff58",
+  "isolated_install": true,
+  "user_site_enabled": false
+}

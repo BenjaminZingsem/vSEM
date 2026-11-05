@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "checks": {
+    "separate_authenticated_api": true,
+    "visible_focus": true,
+    "stage_z_prefocus": true,
+    "stigmation_signal": true,
+    "stage_displacement": true,
+    "zoom": true,
+    "roi_acquisition": true,
+    "native1024": true,
+    "within_raster_parameter_segments": true,
+    "observable_boundary": true,
+    "stop_beam_blank": true
+  },
+  "images": {
+    "focused": {
+      "sha256": "670be21070c7ce33d4a5b20c04dcd85e13854e5d0bf6ff6d243a69360a3f58f2",
+      "pixels": 64,
+      "mean": 1015.754150390625,
+      "std": 101.35924304061493,
+      "seconds": 9.527816795,
+      "segments": 1
+    },
+    "defocused": {
+      "sha256": "df3afc0a09a28f862eebcfed6b2291c5e1f9ab1e191b01d51e4019434c179920",
+      "pixels": 64,
+      "mean": 1014.23193359375,
+      "std": 84.36688280266932,
+      "seconds": 0.615467338000002,
+      "segments": 1
+    },
+    "height_defocused": {
+      "sha256": "cfe53de367306de92fe3e24edc09e33bd0e01fd4f5c550e42790c6ff3a791c3c",
+      "pixels": 64,
+      "mean": 1014.357421875,
+      "std": 83.69923941883087,
+      "seconds": 1.1193997769999982,
+      "segments": 1
+    },
+    "astigmatic": {
+      "sha256": "59c778cfa5475f154622eb6a7a905e7d702aa55356ea430feef9494294ba5e99",
+      "pixels": 64,
+      "mean": 1014.853759765625,
+      "std": 86.1043513806618,
+      "seconds": 0.8159553229999972,
+      "segments": 1
+    },
+    "stage_shift": {
+      "sha256": "944bd3b87fd2d84a73fe1a24d1d2273e233c5c1634e528daa41cabdf84b2f71d",
+      "pixels": 64,
+      "mean": 1021.169189453125,
+      "std": 100.51193394400153,
+      "seconds": 3.5450457959999966,
+      "segments": 1
+    },
+    "zoomed": {
+      "sha256": "1fab26ed3b2e60e11bcdadb86abd146eea5530cf7d2a72ffee373d067572f250",
+      "pixels": 64,
+      "mean": 1051.51513671875,
+      "std": 119.70020642971859,
+      "seconds": 1.7279619850000074,
+      "segments": 1
+    },
+    "roi": {
+      "sha256": "c6e853e17b8a9c82e0b4a2b6357b9d3cd22ea3e384cfb79df380770aab549ec8",
+      "pixels": 64,
+      "mean": 1106.224609375,
+      "std": 130.58512152879885,
+      "seconds": 0.8168985029999902,
+      "segments": 1
+    },
+    "native1024_mid_scan_focus": {
+      "sha256": "11b268593b44fa2e722154a171fae8c0dc2bf2e943d4e56874443af47bcf3aef",
+      "pixels": 1024,
+      "mean": 1014.7811832427979,
+      "std": 85.48345939730366,
+      "seconds": 126.83494589399999,
+      "segments": 2
+    }
+  },
+  "launcher_exit_code": 0,
+  "owned_children_absent": true,
+  "date": "2026-11-05",
+  "environment": "WSL2 Ubuntu Python3.10.12 RTX3090Ti24GB",
+  "catalogue_manifest_sha256": "ac3c1413c99575c4b07cb1cce33d7b13b47538e6ac7e4befba3b3248dd401cb3",
+  "original_fixture": "packaging_tree_before_fresh_install",
+  "cpu_suite": {
+    "discovered": 215,
+    "passed": 207,
+    "explicit_skips": 8
+  },
+  "transport_integration": {
+    "passed": 7
+  },
+  "display_retention": {
+    "passed": 7
+  },
+  "histogram_transfer": {
+    "valid_passed": 5,
+    "rejections_passed": 12
+  }
+}

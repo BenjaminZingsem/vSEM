@@ -1,0 +1,95 @@
+{
+  "baseline_commit": "7012f5d0275b7a8aa58f6e62fda3da147034c396",
+  "qualified_implementation_commit": "9cf689f8d01f2f95e58d511841f1156866f0ff58",
+  "hash_algorithm": "sha256",
+  "self_file_excluded": true,
+  "scientific_scope_review": "All 77 engine ASTs unchanged except GPU_UUID configuration.",
+  "changed_original_files": {
+    "acceptance/test_finite_transports.py": {
+      "original": "64a5fdb516a4baf8ec0443496144133e824637fda0af3e8364fdeb6b1a6f6b01",
+      "publication": "39a6304686b38711297bb5d30b37180c61280f8690d9277a940ccb8fea3b3d89"
+    },
+    "acceptance/test_human_causal_verifier.py": {
+      "original": "716b98d6edfdeb963b2ee7f0829d972583a0528c934ca9d6621f02450f649201",
+      "publication": "201b18973ec0150e573d59c33b033956e5498d6f2952cf4a2ec1e3f6bd94f8dc"
+    },
+    "engine/chunked_probe.py": {
+      "original": "eae8c39759a14bf19440e79373a669bd44909f94d5b99a1b76729e4ae6337a3f",
+      "publication": "bb4eef3b5294e31c1bb159216c47ad84314e0566a3c44f95d780ea407b66837c"
+    },
+    "engine/finite_chunked_probe.py": {
+      "original": "b21463c6e4aba12cfbe33db63b47ab3d54ca0a5983983bfb410f804c13e94c1e",
+      "publication": "23ecb476494287b43cd86ea01265b8ab1128ea2c42340bfed13f269829f76946"
+    },
+    "engine/finite_gpu_catalog.py": {
+      "original": "824721b23f8e3e9b4d6f4775529a1d4b127049280289926b188aa9af1c88e8a3",
+      "publication": "64021d02cfe4a90d00226dd83f4ae1f38b827ba15527b8c9fabff55437733f83"
+    },
+    "engine/finite_gpu_fields.py": {
+      "original": "d40f45799fa49f6e8590437913a4594bbf55c9f0a492b9624fe9b7f459d0bd1d",
+      "publication": "39662f19bf0cf865c8013fff58710e6976a4e580fb32113ea87c6de7bc0cdde3"
+    },
+    "engine/hierarchical_gpu_fields.py": {
+      "original": "b867ea1c5a5b253c0e0c40799a42c023c3c39d22dfadebf620e4436a9988fa34",
+      "publication": "22085723ce91866877ef3b218bd69ef5e4ed8e973997753293b7ae10a39cc704"
+    },
+    "engine/prepared_gpu_probe.py": {
+      "original": "d713d667f4a7440454eadf0a38dd53451916d15ec383a8c7bd74931a34ec1d53",
+      "publication": "facc20a2183bfab208883082b77f3c31a6ca869a1f91a47848190a2c3d6ffb37"
+    },
+    "runtime/finite_launch_spec.py": {
+      "original": "b66083aa6ad59a9529ad5a4942294b7945db33b55ebdebbc54ce7a38d8eed3a8",
+      "publication": "7a64c40de9245fc10a7c4fe03603c765566dc31cb6bd08149a10b4057987e4e2"
+    },
+    "runtime/human_realtime_codec.py": {
+      "original": "60e1dde6daf916446738bf80d10a0138322c3c8d8a1998def792f27d7d06b542",
+      "publication": "6ecad3c6f605f887a33cc05c591a198381efdf481e42e594976acade49b6d12b"
+    },
+    "runtime/prepared_resources.py": {
+      "original": "b412788388f023070a79c35131aa251ba62dad3aea662abdfc0159f03386fdc2",
+      "publication": "9f111353408e9b7a980a93140981accbabd87344c6aa3e62b026d19755d825f0"
+    },
+    "scripts/prepare_finite_catalogue.py": {
+      "original": "e5f53e24cdd0a022c1a5ba3fe163240b3faadbd0794d0a0873f1410f728c78e4",
+      "publication": "df3330f15c8f7dae8c59bf0ef132932d0a4222664c0fb374e877be7027a93563"
+    }
+  },
+  "excluded_original_files": [
+    "evidence/frontier/counter-table-closure01.json",
+    "orchestrator/__init__.py",
+    "orchestrator/common.py",
+    "orchestrator/eta.py",
+    "orchestrator/state.py"
+  ],
+  "added_files": {
+    ".gitattributes": "23302dd90b8bb74b44d365fafef8df20f809b61cb347023951ecf60a88a29651",
+    ".github/ISSUE_TEMPLATE/behavior.yml": "f23167c6e511808534a2cc81e24c1f0a457997960ceb943d45216cded56cc309",
+    ".github/workflows/ci.yml": "1f385ebe936e0e5befb72b63d8b84a5c1c0509c7228980eff58b451ccf2d4700",
+    ".gitignore": "4f4a115e49ad78874a34e1e44d5753ebccd191e7e3934dca06212e1ed81c7ad9",
+    "AGENTS.md": "d7487b72357b965f51fd91daeabdc05da6fc386f6bd1d2fe74de295224fa97c8",
+    "CHANGELOG.md": "a661d4b32e03fb36ee8de319ed231df46cb5e6f7dbec11722934702f805e702d",
+    "CONTRIBUTING.md": "bd3bd79facc13397755ad1e1bff4c8f7a1eae8af86f6c7897fcf8eb6153ab81f",
+    "LICENSE": "ab40332c4d8934ee9e85c743f65175d9623d23ef3ae02f6610e08d3d449183e6",
+    "README.md": "1858f06e3925e866181f4ce2ba0beb91a0d97db283fa991f0c9fe85bc0955d28",
+    "SECURITY.md": "80dbcdaee8e976e54d99a8889eaab2c463591458f698b84067b2fde2c7de6dcd",
+    "acceptance/test_publication_resources.py": "3a3f14159f0592e36834cdb097f5b8c32964c33b9cc14f911208446dbb0786a2",
+    "constraints-gpu.txt": "d6d1f46badbbcb359cb4982657ddeb68a41d847a1a123b5249687be9e99f5ea8",
+    "docs/API.md": "ba9d63c09b84601116314bc6db16c3c3de717e9bf678fa8002fb71a9a2aa86c8",
+    "docs/DEPLOYMENT.md": "6f208e396f879024ba9216ddd8c1e2d80c4d6a471f8cc275905d705aaa8bd68b",
+    "docs/HUMAN_REVIEW.md": "10a24e458d4acce9030e75789b349ba0f9e36f0f9b3603b22451385cceda9e15",
+    "docs/PROVENANCE.md": "f01fcb125ff47eb8d77329384a1c975091a4a0b6f4316eae9b64c4c416e0fdad",
+    "docs/ROADMAP.md": "19d5a8bf6ee5da3f3dcafdf6292c7fb2edf250cbc7ccbbef8ed405241c8be27c",
+    "docs/SCIENCE.md": "72dfd34c294380f867cd7e25c057dd5c1befd356863a7e01bd52156275f43a2d",
+    "docs/VALIDATION.md": "8569ab10698b5e031480aa88b133e1c6c43a75a20c1db887232d7823141471d9",
+    "docs/baseline-files.json": "5368953280c8038145f7821e41522f2571aaf4e14e8284c81e36b5160cd27b09",
+    "docs/fresh-install-validation.json": "ca65d12d379080d979d5e26c625e1c8b09b1dfe1d6c6dadc3f0fcf9e4867c695",
+    "docs/release-validation.json": "fce867fb4107560cbf1a265b1bc4559bd54b4645347e81dbfce6646601710ea7",
+    "examples/agent_client.py": "ee70ae5b65c1e20568491d9c3f62348ec2769d952ebbda65bd89ade6e48ca02e",
+    "requirements-gpu.txt": "092d1f2d94338ec9caa62d58119e09ca37e3b44de6db92979951e6a7ee90bb2a",
+    "requirements.txt": "56e784d24e84168f21fe5bd08c680dfb5468ad70dbce793700c2c97a2dcb3a64",
+    "runtime/gpu_resources.py": "16804863e6382f24022a70e93770cf083de508d13d37dc9ff11c9742f8e6c180",
+    "runtime/serve.py": "18a7df0b06f55411de460e97b849519a23ca6ab4ec5990275b97b456b15add33",
+    "scripts/audit_publication.py": "3da64bb3d12d5003a85328fcf7391b8219e9206c3532394e6753ce9ae64d9709",
+    "scripts/qualify_release.py": "d671909548f0137f95e68a780cdd9c48ce423e6e8182fb8105594f90284f05fd"
+  }
+}
