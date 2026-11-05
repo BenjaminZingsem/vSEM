@@ -15,12 +15,15 @@ own session, exact Origin and CSRF token. There is no truth/evaluator/admin rout
 1. `POST /lease` with `{}` acquires control, or renews your existing control.
    Renew every 5 seconds; authority expires after 30 seconds. Competing GUI/API
    control requests can be refused. Do not assume an HTTP 202 means completion.
+   To switch from the GUI to an API client, stop exposure, close the GUI tab and
+   let its authority expire before acquiring API control.
 2. `GET /state` obtains observable readbacks, current/applied/requested settings,
    physical scan progress, delivery age, stop generation and available images.
 3. `POST /command` submits exactly the object shown below. It returns an
    `operation_id`; use `GET /operation/ID` to observe its disposition.
 4. Image metadata is `GET /image/ID`; raw SE data is `GET /image/ID/SE`.
    The count plane is row-major, little-endian uint32, four bytes per pixel.
+   Columns increase toward positive specimen X; rows increase toward negative Y.
 5. Send Stop before ending a client session. Closing an HTTP connection alone
    does not stop the physical instrument. The service continues while you think.
 

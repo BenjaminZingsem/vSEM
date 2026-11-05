@@ -94,17 +94,12 @@ def main():
         stage();optics(sx=.8,sy=.4);stig,_=scan('astigmatic')
         assert np.mean((stig-focused)**2)>max(1.,2*focused.mean()),'stigmation must alter signal beyond shot noise'
         optics();stage(x=.25e-6,y=-.125e-6);shifted,_=scan('stage_shift')
-        a=focused[4:,:-8].ravel();b=shifted[:-4,8:].ravel()
-        # Positive specimen coordinates move features left; compare both signs
-        # independently to catch a wrong shift or no motion.
-        candidates=[]
-        for yy in (-4,4):
-            for xx in (-8,8):
-                ay=slice(max(0,yy),min(64,64+yy));by=slice(max(0,-yy),min(64,64-yy))
-                ax=slice(max(0,xx),min(64,64+xx));bx=slice(max(0,-xx),min(64,64-xx))
-                candidates.append(float(np.corrcoef(focused[ay,ax].ravel(),shifted[by,bx].ravel())[0,1]))
+        # HFW=2um/64: +250nm X and -125nm Y move features left8/up4.
+        # Image row zero is at positive specimen Y. Check that exact sign/scale.
+        correlation=float(np.corrcoef(focused[4:,8:].ravel(),shifted[:-4,:-8].ravel())[0,1])
         unshifted=float(np.corrcoef(focused.ravel(),shifted.ravel())[0,1])
-        assert max(candidates)>unshifted+.1 and max(candidates)>.6,'stage image displacement required'
+        assert correlation>unshifted+.1 and correlation>.6,'signed stage image displacement required'
+        result['stage_shift_correlation']=correlation
         stage();zoom,_=scan('zoomed',width=1e-6)
         assert np.mean((zoom-focused)**2)>2*focused.mean(),'physical zoom must change acquired content'
         scan('roi',width=.5e-6,offset=.25e-6)

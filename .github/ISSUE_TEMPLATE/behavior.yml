@@ -1,0 +1,32 @@
+name: Instrument behavior or operator integration
+description: Report a reproducible SEM behavior or automation need.
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps and observed settings
+      description: Include resolution, HFW, dwell, current and relevant stage/optics settings.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Hardware and software
+      description: GPU, OS, Python/dependency versions, browser and approximate timings.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Observable evidence
+      description: Redacted metadata or screenshots. Never include connection.json, tokens, invitation URLs or private run logs.
