@@ -1,0 +1,297 @@
+[
+  {
+    "expected": {
+      "autoWindow": {
+        "high": 3006477112.500001,
+        "low": 3.0000000000000004
+      },
+      "histogram": {
+        "counts": [
+          3,
+          0,
+          0,
+          1
+        ],
+        "maximum": 4294967295,
+        "minimum": 0,
+        "sampleCount": 4
+      },
+      "rgba": [
+        0,
+        0,
+        0,
+        255,
+        64,
+        64,
+        64,
+        255,
+        128,
+        128,
+        128,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    "input": {
+      "active_ns": 10,
+      "bins": 4,
+      "brightness": 0.0,
+      "completed": 3,
+      "contrast": 1.0,
+      "counts": [
+        0,
+        10,
+        20,
+        4294967295
+      ],
+      "dwell_ns": 20,
+      "gamma": 1.0,
+      "height": 1,
+      "high": 40.0,
+      "low": 0.0,
+      "q_high": 0.9,
+      "q_low": 0.1,
+      "units": "counts",
+      "width": 4
+    }
+  },
+  {
+    "expected": {
+      "autoWindow": {
+        "high": 3.0064771095000006e+17,
+        "low": 150000000.00000003
+      },
+      "histogram": {
+        "counts": [
+          3,
+          0,
+          0,
+          1
+        ],
+        "maximum": 4.294967295e+17,
+        "minimum": 0.0,
+        "sampleCount": 4
+      },
+      "rgba": [
+        0,
+        0,
+        0,
+        255,
+        64,
+        64,
+        64,
+        255,
+        128,
+        128,
+        128,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    "input": {
+      "active_ns": 10,
+      "bins": 4,
+      "brightness": 0.0,
+      "completed": 3,
+      "contrast": 1.0,
+      "counts": [
+        0,
+        10,
+        20,
+        4294967295
+      ],
+      "dwell_ns": 20,
+      "gamma": 1.0,
+      "height": 1,
+      "high": 2000000000.0,
+      "low": 0.0,
+      "q_high": 0.9,
+      "q_low": 0.1,
+      "units": "cps",
+      "width": 4
+    }
+  },
+  {
+    "expected": {
+      "autoWindow": {
+        "high": 1,
+        "low": 0
+      },
+      "histogram": {
+        "counts": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maximum": 1,
+        "minimum": 0,
+        "sampleCount": 0
+      },
+      "rgba": [
+        0,
+        0,
+        0,
+        255,
+        0,
+        0,
+        0,
+        255,
+        0,
+        0,
+        0,
+        255,
+        0,
+        0,
+        0,
+        255
+      ]
+    },
+    "input": {
+      "active_ns": 0,
+      "bins": 4,
+      "brightness": 0.0,
+      "completed": 0,
+      "contrast": 1.0,
+      "counts": [
+        0,
+        10,
+        20,
+        4294967295
+      ],
+      "dwell_ns": 20,
+      "gamma": 1.0,
+      "height": 1,
+      "high": 40.0,
+      "low": 0.0,
+      "q_high": 0.9,
+      "q_low": 0.1,
+      "units": "counts",
+      "width": 4
+    }
+  },
+  {
+    "expected": {
+      "autoWindow": {
+        "high": 8.0,
+        "low": 6.0
+      },
+      "histogram": {
+        "counts": [
+          4,
+          0,
+          0,
+          0
+        ],
+        "maximum": 7,
+        "minimum": 7,
+        "sampleCount": 4
+      },
+      "rgba": [
+        45,
+        45,
+        45,
+        255,
+        45,
+        45,
+        45,
+        255,
+        45,
+        45,
+        45,
+        255,
+        45,
+        45,
+        45,
+        255
+      ]
+    },
+    "input": {
+      "active_ns": 0,
+      "bins": 4,
+      "brightness": 0.0,
+      "completed": 4,
+      "contrast": 1.0,
+      "counts": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "dwell_ns": 20,
+      "gamma": 1.0,
+      "height": 1,
+      "high": 40.0,
+      "low": 0.0,
+      "q_high": 0.9,
+      "q_low": 0.1,
+      "units": "counts",
+      "width": 4
+    }
+  },
+  {
+    "expected": {
+      "autoWindow": {
+        "high": 2.7,
+        "low": 0.30000000000000004
+      },
+      "histogram": {
+        "counts": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "maximum": 3,
+        "minimum": 0,
+        "sampleCount": 2
+      },
+      "rgba": [
+        0,
+        0,
+        0,
+        255,
+        0,
+        0,
+        0,
+        255,
+        0,
+        0,
+        0,
+        255,
+        0,
+        0,
+        0,
+        255
+      ]
+    },
+    "input": {
+      "active_ns": 0,
+      "bins": 4,
+      "brightness": 0.1,
+      "completed": 2,
+      "contrast": 2.0,
+      "counts": [
+        0,
+        3,
+        5,
+        9
+      ],
+      "dwell_ns": 20,
+      "gamma": 2.0,
+      "height": 1,
+      "high": 40.0,
+      "low": 0.0,
+      "q_high": 0.9,
+      "q_low": 0.1,
+      "units": "counts",
+      "width": 4
+    }
+  }
+]

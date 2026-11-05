@@ -1,0 +1,3 @@
+# Qualified CPU/scientific dependencies. Python 3.10 is the supported line.
+numpy==1.26.4
+scipy==1.15.3

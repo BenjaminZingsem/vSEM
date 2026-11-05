@@ -1,0 +1,5 @@
+# Install after requirements.txt. Explicit CUDA 12.1 wheel; no silent fallback.
+--extra-index-url https://download.pytorch.org/whl/cu121
+-c constraints-gpu.txt
+torch==2.3.1+cu121
+triton==2.3.1

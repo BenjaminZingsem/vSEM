@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.bootstrap-tmp/
+runs/
+data/
+*.egg-info/
+build/
+dist/
+.env
+.env.*
+private-launch.json
+connection.json
+*.log
