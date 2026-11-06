@@ -8,7 +8,8 @@ account, GitHub App or new API key is required.
 ## 1. Open the correct local checkout
 
 Open the public vSEM checkout in a local Codex session with access to the already
-authenticated GitHub CLI. Keep the earlier experimental completion goal paused.
+authenticated GitHub CLI. The owner retired the earlier experimental completion
+goal on 6 November 2026; preserve its work without resuming its broad mandate.
 A separate maintenance conversation avoids mixing their scopes. To clone elsewhere:
 
 ```bash
@@ -74,26 +75,44 @@ the limitation and still use reviewed PRs, successful checks and chat decisions.
 
 ## 4. Activate the goal explicitly
 
-Read [the full activation prompt](../prompts/CONTINUOUS_MAINTENANCE.md) and paste
-it into the maintenance conversation with the policy commit you approve. A concise
-equivalent is:
+Read [the full goal contract](../prompts/CONTINUOUS_MAINTENANCE.md). First clear
+the retired goal using **Clear goal** in the goal progress row, or `/goal clear`
+where supported. This retires the objective, not the preserved project files.
+Do not mark unfinished work complete to make room. A fresh conversation in this
+checkout is also possible; keep the old one inactive.
+
+Use `/goal` and paste the following objective, supplying the exact owner-approved
+commit containing the contract (not a contributor branch or moving `main`):
 
 ```text
-Start the continuous vSEM maintenance goal using
-prompts/CONTINUOUS_MAINTENANCE.md at policy commit <APPROVED_COMMIT>.
-Use my existing BenjaminZingsem GitHub account. Ask me with concrete choices before
-incorporating external code or implementing features. Keep the older experimental
-completion goal paused.
+Maintain BenjaminZingsem/vSEM under prompts/CONTINUOUS_MAINTENANCE.md at
+contract commit <OWNER_APPROVED_PROMPT_COMMIT>, using policy baseline
+2b21be6ff24db181f39179dd38d61a53a35310ac. Read the exact committed contract
+before acting. Use my existing BenjaminZingsem account and leave branch
+permissions unchanged. The former completion goal is retired; preserve its work.
+Prioritize verified defects, then explicitly approved roadmap slices. Ask me with
+options before external-code adoption, feature implementation, sensitive
+integration, releases or permission/policy/destructive changes. Only my reply in
+this conversation supplies approval. Preserve scientific and GUI/API/observable
+boundaries, independent acceptance and verified PR/main CI.
+First activation only: verify access, source and queue, save a private handoff,
+then pause before coding, public replies or worker/server launches. After my
+explicit resume, follow the full maintenance cycle. Pause again on my request,
+when decisions block all useful work, or on a fresh access failure. No scheduler
+or persistent human server is authorized.
 ```
 
-The first cycle verifies account/repo/policy, records a private resumable handoff
-and inspects the actual issue/PR/check queue. If no actionable bug exists, it
+The first activation verifies account/repo/policy, records a private resumable
+handoff and inspects the actual issue/PR/check queue, then pauses. On explicit
+resume, the normal cycle starts. If no actionable bug exists, it
 proposes the next roadmap feature for your choice; it does not implement all
 roadmap items automatically or install a scheduler.
 
-If the interface retains another unfinished paused goal, use a fresh maintenance
-conversation or its goal controls. Never declare the old goal complete merely
-to make room. This repository cannot change the application's goal controls.
+The assistant cannot clear a goal through its current goal tools; the user controls
+removal. Keep the short objective below the documented 4,000-character limit;
+the committed contract holds the detailed instructions. See official
+[goal commands](https://learn.chatgpt.com/docs/developer-commands) and
+[desktop goal controls](https://learn.chatgpt.com/docs/long-running-work).
 
 ## 5. Answer decisions and pause when needed
 
@@ -104,7 +123,8 @@ permission for that action; batch approval covers only its named tasks.
 
 Say **"Pause the maintenance goal at the next safe checkpoint"** to pause. To
 resume, ask it to read the preserved handoff and recheck source, approvals and
-the queue. [ROADMAP.md](ROADMAP.md) and [MAINTENANCE_STATUS.md](MAINTENANCE_STATUS.md)
+the queue, or use `/goal resume`. Use `/goal pause` or the goal row's Pause control
+to pause directly. [ROADMAP.md](ROADMAP.md) and [MAINTENANCE_STATUS.md](MAINTENANCE_STATUS.md)
 are dated public summaries; private execution/approval records stay ignored.
 
 No issue-triggered workflow, scheduled service or permanent GPU runner is installed.

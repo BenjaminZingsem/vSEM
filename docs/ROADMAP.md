@@ -1,7 +1,7 @@
 # Project status and roadmap
 
 Last reviewed: **6 November 2026**. Released: **v0.1.0**, an MIT-licensed research
-sandbox. The broader implementation goal is **paused for maintainer planning**;
+sandbox. The broader implementation goal is **retired by the owner**;
 there is no unattended maintenance service. The owner-account maintenance policy
 and launch instructions are prepared; the continuous goal starts only on explicit
 activation. See [setup](MAINTENANCE_SETUP.md) and [status](MAINTENANCE_STATUS.md).
@@ -69,4 +69,4 @@ details as progress evidence.
 Policy changes and roadmap implementation scope require the owner's decision. The
 [continuous goal prompt](../prompts/CONTINUOUS_MAINTENANCE.md) describes how a
 future maintenance run would use this roadmap; merely committing it does not
-start a service or resume the paused goal.
+start a service or reactivate the retired completion mandate.

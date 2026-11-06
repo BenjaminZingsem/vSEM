@@ -8,7 +8,7 @@ Last verified: **6 November 2026**.
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
 | Continuous maintenance goal | Not started by policy/setup publication |
-| Earlier experimental goal | Paused; preserve separate source and handoffs |
+| Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
 | Human-review instance / local coding wave | None launched for this setup |
@@ -32,6 +32,13 @@ zoom, ROI, observable state, Stop and 1024-pixel acquisition with two within-ras
 focus segments passed. The 1024 acquisition took 133.16 seconds on the qualified
 RTX 3090 Ti. The owned launcher exited successfully, children closed and GPU
 memory was released. This repair adds no dependency and does not activate a goal.
+
+The replacement [goal contract](../prompts/CONTINUOUS_MAINTENANCE.md) defines the
+initial verification-and-pause checkpoint, normal maintenance priorities,
+explicit owner choices, local coding boundaries and acceptance/handoff rules.
+It has not been activated by publication. The retired completion goal's blanket
+development authority does not carry over; its unfinished experiments remain
+available for individually approved roadmap work.
 
 Use [the setup guide](MAINTENANCE_SETUP.md) to activate and
 [the roadmap](ROADMAP.md) for delivered capabilities and next gates. This page is
