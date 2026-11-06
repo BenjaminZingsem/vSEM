@@ -38,6 +38,11 @@ the goal will use; another computer/cloud session may not share that login.
 
 ## 3. Verify repository protection
 
+**Owner decision, 6 November 2026: leave permissions unchanged.** Main remains
+unprotected and direct pushes remain available. Maintenance still follows reviewed
+PRs, successful checks and explicit human decisions under the policy. No protection
+configuration needs to be applied to complete this setup.
+
 The prepared settings are
 [configs/maintenance_branch_protection.json](../configs/maintenance_branch_protection.json).
 They require PRs, an up-to-date base, the GitHub Actions `acceptance` check,

@@ -7,6 +7,8 @@ from pathlib import Path
 import struct
 import tempfile
 import unittest
+from contextlib import contextmanager
+from unittest.mock import patch
 from engine.finite_catalog_format import load_header,array_chunks,ArraySpec
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -97,6 +99,35 @@ class FiniteCatalogFormatGates(unittest.TestCase):
         header=self.header();item=header.arrays[0];iterator=array_chunks(header,item,7);next(iterator)
         with (self.directory/item.name).open('r+b') as stream:stream.seek(-1,2);stream.write(b'X')
         with self.assertRaises(ValueError):list(iterator)
+
+    def test_unread_content_change_rejected_even_if_mtime_does_not_advance(self):
+        header=self.header();item=header.arrays[0];path=self.directory/item.name
+        # Whole seconds round-trip on both native and mounted filesystems.
+        stamp=1_600_000_000_000_000_000
+        os.utime(path,ns=(stamp,stamp))
+        before=path.stat();iterator=array_chunks(header,item,7);next(iterator)
+        with path.open('r+b') as stream:stream.seek(-1,2);stream.write(b'X')
+        # Reproduce coarse/equal timestamps deterministically, without a sleep
+        # or weakening the original concurrent-write rejection gate.
+        os.utime(path,ns=(before.st_atime_ns,before.st_mtime_ns))
+        self.assertEqual(path.stat().st_mtime_ns,before.st_mtime_ns)
+        self.assertNotEqual(sha(path.read_bytes()),item.sha256)
+        with self.assertRaises(ValueError):list(iterator)
+
+    def test_short_file_reads_preserve_chunks_and_exact_stream(self):
+        header=self.header();item=header.arrays[0];path=self.directory/item.name
+        expected=path.read_bytes();original_open=Path.open
+        class ShortReader:
+            def __init__(self,stream):self.stream=stream
+            def fileno(self):return self.stream.fileno()
+            def read(self,size):return self.stream.read(min(size,3))
+        @contextmanager
+        def short_open(target,*args,**kwargs):
+            with original_open(target,*args,**kwargs) as stream:yield ShortReader(stream)
+        with patch.object(Path,'open',short_open):chunks=list(array_chunks(header,item,16))
+        self.assertEqual(b''.join(chunks),expected)
+        self.assertEqual([len(c) for c in chunks],[16]*(len(expected)//16)+[len(expected)%16])
+        self.assertTrue(all(len(c)%4==0 for c in chunks))
 
     def test_unknown_member_and_hardlink_rejected(self):
         (self.directory/'unexpected').write_bytes(b'extra')
