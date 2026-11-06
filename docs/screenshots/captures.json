@@ -1,0 +1,347 @@
+{
+  "description": "Real GUI screenshots acquired via the released browser controls; unchanged PNG bytes, visually reviewed. Only observable acquisition metadata are included.",
+  "captured_date": "2026-11-06",
+  "source_commit": "a8296f777e69f847ac1422ee04cbd22ab16f28d2",
+  "browser": "Chrome/156.0.8078.81",
+  "viewport_css_pixels": {
+    "width": 1440,
+    "height": 1100
+  },
+  "capture_extent": "Full document; page scrollbar is excluded from image width.",
+  "runtime": "WSL2 Ubuntu; Python 3.10.12; explicitly selected NVIDIA RTX 3090 Ti; finite stored specimen; runtime world generation disabled.",
+  "scope": "Generic uncalibrated ideal-grounded SE model. Charging and beam damage inactive.",
+  "fixture_checks": {
+    "completed_native_captures": 7,
+    "roi_retained_survey_native_pixels": 1024,
+    "roi_native_pixels": 64,
+    "browser_runtime_exceptions": 0,
+    "final_stop_beam_blank": true,
+    "owned_browser_closed": true,
+    "launcher_exit_code": 0,
+    "owned_children_absent": true
+  },
+  "captures": [
+    {
+      "file": "01-console-focused.png",
+      "sha256": "4c058d89c2b5a37e64a6c9e3e05eb8baf301cfe5f4f23d525cc777d75bd82676",
+      "width": 1425,
+      "height": 1611,
+      "instruction": "Take control; HFW 2; Live pixels 128; Live scan; Freeze live; Auto window; disable Auto window full field.",
+      "image": {
+        "width_px": 128,
+        "height_px": 128,
+        "field_width_m": 2e-06,
+        "offset_x_m": 0,
+        "offset_y_m": 0,
+        "dwell_ns": 20000,
+        "outcome": "COMPLETED",
+        "completed_pixels": 16384,
+        "stage": {
+          "x_m": 0,
+          "y_m": 0,
+          "z_m": 0,
+          "working_distance_m": 0.01
+        },
+        "parameter_segments": [
+          {
+            "start_elapsed_ns": 0,
+            "end_elapsed_ns": 370380000,
+            "current_pA": 100,
+            "focus_offset_m": 0,
+            "stigmator_x": 0,
+            "stigmator_y": 0,
+            "stage": {
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0,
+              "working_distance_m": 0.01
+            }
+          }
+        ]
+      },
+      "display": {
+        "cps-low": "37850000",
+        "cps-high": "64408500",
+        "display-gamma": "1",
+        "display-brightness": "0",
+        "display-contrast": "1"
+      }
+    },
+    {
+      "file": "02-defocus.png",
+      "sha256": "f02491eac47f10045b9922980663a81e1ce0e27470aa85a24bd3f163ae26e31c",
+      "width": 1425,
+      "height": 1611,
+      "instruction": "Focus 15 um; Live scan; Freeze live; keep the first display window.",
+      "image": {
+        "width_px": 128,
+        "height_px": 128,
+        "field_width_m": 2e-06,
+        "offset_x_m": 0,
+        "offset_y_m": 0,
+        "dwell_ns": 20000,
+        "outcome": "COMPLETED",
+        "completed_pixels": 16384,
+        "stage": {
+          "x_m": 0,
+          "y_m": 0,
+          "z_m": 0,
+          "working_distance_m": 0.01
+        },
+        "parameter_segments": [
+          {
+            "start_elapsed_ns": 0,
+            "end_elapsed_ns": 370380000,
+            "current_pA": 100,
+            "focus_offset_m": 1.4999999999999999e-05,
+            "stigmator_x": 0,
+            "stigmator_y": 0,
+            "stage": {
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0,
+              "working_distance_m": 0.01
+            }
+          }
+        ]
+      },
+      "display": {
+        "cps-low": "37850000",
+        "cps-high": "64408500",
+        "display-gamma": "1",
+        "display-brightness": "0",
+        "display-contrast": "1"
+      }
+    },
+    {
+      "file": "03-stigmation.png",
+      "sha256": "963be901ecf624bd6ad041dfa035425daab030aab68175e4e5eb90ecc81ceba0",
+      "width": 1425,
+      "height": 1611,
+      "instruction": "Focus 0; Stigmator X 0.8 and Y 0.4; Live scan; Freeze live; same display window.",
+      "image": {
+        "width_px": 128,
+        "height_px": 128,
+        "field_width_m": 2e-06,
+        "offset_x_m": 0,
+        "offset_y_m": 0,
+        "dwell_ns": 20000,
+        "outcome": "COMPLETED",
+        "completed_pixels": 16384,
+        "stage": {
+          "x_m": 0,
+          "y_m": 0,
+          "z_m": 0,
+          "working_distance_m": 0.01
+        },
+        "parameter_segments": [
+          {
+            "start_elapsed_ns": 0,
+            "end_elapsed_ns": 370380000,
+            "current_pA": 100,
+            "focus_offset_m": 0,
+            "stigmator_x": 0.8,
+            "stigmator_y": 0.4,
+            "stage": {
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0,
+              "working_distance_m": 0.01
+            }
+          }
+        ]
+      },
+      "display": {
+        "cps-low": "37850000",
+        "cps-high": "64408500",
+        "display-gamma": "1",
+        "display-brightness": "0",
+        "display-contrast": "1"
+      }
+    },
+    {
+      "file": "04-stage-zoom.png",
+      "sha256": "3e8e843e325438c6dc47d295e4aeaf1c06d38061b0ff8426c58f97a5854c2367",
+      "width": 1425,
+      "height": 1611,
+      "instruction": "Move XYZ to X 0.00025 mm, Y -0.000125 mm, Z 0 um; Zoom + once to HFW 1 um; Live scan; Freeze live.",
+      "image": {
+        "width_px": 128,
+        "height_px": 128,
+        "field_width_m": 1e-06,
+        "offset_x_m": 0,
+        "offset_y_m": 0,
+        "dwell_ns": 20000,
+        "outcome": "COMPLETED",
+        "completed_pixels": 16384,
+        "stage": {
+          "x_m": 2.5e-07,
+          "y_m": -1.25e-07,
+          "z_m": 0,
+          "working_distance_m": 0.01
+        },
+        "parameter_segments": [
+          {
+            "start_elapsed_ns": 0,
+            "end_elapsed_ns": 370380000,
+            "current_pA": 100,
+            "focus_offset_m": 0,
+            "stigmator_x": 0,
+            "stigmator_y": 0,
+            "stage": {
+              "x_m": 2.5e-07,
+              "y_m": -1.25e-07,
+              "z_m": 0,
+              "working_distance_m": 0.01
+            }
+          }
+        ]
+      },
+      "display": {
+        "cps-low": "37850000",
+        "cps-high": "64408500",
+        "display-gamma": "1",
+        "display-brightness": "0",
+        "display-contrast": "1"
+      }
+    },
+    {
+      "file": "05-finite-survey.png",
+      "sha256": "cd227fd5345c5d2d659f050982986f2743650363bca4035e5538f636d63b55d9",
+      "width": 1425,
+      "height": 1611,
+      "instruction": "Return XYZ to zero; HFW 5000 um; Live scan; Freeze live; Auto window.",
+      "image": {
+        "width_px": 128,
+        "height_px": 128,
+        "field_width_m": 0.005,
+        "offset_x_m": 0,
+        "offset_y_m": 0,
+        "dwell_ns": 20000,
+        "outcome": "COMPLETED",
+        "completed_pixels": 16384,
+        "stage": {
+          "x_m": 0,
+          "y_m": 0,
+          "z_m": 0,
+          "working_distance_m": 0.01
+        },
+        "parameter_segments": [
+          {
+            "start_elapsed_ns": 0,
+            "end_elapsed_ns": 370380000,
+            "current_pA": 100,
+            "focus_offset_m": 0,
+            "stigmator_x": 0,
+            "stigmator_y": 0,
+            "stage": {
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0,
+              "working_distance_m": 0.01
+            }
+          }
+        ]
+      },
+      "display": {
+        "cps-low": "0",
+        "cps-high": "57008500",
+        "display-gamma": "1",
+        "display-brightness": "0",
+        "display-contrast": "1"
+      }
+    },
+    {
+      "file": "06-native1024.png",
+      "sha256": "df4c6e97146636e4347921f235b53b9c39519713813c1dd6705790ca46b7ad70",
+      "width": 1425,
+      "height": 1611,
+      "instruction": "HFW 2 um; focus/stigmators/XYZ zero; Record dwell 20 us; Acquire 1024 squared; wait for completed delivered image.",
+      "image": {
+        "width_px": 1024,
+        "height_px": 1024,
+        "field_width_m": 2e-06,
+        "offset_x_m": 0,
+        "offset_y_m": 0,
+        "dwell_ns": 20000,
+        "outcome": "COMPLETED",
+        "completed_pixels": 1048576,
+        "stage": {
+          "x_m": 0,
+          "y_m": 0,
+          "z_m": 0,
+          "working_distance_m": 0.01
+        },
+        "parameter_segments": [
+          {
+            "start_elapsed_ns": 0,
+            "end_elapsed_ns": 21103820000,
+            "current_pA": 100,
+            "focus_offset_m": 0,
+            "stigmator_x": 0,
+            "stigmator_y": 0,
+            "stage": {
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0,
+              "working_distance_m": 0.01
+            }
+          }
+        ]
+      },
+      "display": {
+        "cps-low": "37900000",
+        "cps-high": "64550000",
+        "display-gamma": "1",
+        "display-brightness": "0",
+        "display-contrast": "1"
+      }
+    },
+    {
+      "file": "07-reduced-raster.png",
+      "sha256": "6440488e1c71325e144f469dedc662b2769b07da7a1f77ef5d819152e6089762",
+      "width": 1425,
+      "height": 1611,
+      "instruction": "From the completed 1024 survey, click Reduced raster; let the central 64-pixel ROI complete; Freeze live.",
+      "image": {
+        "width_px": 64,
+        "height_px": 64,
+        "field_width_m": 1e-06,
+        "offset_x_m": 0,
+        "offset_y_m": 0,
+        "dwell_ns": 20000,
+        "outcome": "COMPLETED",
+        "completed_pixels": 4096,
+        "stage": {
+          "x_m": 0,
+          "y_m": 0,
+          "z_m": 0,
+          "working_distance_m": 0.01
+        },
+        "parameter_segments": [
+          {
+            "start_elapsed_ns": 0,
+            "end_elapsed_ns": 118220000,
+            "current_pA": 100,
+            "focus_offset_m": 0,
+            "stigmator_x": 0,
+            "stigmator_y": 0,
+            "stage": {
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0,
+              "working_distance_m": 0.01
+            }
+          }
+        ]
+      },
+      "display": {
+        "cps-low": "37900000",
+        "cps-high": "64550000",
+        "display-gamma": "1",
+        "display-brightness": "0",
+        "display-contrast": "1"
+      }
+    }
+  ]
+}

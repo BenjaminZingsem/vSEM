@@ -26,6 +26,12 @@ it is not a calibrated digital twin or a connection to a real microscope.
 reserve 27 morphology/sensitivity/conductivity combinations; these do not mean
 27 activated damage/charging scenarios. See [scientific scope](docs/SCIENCE.md).
 
+See the [illustrated GUI walkthrough](docs/GUI_WALKTHROUGH.md) for real screenshots,
+control locations and reproducible focus, stigmation, stage/zoom, survey, 1024-pixel
+acquisition and alignment-ROI scenarios.
+
+[![vSEM console with a completed native 1024-pixel acquisition](docs/screenshots/06-native1024.png)](docs/GUI_WALKTHROUGH.md)
+
 ## Setup
 
 The numerical runtime currently requires **Linux or WSL2, Python 3.10 and an

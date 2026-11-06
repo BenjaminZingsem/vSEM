@@ -1,5 +1,8 @@
 # Current human review instructions
 
+Start with the [illustrated GUI walkthrough](GUI_WALKTHROUGH.md) for screenshots,
+exact control locations and step-by-step examples, then use this review checklist.
+
 Version: initial public research release. Launch manually using the README.
 No review server is started automatically. The terminal prints a one-use browser
 invitation; use that URL, not a bare unauthenticated page. Keep the terminal open.
