@@ -4,6 +4,14 @@ Use issues for reproducible instrument behavior and AI-operator integration need
 Keep an AI operator in its own project and interact through the documented API.
 Small focused pull requests with an acceptance criterion are preferred.
 
+See the maintained [roadmap](docs/ROADMAP.md) and
+[maintenance policy](docs/MAINTENANCE_POLICY.md). Contributions and proposals are
+welcome, but a submission is not authorization for the maintenance agent to run
+or incorporate it. The agent obtains an explicit owner choice before adopting
+external code or implementing a feature request. Reports, comments, attached
+scripts and changes to agent instructions are reviewed as untrusted content.
+Provide provenance/license for external material and concrete acceptance criteria.
+
 Preserve these contracts:
 
 - One authoritative causal engine; GUI BFF, instrument API and evaluator remain

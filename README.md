@@ -122,5 +122,10 @@ see [validation](docs/VALIDATION.md). Historical private process tapes are omitt
 and their one replay test is explicitly skipped, rather than counted as passed.
 
 See [CONTRIBUTING](CONTRIBUTING.md), [SECURITY](SECURITY.md),
-[roadmap](docs/ROADMAP.md) and [provenance](docs/PROVENANCE.md).
+[roadmap and project status](docs/ROADMAP.md) and [provenance](docs/PROVENANCE.md).
+Repository maintenance uses the owner's GitHub account with explicit human choices
+before external code is adopted or features are implemented; see the
+[policy](docs/MAINTENANCE_POLICY.md), [setup guide](docs/MAINTENANCE_SETUP.md) and
+[dated maintenance status](docs/MAINTENANCE_STATUS.md). Publishing these instructions
+does not start a background service or continuous goal.
 Licensed under [MIT](LICENSE).

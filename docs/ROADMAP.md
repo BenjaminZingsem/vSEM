@@ -1,20 +1,72 @@
-# Post-release priorities
+# Project status and roadmap
 
-The first release enables a separate AI-operator project and feedback from actual
-use. These are future work, not prerequisites silently added to v0.1:
+Last reviewed: **6 November 2026**. Released: **v0.1.0**, an MIT-licensed research
+sandbox. The broader implementation goal is **paused for maintainer planning**;
+there is no unattended maintenance service. The owner-account maintenance policy
+and launch instructions are prepared; the continuous goal starts only on explicit
+activation. See [setup](MAINTENANCE_SETUP.md) and [status](MAINTENANCE_STATUS.md).
 
-1. Develop an external API operator and reproducible focus/stigmation/stage/ROI
-   tasks. Record observable action/observation histories and useful failure cases.
-2. Integrate the preserved experimental causal damage/charging and spatial material
-   response after independent physics, timing, performance and human review.
-3. Qualify additional GPUs, reduce startup/render cost without changing physical
-   results, and improve chunk/cache/storage behavior based on measured workloads.
-4. Add crash-durable episode replay and controlled long-session retention.
-5. Build a separately audited evaluated-agent deployment: filesystem/process/network
-   confinement and an evaluator that cannot leak private answers to the operator.
-6. Add calibrated profiles and broader SEM controls only with actual causal behavior
-   and acceptance evidence. Research real SEM interaction design before UI expansion.
+## What works today
 
-Public issues and pull requests should identify a concrete use case, expected
-behavior and acceptance criterion. Core SEM imaging takes priority over image
-editing, analysis or unrelated peripheral tools.
+| Area | Public status | Evidence / limits |
+|---|---|---|
+| Core imaging and control | Released | Stage XYZ, focus, two-axis stigmation, physical field width/zoom, live scans, alignment ROI and native 1024 acquisition. [GUI walkthrough](GUI_WALKTHROUGH.md). |
+| Acquisition semantics | Released | Timed exposure, partial images, applied-parameter segments, dose accounting and Stop. Numerical delivery may take longer than modeled exposure. [Validation](VALIDATION.md). |
+| Specimen | Released, bounded scope | Finite offline-prepared 1.28 mm procedural specimen; exterior vacuum; runtime generation disabled. |
+| GUI and instrument API | Released for trusted development | Separate principals/transports over one causal engine; observable-only API. This is not OS confinement for hostile agents. [API](API.md). |
+| Documentation and CI | Released | Setup, API example, review checklist, seven real GUI screenshots, CPU/display/content checks. GPU qualification is a separate manual gate. |
+| Charging and beam damage | Not active in the release | Experimental work exists separately and still needs integration/qualification. Spatial material codes alone are not physical feedback. |
+| Calibration, persistent replay and hostile-agent confinement | Not delivered | See R04–R06 below and [scientific scope](SCIENCE.md). |
+
+The public queue had no open issues or pull requests at this review. Consult
+[live issues](https://github.com/BenjaminZingsem/vSEM/issues) and
+[pull requests](https://github.com/BenjaminZingsem/vSEM/pulls) for current activity;
+the dated observation above is not a live status indicator.
+
+## Work order and acceptance
+
+Verified security problems, scientific/data-integrity regressions and reproducible
+core-imaging bugs take precedence over feature work. An open request is not
+automatically accepted scope. When no actionable defect remains, select the next
+approved, unblocked roadmap slice. Before implementing a new feature or incorporating
+external code, interrupt and present concrete choices to the owner in chat. Listing
+a feature here does not approve implementation. A request awaiting reproduction or
+a decision need not prevent independent already-authorized work.
+
+The IDs below preserve the existing post-release priorities. They are not release
+dates or permission to begin every item. They should become small issues/PRs with
+explicit acceptance criteria when work is authorized.
+
+| ID | Deliverable | Current status | Required acceptance / dependencies |
+|---|---|---|---|
+| R00 | Supervised repository maintenance | Owner-account policy/setup prepared; goal not started | Use the [maintenance policy](MAINTENANCE_POLICY.md), existing owner account and explicit chat choices before external code/features. Verify account, approved revision, execution boundaries and chosen PR/CI protection. Shared-account chat approval is a procedural gate, not independently enforced by GitHub. |
+| R01 | Support a separate AI-operator project | API/example released; task harness planned | Reproducible focus, stigmation, stage, zoom, ROI and 1024 tasks with observable action/result histories, stop/lease behavior and documented failure cases. An operator uses only the public API; no hidden answers or seeds. Agent learning/policy code belongs in its own project. |
+| R02 | Causal charging, damage and spatial material response | Experimental, not integrated | Independently verify exposure history, conductivity/sensitivity combinations, changes within a raster, timing and numerical accuracy. Qualify full-frame performance and human-visible scenarios before integration. No decorative effects or claims based only on code presence. |
+| R03 | Performance, storage and hardware coverage | Qualified baseline; expansion planned | Measure startup, repeated scans, ROI, zoom and 1024 delivery on named hardware; improve cache/chunk/storage behavior without changing scientific bounds or dose/timing. Qualify each additional GPU explicitly. May proceed in independent slices alongside R01/R02. |
+| R04 | Crash-durable replay and bounded storage retention | Planned | Versioned records, recovery from interrupted writes, acquisition-time/partial-frame fidelity, retention controls and tested migration/rollback. Buffered development records do not meet this gate. |
+| R05 | Deployment for untrusted evaluated agents | Planned; required before hostile evaluations | Audited process/filesystem/network separation; private evaluator/scenario data inaccessible to the operator; negative access tests and explicit threat model. Trusted API experiments in R01 do not require claiming this is already solved. |
+| R06 | Broader SEM controls and calibrated profiles | Planned; evidence dependent | Research actual SEM interactions, implement causal behavior for each control, validate against measured references and qualify human usability. Keep unsupported controls absent/disabled and generic profiles labelled uncalibrated. |
+
+No feature-only milestone is currently in progress. Exact next slices and owners
+will be recorded when approved. Core SEM imaging and useful automation scenarios
+take priority over image editing, analysis and unrelated peripheral features.
+
+## Keeping this page accurate
+
+Update this page with each merged change that affects capability, milestone
+status, accepted priority, a blocker or qualification evidence. Each active slice
+must name its issue/PR, responsible maintainer, acceptance criterion and next gate.
+Use **Planned**, **In progress**, **Awaiting review**, **Blocked**, **Merged** and
+**Released** distinctly. Record why a blocker exists; attach test/commit evidence
+before marking a milestone complete. A merged change is not necessarily released.
+
+Update [HUMAN_REVIEW.md](HUMAN_REVIEW.md) and the GUI walkthrough when interactions
+change; keep scientific limits and API documentation consistent. A release should
+summarize delivered changes and known limitations. Do not publish private local
+paths, credentials, hidden specimen/evaluator data or sensitive vulnerability
+details as progress evidence.
+
+Policy changes and roadmap implementation scope require the owner's decision. The
+[continuous goal prompt](../prompts/CONTINUOUS_MAINTENANCE.md) describes how a
+future maintenance run would use this roadmap; merely committing it does not
+start a service or resume the paused goal.
