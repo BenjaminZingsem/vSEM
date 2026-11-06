@@ -187,7 +187,9 @@ def array_chunks(header,array,chunk_bytes=8*1024*1024):
         raise ValueError('array must belong to this validated catalogue')
     _integer(chunk_bytes,1,2**31-1)
     path=header.directory/array.name;before=_regular(path);digest=hashlib.sha256();total=0
-    with path.open('rb') as stream:
+    # Do not prefetch later chunks: a concurrent write to not-yet-yielded bytes
+    # must reach the digest even when filesystem timestamps have not advanced.
+    with path.open('rb',buffering=0) as stream:
         opened=os.fstat(stream.fileno())
         if (not stat.S_ISREG(opened.st_mode) or opened.st_nlink!=1 or
             (opened.st_dev,opened.st_ino,opened.st_size,opened.st_mtime_ns)!=
@@ -196,6 +198,15 @@ def array_chunks(header,array,chunk_bytes=8*1024*1024):
         while True:
             raw=stream.read(chunk_bytes)
             if not raw:break
+            # Raw IO may return short reads. Preserve the caller's chunk grain
+            # (and numeric element alignment) until actual EOF.
+            if len(raw)<chunk_bytes:
+                parts=[raw];remaining=chunk_bytes-len(raw)
+                while remaining:
+                    part=stream.read(remaining)
+                    if not part:break
+                    parts.append(part);remaining-=len(part)
+                raw=b''.join(parts)
             total+=len(raw)
             if total>array.byte_count:raise ValueError('array changed while loading')
             digest.update(raw);yield raw
