@@ -17,6 +17,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from examples.agent_client import InstrumentClient
+from scripts.owned_cleanup import process_identity,observe_owned_exit
 
 
 def main():
@@ -42,6 +43,7 @@ def main():
             time.sleep(.2)
         credentials=json.loads(connection.read_bytes())
         children=Path('/proc/'+str(process.pid)+'/task/'+str(process.pid)+'/children').read_text().split()
+        children=[identity for pid in children if (identity:=process_identity(pid)) is not None]
         client=InstrumentClient(credentials['api_origin'],credentials['api_token'])
         # A transport-level refusal, before any command or control acquisition.
         c=http.client.HTTPConnection('127.0.0.1',client.port,timeout=10)
@@ -123,7 +125,8 @@ def main():
             raise RuntimeError('Owned launcher did not close; inspect before any relaunch')
         finally:log.close()
         result['launcher_exit_code']=process.returncode
-        result['owned_children_absent']=all(not Path('/proc/'+pid).exists() for pid in children)
+        result['cleanup_observation']=observe_owned_exit(children)
+        result['owned_children_absent']=result['cleanup_observation']['owned_children_absent']
         if process.returncode!=0 or not result['owned_children_absent']:result['status']='FAILED_OWNED_CLEANUP'
         (directory/'result.json').write_text(json.dumps(result,indent=2)+'\n')
     assert result['status']=='PASS',result
