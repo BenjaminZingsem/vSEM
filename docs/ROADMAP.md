@@ -1,10 +1,11 @@
 # Project status and roadmap
 
-Last reviewed: **6 November 2026**. Released: **v0.1.0**, an MIT-licensed research
+Last reviewed: **10 November 2026**. Released: **v0.1.0**, an MIT-licensed research
 sandbox. The broader implementation goal is **retired by the owner**;
 there is no unattended maintenance service. The owner-account maintenance policy
-and launch instructions are prepared; the continuous goal starts only on explicit
-activation. See [setup](MAINTENANCE_SETUP.md) and [status](MAINTENANCE_STATUS.md).
+and launch instructions are published; initialization is complete and the owner
+approved the repair batch described below. See [setup](MAINTENANCE_SETUP.md) and
+[status](MAINTENANCE_STATUS.md).
 
 ## What works today
 
@@ -18,7 +19,9 @@ activation. See [setup](MAINTENANCE_SETUP.md) and [status](MAINTENANCE_STATUS.md
 | Charging and beam damage | Not active in the release | Experimental work exists separately and still needs integration/qualification. Spatial material codes alone are not physical feedback. |
 | Calibration, persistent replay and hostile-agent confinement | Not delivered | See R04–R06 below and [scientific scope](SCIENCE.md). |
 
-The public queue had no open issues or pull requests at this review. Consult
+The queue contains five open reports at this inspection. The later correction
+on #4 withdraws its upstream cleanup-defect inference; #5-#8 are under approved
+maintenance. Consult
 [live issues](https://github.com/BenjaminZingsem/vSEM/issues) and
 [pull requests](https://github.com/BenjaminZingsem/vSEM/pulls) for current activity;
 the dated observation above is not a live status indicator.
@@ -39,7 +42,7 @@ explicit acceptance criteria when work is authorized.
 
 | ID | Deliverable | Current status | Required acceptance / dependencies |
 |---|---|---|---|
-| R00 | Supervised repository maintenance | Owner-account policy/setup prepared; goal not started | Use the [maintenance policy](MAINTENANCE_POLICY.md), existing owner account and explicit chat choices before external code/features. Verify account, approved revision, execution boundaries and chosen PR/CI protection. Shared-account chat approval is a procedural gate, not independently enforced by GitHub. |
+| R00 | Supervised repository maintenance | Initialized; bounded repair batch approved | Use the [maintenance policy](MAINTENANCE_POLICY.md), existing owner account and explicit chat choices before external code/features. Verify account, approved revision, execution boundaries and chosen PR/CI protection. Shared-account chat approval is a procedural gate, not independently enforced by GitHub. |
 | R01 | Support a separate AI-operator project | API/example released; task harness planned | Reproducible focus, stigmation, stage, zoom, ROI and 1024 tasks with observable action/result histories, stop/lease behavior and documented failure cases. An operator uses only the public API; no hidden answers or seeds. Agent learning/policy code belongs in its own project. |
 | R02 | Causal charging, damage and spatial material response | Experimental, not integrated | Independently verify exposure history, conductivity/sensitivity combinations, changes within a raster, timing and numerical accuracy. Qualify full-frame performance and human-visible scenarios before integration. No decorative effects or claims based only on code presence. |
 | R03 | Performance, storage and hardware coverage | Qualified baseline; expansion planned | Measure startup, repeated scans, ROI, zoom and 1024 delivery on named hardware; improve cache/chunk/storage behavior without changing scientific bounds or dose/timing. Qualify each additional GPU explicitly. May proceed in independent slices alongside R01/R02. |
@@ -47,8 +50,12 @@ explicit acceptance criteria when work is authorized.
 | R05 | Deployment for untrusted evaluated agents | Planned; required before hostile evaluations | Audited process/filesystem/network separation; private evaluator/scenario data inaccessible to the operator; negative access tests and explicit threat model. Trusted API experiments in R01 do not require claiming this is already solved. |
 | R06 | Broader SEM controls and calibrated profiles | Planned; evidence dependent | Research actual SEM interactions, implement causal behavior for each control, validate against measured references and qualify human usability. Keep unsupported controls absent/disabled and generic profiles labelled uncalibrated. |
 
-No feature-only milestone is currently in progress. Exact next slices and owners
-will be recorded when approved. Core SEM imaging and useful automation scenarios
+Current maintainer-owned batch: truthful configure/freeze lifecycle (#5), bounded
+private preparation diagnostics and terminal-fault documentation (#6), private
+qualification output (#7), and bounded refusal accounting (#8). Implementation
+has CPU evidence; GPU/HTTP cleanup qualification is still under diagnosis. No
+broader physical control, charging/damage integration or new roadmap slice is
+approved by this batch. Core SEM imaging and useful automation scenarios
 take priority over image editing, analysis and unrelated peripheral features.
 
 ## Keeping this page accurate

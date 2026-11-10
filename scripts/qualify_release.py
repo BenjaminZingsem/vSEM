@@ -25,8 +25,8 @@ def main():
     parser.add_argument('--catalogue-manifest-sha256',required=True)
     parser.add_argument('--output',required=True)
     args=parser.parse_args()
-    directory=Path(args.output).resolve();directory.mkdir(parents=True,exist_ok=False)
-    log=(directory/'service.log').open('xb')
+    directory=Path(args.output).absolute();directory.mkdir(mode=0o700,parents=True,exist_ok=False)
+    log=os.fdopen(os.open(directory/'service.log',os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600),'wb')
     process=subprocess.Popen([sys.executable,'-B','-m','runtime.serve','--no-world-generation',
         '--catalogue-directory',str(Path(args.catalogue_directory).resolve()),
         '--catalogue-manifest-sha256',args.catalogue_manifest_sha256,

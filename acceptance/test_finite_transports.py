@@ -104,5 +104,62 @@ class TransportTests(unittest.TestCase):
         image=state['latest_image'];status,_,raw=self.request(self.http.api,'/image/'+image['image_id']+'/SE',headers=self.bearer())
         self.assertEqual(status,200);self.assertEqual(len(raw),64*64*4)
 
+    def test_actual_live_configure_and_freeze_terminal_receipts(self):
+        from examples.agent_client import InstrumentClient
+        client=InstrumentClient(self.http.api.origin,self.http.api.token)
+        acquired=False
+        def wait(condition,timeout=600):
+            deadline=time.monotonic()+timeout
+            while time.monotonic()<deadline:
+                if client.renewal_error:raise RuntimeError('Lease renewal failed') from client.renewal_error
+                state=client.request('/state')
+                self.assertNotEqual(state.get('phase'),'INTERLOCKED')
+                self.assertNotEqual(state.get('availability'),'QUARANTINED')
+                if condition(state):return state
+                time.sleep(.05)
+            self.fail('Actual live observable condition did not finish')
+        try:
+            client.acquire_control();acquired=True
+            client.wait_operation(client.command('optics',dict(current_pA=50,
+                focus_offset_m=0.,stigmator_x=0.,stigmator_y=0.)),600)
+            live=client.command('scan_live',dict(width_px=64,height_px=64,field_width_m=2e-6,
+                offset_x_m=0.,offset_y_m=0.,dwell_ns=1000000))
+            state=wait(lambda s:s.get('progress') and s['progress']['completed_pixels']>0
+                and s.get('current_scan') and s['current_scan']['width_px']==64)
+            generation=state['stop_generation']
+            config=client.command('configure_live',dict(width_px=128,height_px=128,field_width_m=2e-6,
+                offset_x_m=0.,offset_y_m=0.,dwell_ns=100000))
+            client.wait_operation(config,600)
+            state=wait(lambda s:s.get('progress') and s['progress']['completed_pixels']>0
+                and s.get('current_scan') and s['current_scan']['width_px']==128)
+            before_freeze=state['observed_at_ns'];source=state['live_source_id']
+            frozen=client.command('freeze',{'source_id':source})
+            client.wait_operation(frozen,600)
+            client.wait_operation(live,600)
+            state=wait(lambda s:s.get('phase')=='STOPPED' and s['beam_blank']
+                and s.get('live_source_id') is None)
+            self.assertEqual(state['stop_generation'],generation)
+            image=wait(lambda s:s.get('latest_image') and s['latest_image']['source_id']==source
+                and s['latest_image']['outcome']=='COMPLETED'
+                and s['latest_image']['width_px']==128
+                and s['latest_image']['origin_ns']+s['latest_image']['cut_elapsed_ns']>=before_freeze)['latest_image']
+            self.assertEqual(image['completed_pixels'],128*128)
+            self.assertGreaterEqual(image['cut_elapsed_ns'],128*128*100000)
+            raw=client.request('/image/'+image['image_id']+'/SE',raw=True)
+            self.assertEqual(len(raw),128*128*4)
+            for op in (config,frozen):
+                receipt=client.request('/operation/'+op['operation_id'])
+                self.assertEqual(receipt['status'],'COMPLETED')
+            client.wait_operation(client.command('stop',{}),600)
+            state=wait(lambda s:s['beam_blank'] and s['stop_generation']>generation)
+            self.assertIsNone(state['live_source_id'])
+            forbidden=('diagnostic_id','ticket_id','preparation-diagnostics','seed','world_height','ideal_focus')
+            public=json.dumps(state)+json.dumps(image)
+            for name in forbidden:self.assertNotIn(name,public)
+        finally:
+            try:
+                if acquired:client.wait_operation(client.command('stop',{}),600)
+            finally:client.close()
+
 
 if __name__=='__main__':unittest.main()

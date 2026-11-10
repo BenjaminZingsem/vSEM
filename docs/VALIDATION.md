@@ -37,7 +37,7 @@ constraints files for the transitive dependency versions.
 ## Reproduce CPU and display gates
 
 Use the commands in README.md. No GPU test is silently selected during ordinary
-discovery. Seven transport integration tests require the explicit environment
+discovery. Eight transport integration tests require the explicit environment
 variables below; the one historical saved-tape test is skipped because those
 private recordings are not distributed. All other tests must pass.
 
@@ -70,6 +70,14 @@ The tests check distinct GUI/API credentials, invitation/CSRF, denied private
 routes and fields, control ownership, live evolution without requests and acquired
 count access. They close their transient service. Do not run two GPU fixtures
 concurrently or bypass the ownership lock.
+
+The added live-receipt case starts a 64-square live raster, applies a 128-square
+configuration, freezes a matching complete frame and confirms both individual
+operation receipts. It separately confirms Stop generation advance, raw count
+dimensions, exposure pacing and absence of private diagnostic fields. CPU-only
+regressions cover request versus application, supersession, cancellation, event
+ordering, queue-refusal accounting, POSIX output privacy and controlled worker
+diagnostics. These checks do not reproduce the cause of a real numerical fault.
 
 CPU hosted CI cannot qualify CUDA behavior, performance, or visual usability.
 Fresh-clone setup and all GPU changes require a recorded local acceptance run;

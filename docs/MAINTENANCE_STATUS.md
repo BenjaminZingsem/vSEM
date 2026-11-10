@@ -1,18 +1,18 @@
 # Maintenance status
 
-Last verified: **6 November 2026**.
+Last verified: **10 November 2026**.
 
 | Item | State |
 |---|---|
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Not started by policy/setup publication |
+| Continuous maintenance goal | Initialized separately; owner approved the bounded operator-integration repair batch below |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
-| Human-review instance / local coding wave | None launched for this setup |
-| Queue | No open issue/PR at preceding planning inspection; activation must recheck |
+| Human-review instance / local coding wave | No persistent human instance or local coding wave; qualification uses owned transient fixtures |
+| Queue | Five open reports at inspection: #4 has a reporter correction withdrawing the upstream cleanup inference; #5-#8 form the approved repair batch |
 
 The owner chose procedural maintenance safeguards instead of GitHub branch
 protection. Continue reviewed PRs, the successful GitHub Actions `acceptance`
@@ -36,7 +36,7 @@ memory was released. This repair adds no dependency and does not activate a goal
 The replacement [goal contract](../prompts/CONTINUOUS_MAINTENANCE.md) defines the
 initial verification-and-pause checkpoint, normal maintenance priorities,
 explicit owner choices, local coding boundaries and acceptance/handoff rules.
-It has not been activated by publication. The retired completion goal's blanket
+Publication alone did not activate it. Initialization is now complete. The retired completion goal's blanket
 development authority does not carry over; its unfinished experiments remain
 available for individually approved roadmap work.
 
@@ -45,3 +45,29 @@ Use [the setup guide](MAINTENANCE_SETUP.md) to activate and
 a dated record, not a live monitor. Update it when the goal starts, pauses, changes
 phase or reaches a material blocker. Link public PR/test evidence without private
 run credentials, hidden scenario data or approval transcripts.
+
+## Operator-integration repairs, 10 November
+
+The owner approved implementation, independent qualification and reviewed merge
+of [live receipts (#5)](https://github.com/BenjaminZingsem/vSEM/issues/5),
+[private diagnostics (#6)](https://github.com/BenjaminZingsem/vSEM/issues/6),
+[qualifier permissions (#7)](https://github.com/BenjaminZingsem/vSEM/issues/7) and
+[queue-refusal accounting (#8)](https://github.com/BenjaminZingsem/vSEM/issues/8).
+The candidate adds no dependency and changes no engine file or numerical loop.
+
+Current candidate evidence: 247 Linux CPU tests, 238 passed and nine explicit
+skips (eight separate GPU transport cases and one private historical fixture).
+Windows focused regressions and 14 catalogue tests pass; POSIX-only cases skip
+on Windows. Display retention and intensity-transfer checks pass. Original-source
+comparisons reproduce the receipt, rejection-accounting and permission problems,
+and the missing controlled-worker diagnostic.
+
+Qualification is not yet complete. All 11 GPU/public-HTTP acquisition checks
+passed, including native 1024 with two focus segments, but the qualifier's final
+immediate child-absence assertion failed. The later owned process group was
+absent. That distinction is retained; no assertion or status has been weakened.
+All eight separate GPU transport tests now pass, including live configure/freeze
+terminal receipts. Lifecycle diagnosis against the unchanged baseline is pending.
+Do not merge or describe this candidate as fully qualified until those gates pass.
+The underlying numerical failure reported in #6 remains unidentified; diagnostics
+are not presented as a solver repair or permission to clear an interlock.
