@@ -7,6 +7,7 @@ from engine.episode_credits import EpisodeCapacity
 from .hierarchical_human_service import InteractiveHumanService as BaseService,ObservedKernel
 from .hierarchical_human_kernel import LiveKernelConfiguration
 from .finite_human_kernel import FiniteLiveRealtimeKernel
+from .live_operation_receipts import LiveOperationReceipts
 
 
 class ObservedFiniteKernel(ObservedKernel,FiniteLiveRealtimeKernel):
@@ -20,6 +21,7 @@ class FiniteHumanService(BaseService):
         self.normal = queue.Queue(256); self.safety = queue.Queue(64)
         self.lock = threading.Lock(); self.stop_event = threading.Event()
         self.operations = {}; self.latest = {'protocol':'vsem.core-human.v3','availability':'INITIALIZING'}
+        self.live_receipts = LiveOperationReceipts()
         self.image_records = {}; self.latest_image = None; self.history = []
         self.failure = None; self._image_index = 0
         self.thread = threading.Thread(target=self._run,name='vsem-trusted-service',daemon=True); self.thread.start()

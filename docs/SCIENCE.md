@@ -37,3 +37,12 @@ qualified public capability merely because supporting types exist in this tree.
 Acquired records are buffered development artifacts. Crash-durable replay,
 adversarial evaluated-agent confinement and long-duration retention policy are
 future gates, not release claims. This project has no real-instrument route.
+
+A finite response preparation failure latches a terminal `BANK_FAILED` interlock.
+The scalar owner ends active exposure/motion and removes authority; later ticks
+return without new exposure. This is a terminal fault, not an acknowledged Stop
+or evidence that pending optics settled. Acquired/partial publication and charge
+already observed remain evidence; missing finalized numerical accounting remains
+unknown. Private bounded failure categories aid diagnosis without changing the
+physical failure path or exposing hidden specimen state. They do not establish
+the cause of any previously observed numerical failure.

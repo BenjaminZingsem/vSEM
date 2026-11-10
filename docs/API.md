@@ -67,6 +67,43 @@ pixels, acquisition times, parameter segments and blank holds. Single-frame
 terminal images are listed in `recorded_images`; live scans reuse their source.
 Raw counts and metadata can be stored directly, as the example client does.
 
+### Live command completion
+
+`configure_live` admission records a request, not an applied raster. Its operation
+completes when a verified raster uses the requested pixel grid, field, offsets and
+dwell. If that configuration is already active, completion can follow admission
+without a new sweep. Stage pose is controlled separately. A later admitted
+configuration supersedes a still-unapplied one (`CANCELLED`, `SUPERSEDED`). Stop,
+authority loss or a terminal fault cancels requests that have not applied. Ending
+a session before application is not successful configuration.
+
+`freeze` has its own receipt, separate from the original `scan_live` operation.
+It completes when the corresponding live session finishes normally; interruption
+reports cancellation. Freeze does not advance Stop generation. Confirm a separate
+Stop when required. A late admission event never downgrades an already terminal
+receipt. Physical completion can precede numerical image delivery: still match
+the live source, frame outcome and acquisition times when retrieving the image.
+
+Requests refused because an ingress queue is full return `ingress_capacity`
+without an admitted operation receipt. They retain no operation record. The
+separate reserved Stop queue is unchanged; this is not a general history-retention
+policy or a hostile-client confinement guarantee.
+
+### Terminal preparation faults
+
+`BANK_FAILED` is fail-closed: the episode interlocks, ends active acquisition,
+retires pending work and removes control authority. Subsequent episode ticks do
+not expose more specimen. Blank state does not establish a newly successful Stop,
+settled optics or complete numerical publication. An old Stop generation cannot
+confirm a later Stop after the fault. Preserve acquired images, partial metadata
+and the known observable charge interval; do not invent missing finalized dose.
+
+The administrator must preserve the private run records, close the owned instance
+and investigate before starting a new episode. There is no operator reset or
+interlock-clearing endpoint. Bounded private preparation categories can help the
+administrator correlate the failure, but are never returned through state, image
+or operation endpoints. See [deployment diagnostics](DEPLOYMENT.md).
+
 The current protocol is `vsem.core-human.v3` with captured-image v2 projections;
 older helper schemas in the code are not this API's contract. The authoritative
 admission/projection code is `runtime/hierarchical_public_protocol.py`,

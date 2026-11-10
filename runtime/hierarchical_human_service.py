@@ -12,6 +12,7 @@ from engine.episode_credits import EpisodeCapacity
 from .hierarchical_human_kernel import LiveRealtimeKernel,LiveKernelConfiguration
 from .human_realtime_records import TickEnd
 from .hierarchical_public_protocol import observable_state,image_observation,validate_command,make_input
+from .live_operation_receipts import LiveOperationReceipts
 
 
 class ObservedKernel(LiveRealtimeKernel):
@@ -34,6 +35,7 @@ class InteractiveHumanService:
         self.normal = queue.Queue(256); self.safety = queue.Queue(64)
         self.lock = threading.Lock(); self.stop_event = threading.Event()
         self.operations = {}; self.latest = {'protocol':'vsem.core-human.v3','availability':'INITIALIZING'}
+        self.live_receipts = LiveOperationReceipts()
         self.image_records = {}; self.latest_image = None; self.history = []
         self.failure = None; self._image_index = 0
         self.thread = threading.Thread(target=self._run,name='vsem-trusted-service',daemon=True); self.thread.start()
@@ -51,7 +53,9 @@ class InteractiveHumanService:
         target = self.safety if kind == 'command' and value['action'] == 'stop' else self.normal
         try:target.put_nowait(work)
         except queue.Full:
-            with self.lock:self.operations[operation_id].update(status='REJECTED',reason='ingress_capacity')
+            # No receipt was admitted or returned. Keep admitted records visible
+            # before their consumer runs, but retain nothing for queue refusal.
+            with self.lock:del self.operations[operation_id]
             raise BufferError('ingress_capacity')
         return record
 
@@ -92,14 +96,17 @@ class InteractiveHumanService:
             operation = body[0]; reason = body[-1]; status = 'COMPLETED' if reason == 'COMPLETED' else 'CANCELLED'
         elif kind == 'RASTER_START':operation,status,reason = body[4],'RUNNING','OK'
         elif kind == 'SESSION_ENDED':operation,reason = body[:2];status = 'COMPLETED' if reason == 'COMPLETED' else 'CANCELLED'
-        if operation is not None:
-            with self.lock:
+        with self.lock:
+            updates = self.live_receipts.observe(fact, self.operations)
+            if operation is not None:updates.append((operation,status,reason))
+            for operation,status,reason in updates:
                 if operation in self.operations:
                     prior = self.operations[operation]['status']
-                    # Accepted disposition follows a motion/start fact. It cannot
-                    # downgrade the verified physical RUNNING state to admission.
-                    if not(status == 'ACCEPTED' and prior == 'RUNNING'):
-                        self.operations[operation].update(status=status,reason=reason,observed_at_ns=fact.event_at_ns)
+                    # Facts can precede their accepted disposition. A later
+                    # admission cannot downgrade a running or terminal receipt.
+                    if prior in ('COMPLETED','CANCELLED','REJECTED'):continue
+                    if status == 'ACCEPTED' and prior == 'RUNNING':continue
+                    self.operations[operation].update(status=status,reason=reason,observed_at_ns=fact.event_at_ns)
 
     def _run(self):
         try:

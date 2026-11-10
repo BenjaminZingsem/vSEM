@@ -9,6 +9,12 @@ invitation; use that URL, not a bare unauthenticated page. Keep the terminal ope
 Ctrl+C stops the server and closes its owned processes. Use a new run directory
 for each launch. Do not send run credentials or invitation URLs in issue reports.
 
+For automation, the configure/freeze completion rules and terminal-fault limits
+are documented in [the API guide](API.md). A completed physical operation can
+precede image delivery; compare applied readbacks and acquisition timestamps. If
+the episode interlocks, preserve evidence and close the instance. Blanking after
+a terminal fault is not a new Stop acknowledgement or permission to resume.
+
 Acquire GUI control, then test:
 
 1. Start a 64-pixel live scan around HFW 2 µm. Adjust focus through both sides of

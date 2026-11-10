@@ -17,6 +17,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from examples.agent_client import InstrumentClient
+from scripts.owned_cleanup import process_identity,observe_owned_exit
 
 
 def main():
@@ -25,8 +26,8 @@ def main():
     parser.add_argument('--catalogue-manifest-sha256',required=True)
     parser.add_argument('--output',required=True)
     args=parser.parse_args()
-    directory=Path(args.output).resolve();directory.mkdir(parents=True,exist_ok=False)
-    log=(directory/'service.log').open('xb')
+    directory=Path(args.output).absolute();directory.mkdir(mode=0o700,parents=True,exist_ok=False)
+    log=os.fdopen(os.open(directory/'service.log',os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600),'wb')
     process=subprocess.Popen([sys.executable,'-B','-m','runtime.serve','--no-world-generation',
         '--catalogue-directory',str(Path(args.catalogue_directory).resolve()),
         '--catalogue-manifest-sha256',args.catalogue_manifest_sha256,
@@ -42,6 +43,7 @@ def main():
             time.sleep(.2)
         credentials=json.loads(connection.read_bytes())
         children=Path('/proc/'+str(process.pid)+'/task/'+str(process.pid)+'/children').read_text().split()
+        children=[identity for pid in children if (identity:=process_identity(pid)) is not None]
         client=InstrumentClient(credentials['api_origin'],credentials['api_token'])
         # A transport-level refusal, before any command or control acquisition.
         c=http.client.HTTPConnection('127.0.0.1',client.port,timeout=10)
@@ -123,7 +125,8 @@ def main():
             raise RuntimeError('Owned launcher did not close; inspect before any relaunch')
         finally:log.close()
         result['launcher_exit_code']=process.returncode
-        result['owned_children_absent']=all(not Path('/proc/'+pid).exists() for pid in children)
+        result['cleanup_observation']=observe_owned_exit(children)
+        result['owned_children_absent']=result['cleanup_observation']['owned_children_absent']
         if process.returncode!=0 or not result['owned_children_absent']:result['status']='FAILED_OWNED_CLEANUP'
         (directory/'result.json').write_text(json.dumps(result,indent=2)+'\n')
     assert result['status']=='PASS',result

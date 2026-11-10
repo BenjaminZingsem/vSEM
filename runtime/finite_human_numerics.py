@@ -14,6 +14,7 @@ from .human_live_records import NativeImageReady
 
 
 from .interactive_native import publish_native
+from .preparation_diagnostics import PreparationDiagnostics
 
 
 def _numerical_worker(initial_settings,namespace,nonce,links,seed,directory,delay_s,parent_pid,binding_allowance,image_period_s,finite_catalogue):
@@ -26,6 +27,7 @@ def _numerical_worker(initial_settings,namespace,nonce,links,seed,directory,dela
     t.exact(finite_catalogue,FrozenFiniteLaunch);finite_catalogue.__post_init__()
     registry=FiniteResponseRegistry(catalogue_directory=finite_catalogue.directory,
         manifest_sha256=finite_catalogue.manifest_sha256,binding_capacity=binding_allowance)
+    registry.prepare = PreparationDiagnostics(directory).guard(registry.prepare)
     startup,jobs,facts,banks,cuts,images = (Wire(link,nonce) for link in links)
     if not startup.put(registry.science): raise RuntimeError('Science startup lane unavailable')
     ledger = EpisodeExposureLedger(registry.science,initial_settings,episode_namespace=namespace,

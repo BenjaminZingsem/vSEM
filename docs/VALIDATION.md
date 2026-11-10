@@ -37,7 +37,7 @@ constraints files for the transitive dependency versions.
 ## Reproduce CPU and display gates
 
 Use the commands in README.md. No GPU test is silently selected during ordinary
-discovery. Seven transport integration tests require the explicit environment
+discovery. Eight transport integration tests require the explicit environment
 variables below; the one historical saved-tape test is skipped because those
 private recordings are not distributed. All other tests must pass.
 
@@ -58,6 +58,16 @@ It checks visible focus/stigmation, XYZ response, image displacement, physical z
 ROI, actual 1024 counts, mid-raster parameter segments, exposure pacing, observable
 state and Stop. Raw acceptance acquisitions are saved in the ignored output folder.
 
+Cleanup requires a successful launcher exit and disappearance of its recorded
+child process identities. After launcher exit, the qualifier observes those
+identities for up to five seconds to allow helper finalization. A reused PID with
+a different birth identity is distinct from the original child. A live child,
+zombie or unreadable identity remaining at the deadline fails qualification.
+The observer sends no signals and performs no reaping. It retains the initial
+identities, observed states and elapsed wait in the private `result.json`.
+This process-exit interval does not extend exposure or replace the separate Stop
+check. A failed result must be investigated and retained, not rerun until green.
+
 Separately qualify transport isolation on the same hardware:
 
 ```bash
@@ -71,6 +81,42 @@ routes and fields, control ownership, live evolution without requests and acquir
 count access. They close their transient service. Do not run two GPU fixtures
 concurrently or bypass the ownership lock.
 
+The added live-receipt case starts a 64-square live raster, applies a 128-square
+configuration, freezes a matching complete frame and confirms both individual
+operation receipts. It separately confirms Stop generation advance, raw count
+dimensions, exposure pacing and absence of private diagnostic fields. CPU-only
+regressions cover request versus application, supersession, cancellation, event
+ordering, queue-refusal accounting, POSIX output privacy and controlled worker
+diagnostics. These checks do not reproduce the cause of a real numerical fault.
+
 CPU hosted CI cannot qualify CUDA behavior, performance, or visual usability.
 Fresh-clone setup and all GPU changes require a recorded local acceptance run;
 human review remains the instructions in HUMAN_REVIEW.md.
+
+## Operator-integration maintenance qualification, 10 November 2026
+
+Reviewed implementation: `94ce4804e64bf06ca645cb1cda969155892802ab`, in
+[PR9](https://github.com/BenjaminZingsem/vSEM/pull/9). Later documentation-only
+updates do not alter the qualified runtime, qualifier or tests.
+
+| Gate | Observed result |
+|---|---|
+| Final Linux CPU suite | 253 discovered; 244 passed; 9 explicit skips |
+| GPU skip coverage | All 8 opt-in transport tests passed separately in 61.27 s |
+| Remaining CPU skip | One historical private saved-tape fixture is not distributed |
+| Actual GPU/public HTTP release gate | All 11 acquisition/authentication/observable/Stop checks passed |
+| Native 1024 with mid-raster focus | 123.37 s, 2 applied-focus segments, complete native counts |
+| Shutdown | Launcher exit 0; all 3 recorded child identities absent at first observation |
+| Owned fixture groups and GPU | Both groups absent; selected GPU returned to 0 MiB |
+| Native POSIX output privacy | Output directory 0700; service.log 0600 |
+| Display checks | 7 retention cases; 5 valid and 12 rejected transfer cases passed |
+| Source invariants | All 77 engine files, original numerical loop and existing transport test functions unchanged |
+
+The hardware and qualified dependency versions are the same RTX 3090 Ti/WSL2
+configuration recorded above. The cleanup observer needed less than 0.001 s in
+this run; deterministic tests separately exercise delayed exit and persistent
+live/zombie/unknown failures. This successful run does not identify the child
+in the earlier failed immediate-cleanup observation. Failed evidence is retained.
+The actual numerical cause of the historical `BANK_FAILED` report remains
+unknown; controlled diagnostics tests are not a numerical failure reproducer.
+Final hosted PR/integration and post-merge checks remain independently required.
