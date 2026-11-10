@@ -40,6 +40,12 @@ It refuses an existing output directory, including a dangling output symlink,
 and does not change the caller's umask. Windows-mounted filesystems still need
 appropriate Windows ACLs; POSIX mode requests do not establish those ACLs.
 
+The qualifier also retains a private, finite process-exit observation. It waits
+up to five seconds after launcher exit for the recorded child identities to
+disappear; a live process, zombie or unknown identity at the deadline still
+fails. See [validation](VALIDATION.md) for the exact criterion. This does not
+change instrument Stop, launcher ownership or the supported deployment boundary.
+
 ## Private preparation diagnostics
 
 The finite numerical worker retains at most eight small JSON failure records in

@@ -19,9 +19,9 @@ approved the repair batch described below. See [setup](MAINTENANCE_SETUP.md) and
 | Charging and beam damage | Not active in the release | Experimental work exists separately and still needs integration/qualification. Spatial material codes alone are not physical feedback. |
 | Calibration, persistent replay and hostile-agent confinement | Not delivered | See R04–R06 below and [scientific scope](SCIENCE.md). |
 
-The queue contains five open reports at this inspection. The later correction
-on #4 withdraws its upstream cleanup-defect inference; #5-#8 are under approved
-maintenance. Consult
+The 10 November repair review covers #5-#8 with qualified fixes in
+[PR9](https://github.com/BenjaminZingsem/vSEM/pull/9). The later correction on #4
+withdraws its upstream cleanup-defect inference. Consult
 [live issues](https://github.com/BenjaminZingsem/vSEM/issues) and
 [pull requests](https://github.com/BenjaminZingsem/vSEM/pulls) for current activity;
 the dated observation above is not a live status indicator.
@@ -42,7 +42,7 @@ explicit acceptance criteria when work is authorized.
 
 | ID | Deliverable | Current status | Required acceptance / dependencies |
 |---|---|---|---|
-| R00 | Supervised repository maintenance | Initialized; bounded repair batch approved | Use the [maintenance policy](MAINTENANCE_POLICY.md), existing owner account and explicit chat choices before external code/features. Verify account, approved revision, execution boundaries and chosen PR/CI protection. Shared-account chat approval is a procedural gate, not independently enforced by GitHub. |
+| R00 | Supervised repository maintenance | Initialized; first approved repair batch qualified in PR9 | Use the [maintenance policy](MAINTENANCE_POLICY.md), existing owner account and explicit chat choices before external code/features. Verify account, approved revision, execution boundaries and chosen PR/CI protection. Shared-account chat approval is a procedural gate, not independently enforced by GitHub. |
 | R01 | Support a separate AI-operator project | API/example released; task harness planned | Reproducible focus, stigmation, stage, zoom, ROI and 1024 tasks with observable action/result histories, stop/lease behavior and documented failure cases. An operator uses only the public API; no hidden answers or seeds. Agent learning/policy code belongs in its own project. |
 | R02 | Causal charging, damage and spatial material response | Experimental, not integrated | Independently verify exposure history, conductivity/sensitivity combinations, changes within a raster, timing and numerical accuracy. Qualify full-frame performance and human-visible scenarios before integration. No decorative effects or claims based only on code presence. |
 | R03 | Performance, storage and hardware coverage | Qualified baseline; expansion planned | Measure startup, repeated scans, ROI, zoom and 1024 delivery on named hardware; improve cache/chunk/storage behavior without changing scientific bounds or dose/timing. Qualify each additional GPU explicitly. May proceed in independent slices alongside R01/R02. |
@@ -52,9 +52,12 @@ explicit acceptance criteria when work is authorized.
 
 Current maintainer-owned batch: truthful configure/freeze lifecycle (#5), bounded
 private preparation diagnostics and terminal-fault documentation (#6), private
-qualification output (#7), and bounded refusal accounting (#8). Implementation
-has CPU and eight-test GPU transport evidence; cleanup qualification is awaiting
-an owner choice on a separate finite exit-observation proposal. No
+qualification output (#7), and bounded refusal accounting (#8). The separately
+approved finite cleanup observer preserves failure for remaining live/zombie or
+unknown process identities. Implementation `94ce480` passes 244 CPU cases,
+all 11 actual GPU/HTTP release checks and eight GPU transport cases; native1024
+retains both focus segments and owned fixtures close cleanly. Nine CPU skips
+are explicit and documented in [validation](VALIDATION.md). No
 broader physical control, charging/damage integration or new roadmap slice is
 approved by this batch. Core SEM imaging and useful automation scenarios
 take priority over image editing, analysis and unrelated peripheral features.
