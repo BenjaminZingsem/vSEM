@@ -66,8 +66,21 @@ Qualification is not yet complete. All 11 GPU/public-HTTP acquisition checks
 passed, including native 1024 with two focus segments, but the qualifier's final
 immediate child-absence assertion failed. The later owned process group was
 absent. That distinction is retained; no assertion or status has been weakened.
-All eight separate GPU transport tests now pass, including live configure/freeze
-terminal receipts. Lifecycle diagnosis against the unchanged baseline is pending.
+All eight separate GPU transport tests pass, including live configure/freeze
+terminal receipts. The unchanged baseline passed under read-only diagnostic
+observation. A separate finite multiprocessing reproduction demonstrated a
+timing hazard in immediate absence checks, including still-exiting helpers;
+live reaping alone did not make the immediate check reliable. This does not
+identify the unobserved child in the failed full qualification.
+
+A separate local proposal adds a five-second, birth-identity-aware exit
+observation to the qualifier. It does not kill processes or treat a present
+zombie as absent, and it fails when an owned child remains at the deadline.
+Deterministic CPU cases and 24 real subprocess lifecycles pass. It has not been
+integrated or GPU-qualified; changing cleanup acceptance beyond the approved
+permission fix requires an additional owner choice. The repair remains a
+[draft PR](https://github.com/BenjaminZingsem/vSEM/pull/9); both hosted acceptance
+jobs passed for implementation `e2853a0`.
 Do not merge or describe this candidate as fully qualified until those gates pass.
 The underlying numerical failure reported in #6 remains unidentified; diagnostics
 are not presented as a solver repair or permission to clear an interlock.

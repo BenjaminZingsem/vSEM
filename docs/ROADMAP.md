@@ -53,7 +53,8 @@ explicit acceptance criteria when work is authorized.
 Current maintainer-owned batch: truthful configure/freeze lifecycle (#5), bounded
 private preparation diagnostics and terminal-fault documentation (#6), private
 qualification output (#7), and bounded refusal accounting (#8). Implementation
-has CPU evidence; GPU/HTTP cleanup qualification is still under diagnosis. No
+has CPU and eight-test GPU transport evidence; cleanup qualification is awaiting
+an owner choice on a separate finite exit-observation proposal. No
 broader physical control, charging/damage integration or new roadmap slice is
 approved by this batch. Core SEM imaging and useful automation scenarios
 take priority over image editing, analysis and unrelated peripheral features.
