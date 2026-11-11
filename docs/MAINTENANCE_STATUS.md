@@ -1,18 +1,18 @@
 # Maintenance status
 
-Last verified: **10 November 2026**.
+Last verified: **11 November 2026**.
 
 | Item | State |
 |---|---|
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Initialized separately; approved operator-integration repairs and cleanup extension qualified; further features require an owner choice |
+| Continuous maintenance goal | Approved repairs merged and post-merge CI verified; issue #10 triaged as a new feature awaiting owner choice |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
 | Human-review instance / local coding wave | No persistent human instance or local coding wave; qualification uses owned transient fixtures |
-| Queue | Qualified repairs for #5-#8 are in PR9; #4 has a reporter correction withdrawing its upstream cleanup inference. Consult GitHub for current issue/merge state. |
+| Queue | #5-#8 resolved by merged PR9; #4 closed following its reporter correction. #10 proposes fibsemOS interoperability; implementation and external adoption are not approved. |
 
 The owner chose procedural maintenance safeguards instead of GitHub branch
 protection. Continue reviewed PRs, the successful GitHub Actions `acceptance`
@@ -86,3 +86,23 @@ for the final scope and hosted integration checks. Local qualification does not
 replace successful acceptance CI on the final PR/integration and merged main.
 The underlying numerical failure reported in #6 remains unidentified; diagnostics
 are not presented as a solver repair or permission to clear an interlock.
+
+## Post-merge review, 11 November
+
+[PR9](https://github.com/BenjaminZingsem/vSEM/pull/9) merged at
+`f3add4ac0eddc46c9033a0e515852dd67c3363b7`; its tree matches the reviewed and
+qualified candidate. [Main acceptance](https://github.com/BenjaminZingsem/vSEM/actions/runs/42832638933)
+succeeded from App15368 on that exact commit. Factual resolution comments now
+describe #5-#8. The new follow-up on #6 concerns the older source pin and does
+not reproduce a regression in the merged diagnostic changes.
+
+Accessible advisory and secret-scanning queues were empty at this inspection.
+Dependabot alerts are disabled and code scanning reports no analysis; these are
+coverage gaps, not clean scan results. No setting or credential scope was changed.
+
+[Issue #10](https://github.com/BenjaminZingsem/vSEM/issues/10) received static
+contract review against its exact fibsemOS pin. The proposed optional SEM plugin
+and staged acceptance are in [M05 revision 1](proposals/FIBSEMOS_INTEROP.md).
+Source-prototype implementation needs an owner choice; external dependencies and
+cross-stack execution require a subsequent concrete adoption decision. No external
+code was executed or adopted, and no plugin implementation or service was launched.
