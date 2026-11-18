@@ -1,18 +1,30 @@
 # Maintenance status
 
-Last verified: **11 November 2026**.
+Last verified: **18 November 2026**.
 
 | Item | State |
 |---|---|
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Approved repairs merged and post-merge CI verified; issue #10 triaged as a new feature awaiting owner choice |
+| Continuous maintenance goal | Approved repairs merged and post-merge CI verified; approved M05A source prototype prepared for draft review; no M05B execution or merge approval |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
 | Human-review instance / local coding wave | No persistent human instance or local coding wave; qualification uses owned transient fixtures |
-| Queue | #5-#8 resolved by merged PR9; #4 closed following its reporter correction. #10 proposes fibsemOS interoperability; implementation and external adoption are not approved. |
+| Queue | #5-#8 resolved by merged PR9; #4 closed following its reporter correction. #10 remains open: source prototype approved, external adoption and integration pending. |
+
+M05A adds an optional source-only fibsemOS adapter and independent CPU contracts.
+All 42 new tests pass on Windows/Linux; full Linux discovery is 295 tests with
+286 passing and nine existing explicit skips. No fibsemOS distribution was
+installed/imported/executed, no core runtime/workflow/dependency or original test
+changed, and no new GPU qualification is claimed. Candidate device bindings are
+statically reviewed; synchronous acquisition refuses before exposure while the
+public operation/image association is absent. See the
+[prototype](../integrations/fibsemos/README.md) and
+[M05B decision](proposals/FIBSEMOS_M05B_DECISION.md). The 55-wheel metadata graph
+does not yet qualify source/build payloads or an execution environment. #10 is not
+resolved, and M05A approval includes neither main merge nor release.
 
 The owner chose procedural maintenance safeguards instead of GitHub branch
 protection. Continue reviewed PRs, the successful GitHub Actions `acceptance`

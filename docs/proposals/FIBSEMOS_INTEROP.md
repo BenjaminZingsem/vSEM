@@ -107,6 +107,14 @@ exposure or substituting an old frame.
 
 ### M05A: source prototype and independent contract tests
 
+Status update, 18 November 2026: the owner approved this bounded stage. The
+[source-only candidate](../../integrations/fibsemos/README.md) and 42 independent
+tests are prepared for draft review. Existing core code and protected tests are
+unchanged. See the [M05B decision packet](FIBSEMOS_M05B_DECISION.md) for the exact
+metadata proposal, build/import risks and missing public command/image association.
+No external execution, main merge or release is approved. The original proposed
+scope below records what the owner selected; its pending-choice wording is historical.
+
 Owner choice is required before starting. Proposed scope: independently authored
 plugin source/configuration, pure mapping and data-record helpers, independent CPU
 tests using locally authored HTTP fixtures, and a reviewed draft PR. Allowed new
