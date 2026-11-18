@@ -44,4 +44,9 @@ The metadata-only dependency evidence was generated 12 November and integrity
 rechecked 18 November. The exact proposal SHA256 is
 `833d86b382d95636115f89fdfd06df276806fb9fec8868c336d015a07c844bf5`.
 The [audit record](review/metadata-audit.json) records its method and limits.
-Full source archive, built-wheel and native-payload review remain unperformed.
+Subsequent M05B0 approval covered inert source/archive inspection only. The complete
+source tree and all 55 wheel payload identities now pass structural checks; see
+the [artifact report](../../docs/proposals/FIBSEMOS_ARTIFACT_REVIEW.md). Advisory and
+native-library findings reject the original graph for execution. The replacement
+manifest is a metadata proposal, not adopted code. No upstream payload is added
+to Git and no built upstream wheel or genuine runtime workflow is qualified.

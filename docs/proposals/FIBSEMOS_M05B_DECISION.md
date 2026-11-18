@@ -1,9 +1,15 @@
 # fibsemOS next decision after M05A
 
-Revision 1, 18 November 2026. **Proposal only; no additional approval is implied.**
+Revision 2, 18 November 2026. **Replacement proposal only; no execution approval.**
 The [source prototype](../../integrations/fibsemos/README.md) is an optional draft
 for [#10](https://github.com/BenjaminZingsem/vSEM/issues/10). M05A does not install
 or execute fibsemOS, change the core API, merge main or publish a release.
+
+The approved M05B0 inspection is complete. All original artifact identities pass,
+but the 55-wheel graph is **rejected for execution** because of advisory findings
+and unresolved native-library risk. See the [inspection report](FIBSEMOS_ARTIFACT_REVIEW.md).
+The next proposed choice is M05B0-R1 inert inspection of a revised, isolated client
+environment. No replacement payload or container has been fetched or run.
 
 ## Exact proposed artifacts and known limits
 
@@ -20,23 +26,24 @@ It contains 55 exact CPython 3.10.12/Linux x86_64 wheel filenames, URLs,
 PyPI-published payload hashes, metadata hashes, requirements, enabled extras and
 full declared license fields. Fifty packages are runtime, seven build, with two
 shared. The static audit closes 108 active requirement edges and verifies all 55
-metadata sidecars against PyPI. Payload hashes are index claims, not independently
-hashed downloaded binaries. Python/base-image and installer artifacts, upstream
-source archive, built wheel and dynamic build closure are still missing. This is
-not yet a complete install lock or vulnerability assessment.
+metadata sidecars against PyPI. M05B0 now independently verifies all downloaded
+payloads and the complete source Git tree. It found affected Pillow/setuptools and
+vendored dependencies; the graph must not be installed. The original proposal is
+preserved for provenance. Built-wheel and dynamic-build closure remain unqualified.
 
-NumPy 1.26.4 and SciPy 1.15.3 remain selected. OpenCV 4.11.0.86 permits NumPy 1;
-five newer candidates required NumPy 2. That compatibility choice does not prove
-the older release secure. FastAPI 0.162.5 brings opentelemetry-api 1.45.2, with no
-SDK/exporter selected. An API dependency alone does not establish active telemetry.
-FastAPI's 0.121.0 floor omits it but requires an older Starlette graph; choosing
-that alternative requires a fresh complete resolution and security review.
+The rejected graph kept NumPy 1.26.4/SciPy 1.15.3 and therefore an older OpenCV.
+The replacement removes that coupling: a separate client environment can use
+Python 3.12 and newer numerical/codec packages while core vSEM retains its
+qualified requirements. Metadata compatibility alone does not prove behavior.
+Both proposals include opentelemetry-api without an SDK/exporter; this does not
+establish active telemetry or waive the proposed network isolation.
 
 Native/scientific/codec/XML/PDF dependencies make payload review material.
 Metadata declares bundled FFmpeg under LGPL 2.1, GCC runtime with GPL exception,
 libquadmath under LGPL, Matplotlib font licenses and certifi MPL 2.0, among others.
-Top-level MIT/BSD labels are not a complete bundled-license inventory. Actual
-LICENSE/NOTICE/native-library contents remain to be inspected before redistribution.
+Top-level MIT/BSD labels are not a complete bundled-license inventory. M05B0 has
+recorded actual LICENSE/NOTICE/native-library contents; redistribution and any
+replacement payload still need their applicable review and approval.
 
 ## Build and execution boundary
 
@@ -55,15 +62,17 @@ reviewed environment, not the existing simulator environment.
 
 Proposed stages, each respecting its approval boundary:
 
-1. **M05B0 artifact inspection:** fetch the exact upstream revision and the 55
-   named wheels as inert data into a disposable quarantine; verify wheel payload
-   hashes and Git-tree/source identities; review archive paths, hooks, bundled
-   instructions, licenses, native libraries and current advisories. Do not import,
-   install, build, run scripts or modify product code. If any hash, dependency or
-   source identity differs, stop that artifact and report it. Produce the complete
-   execution candidate, including environment/installer identities and a concrete
-   proposed CPU workflow, for a separate owner choice.
-2. **M05B1 CPU execution, only after that choice:** stage only accepted artifacts
+1. **M05B0 complete; M05B0-R1 proposed:** the original source/55 wheels were
+   inspected without execution. The [replacement manifest](../../integrations/fibsemos/review/replacement-artifact-proposal.json)
+   freezes 52 wheels (25 reused and 27 new), pip 26.3 and the Linux/amd64
+   Python 3.12.16 OCI manifest/config/four-layer identities. Its SHA256 is
+   `a5e705b56adefa5ba884dbab2dba6ccaf036987648bc1498a05253ebcacd75a2`.
+   Approve inspection only of those exact new wheel/config/layer payloads, plus
+   reuse/rechecking existing data. Verify hashes, path/link/whiteout behavior,
+   hooks, licenses, native/OS packages and advisories. Do not extract onto the
+   host, load/run an image, install/import/build, change product code or substitute
+   artifacts. Produce an accepted execution candidate, or report remaining blockers.
+2. **M05B1 CPU execution, only after a separate execution approval:** stage accepted artifacts
    in a disposable CPU runner. No private mounts, owner/cloud tokens, real
    instrument/network route or unrelated installed entry points. Fetching and
    executing are separate phases; disable network during build/import/test.
@@ -107,12 +116,19 @@ already-approved M05A repair. It requires its own trusted owner decision.
 
 ## Owner choices and rollback
 
-Recommended next choice: **approve M05B0 inert artifact inspection only** on the
-pin and 55-wheel proposal above. It closes the missing source/payload review before
-asking for execution. It includes no install/build/import, dependency adoption into
-the project, core API change, main merge or release. A narrower choice is to prepare
-a revised dependency graph (for example an older FastAPI alternative) without
-fetching payloads. Deferral leaves the source-only draft and #10 open.
+Recommended next choice: **approve M05B0-R1 replacement artifact inspection only**
+on the exact manifest above. Scope is 27 new wheel payloads (209,276,581 bytes),
+four OCI layers (45,269,504 bytes), one 5,681-byte config and 25 reused wheels.
+The upstream source commit is unchanged. The review includes native/OS advisories
+and a concrete offline CPU qualification plan; it includes no external execution,
+dependency adoption, product/core API change, main merge or release. Any further
+artifact substitution requires another scoped decision.
+
+A narrower choice is **inspect the 27 replacement wheels only** and defer the OCI
+base review; execution would still lack a qualified environment. **Defer** preserves
+the unmerged source prototype and leaves #10 open. All choices preserve the
+released simulator. A passing metadata query is not a reason to execute the
+replacement before its payloads and environment are reviewed.
 
 The correlation slice can be prepared independently, but implementation needs a
 separate bounded choice. Do not bundle unfinished core semantics into external

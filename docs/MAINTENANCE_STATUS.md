@@ -7,7 +7,7 @@ Last verified: **18 November 2026**.
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Approved repairs merged and post-merge CI verified; approved M05A source prototype prepared for draft review; no M05B execution or merge approval |
+| Continuous maintenance goal | Approved M05A source prototype remains draft; M05B0 artifact inspection complete, original graph rejected for execution; replacement inspection awaits owner choice |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
@@ -22,9 +22,13 @@ changed, and no new GPU qualification is claimed. Candidate device bindings are
 statically reviewed; synchronous acquisition refuses before exposure while the
 public operation/image association is absent. See the
 [prototype](../integrations/fibsemos/README.md) and
-[M05B decision](proposals/FIBSEMOS_M05B_DECISION.md). The 55-wheel metadata graph
-does not yet qualify source/build payloads or an execution environment. #10 is not
-resolved, and M05A approval includes neither main merge nor release.
+[M05B decision](proposals/FIBSEMOS_M05B_DECISION.md). M05B0 verified the pinned source
+and all 55 wheel payloads, but advisory/native-library findings prevent execution
+of that graph. The [inspection report](proposals/FIBSEMOS_ARTIFACT_REVIEW.md) records
+the findings and a new metadata-only 52-wheel, separate Python 3.12 client proposal.
+Replacement payload/base inspection requires a new owner choice. No external
+package was installed/imported/built/executed; #10 is unresolved and PR12 stays
+draft/unmerged. Core dependencies, API and review instructions remain unchanged.
 
 The owner chose procedural maintenance safeguards instead of GitHub branch
 protection. Continue reviewed PRs, the successful GitHub Actions `acceptance`

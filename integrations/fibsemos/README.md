@@ -103,8 +103,12 @@ Only the unit-conversion helper was delegated to a qualified local coding model;
 the maintainer audited/corrected it. Protocol, authority, Stop, records, integration
 design and independent tests are maintainer-owned. See [provenance](PROVENANCE.md).
 
-The [dependency proposal](review/dependency-proposal.json) closes 55 declared wheel
-records, not a proven execution environment. See the [next decision](../../docs/proposals/FIBSEMOS_M05B_DECISION.md)
-for exact identities, build/import risks, missing public correlation and staged
-qualification. No upstream distribution was installed or executed, no simulator
-GPU campaign ran, and no main merge/release is included in M05A.
+The original [dependency proposal](review/dependency-proposal.json) is preserved
+but rejected for execution. [M05B0 inspection](../../docs/proposals/FIBSEMOS_ARTIFACT_REVIEW.md)
+verified the pinned source and all 55 wheels, and found affected packages and
+unresolved native-library risk. The [replacement manifest](review/replacement-artifact-proposal.json)
+proposes a separate Python 3.12 client environment; its new payloads are not
+downloaded or approved. See the [next decision](../../docs/proposals/FIBSEMOS_M05B_DECISION.md)
+for exact scope, missing public correlation and staged qualification. No upstream
+distribution was installed, imported, built or executed, no simulator GPU campaign
+ran, and no main merge/release is included.
