@@ -1,0 +1,30 @@
+{
+  "status": "PASS: static metadata closure only; not adoption, installation or runtime qualification",
+  "audited_at": "2026-11-12T12:49:18.434333+00:00",
+  "lock_sha256": "833d86b382d95636115f89fdfd06df276806fb9fec8868c336d015a07c844bf5",
+  "resolver_sha256": "ceced2be1d86207baf3c25657db2fa559c30af11f28db78256a8ee14adfe09de",
+  "audit_script_sha256": "058caea7e478d5a73327dbbf9a6269f3c6f66d9aeb7ec1db1ebfefc8737f4788",
+  "package_count": 55,
+  "runtime_count": 50,
+  "build_count": 7,
+  "active_requirement_edges": 108,
+  "all_wheel_metadata_sha256_verified": true,
+  "distribution_payloads_fetched_or_present": false,
+  "warnings": [],
+  "checks": [
+    "Every active requirement and extra is closed and version-compatible for the declared target",
+    "Each exact wheel has a compatible CPython/manylinux/pure tag and Python requirement",
+    "Every stored raw metadata sidecar matches its PyPI-published SHA256 and lock requirements",
+    "Only the requested lxml and legacy toml extras were requested; no optional UI/ML/agent/vendor stack",
+    "Recorded incoming requirements match independently reconstructed edges",
+    "Runtime and build proposals were independently projected from the combined graph"
+  ],
+  "limits": [
+    "Wheel binary hashes come from PyPI; no wheel payload was fetched to independently hash it",
+    "Upstream exact source archive/wheel SHA256 and build-hook closure are not determined",
+    "No build/import, ABI, runtime, workflow, vulnerability or bundled-license qualification",
+    "Python3.10.12 is an exact proposed marker target, not a measured execution environment"
+  ],
+  "original_metadata_evidence_lock_sha256": "dabc3e85de7dc3a917ddebf7836a98c2d6fe92196cf8a6d34f07971775bdd234",
+  "publication_normalization": "LF-only normalization; JSON values unchanged; 191 private evidence file hashes independently rechecked on 18 November 2026."
+}
