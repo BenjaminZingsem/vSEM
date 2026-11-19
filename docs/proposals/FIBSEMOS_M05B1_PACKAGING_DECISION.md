@@ -1,9 +1,11 @@
 # M05B1 packaging-pin decision
 
 Prepared 19 November 2026 against qualification base
-`20f87901566b3be070fc05f7ab4d8c64b5b0fa4a`. **Proposed, not applied.**
+`20f87901566b3be070fc05f7ab4d8c64b5b0fa4a`. **Owner approved option 1 on
+19 November; applied only on the isolated qualification branch.**
 The owner approved [CPU qualification revision 1](FIBSEMOS_M05B1_CPU_PLAN.md).
-That approval keeps the M05A product and build configuration unchanged.
+That original approval kept M05A unchanged; the subsequent choice extends it by
+exactly the one build pin below. All other limits and acceptance gates persist.
 
 ## Finding and exact proposed change
 

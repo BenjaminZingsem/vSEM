@@ -1,16 +1,20 @@
-# M05B1 qualification preparation
+# M05B1 disposable CPU qualification
 
 19 November 2026: the owner approved
-[CPU qualification revision 1](../../../docs/proposals/FIBSEMOS_M05B1_CPU_PLAN.md).
-This directory currently contains the **inert admission component only**. There
-is no execution workflow, installer, container launch or genuine upstream result
-yet. It is not a production installation recipe.
+[CPU qualification revision 1](../../../docs/proposals/FIBSEMOS_M05B1_CPU_PLAN.md)
+and the exact packaging correction below. The specification at `20f8790` remains
+the frozen acceptance contract; its original proposed-status header is historical.
+This is a maintainer-owned experiment, not a production installation recipe.
+The isolated harness/workflow is prepared; genuine results remain unqualified
+until the hosted run and independent audit. PR12 stays draft.
 
 The preflight found that the unchanged prototype requires setuptools 75.8.0,
 outside the approved replacement graph's setuptools 84.2.1. The exact proposed
 [one-line correction](../../../docs/proposals/FIBSEMOS_M05B1_PACKAGING_DECISION.md)
-awaits an owner choice because revision 1 excludes product/build-file changes.
-Do not ignore that requirement or execute the rejected dependency graph.
+is approved and applied on the qualification branch. All other product source,
+original acceptance and artifact identities remain unchanged. No private
+execution, other product repair, released dependency adoption, main merge or
+release is approved. The rejected dependency graph remains prohibited.
 
 ## Inert checks
 
@@ -22,7 +26,7 @@ does not extract, import or execute archive members. Nested vendored metadata
 is inventoried as data, not treated as an additional installed distribution.
 
 `wheel_inventory` is structural evidence, **not sufficient runtime admission**.
-The remaining built-wheel inspector must compare the entire package to frozen
+The built-wheel inspector compares the entire package to frozen
 source/assets and explicitly classify generated metadata, requirements, license
 material and entry points. Installer provenance, dynamic build requirements,
 runtime inventory and actual confinement remain separate execution gates.
@@ -31,7 +35,7 @@ From the repository root, the synthetic negative tests need only Python's
 standard library:
 
 ```text
-python -I -B integrations/fibsemos/qualification/test_artifacts.py
+python -I -B -m unittest discover -s integrations/fibsemos/qualification -p "test_*.py" -v
 ```
 
 To inspect already quarantined exact inputs, use a fresh ignored output path:
@@ -47,6 +51,48 @@ artifact failure. These are failures to qualify, never successful skipped gates.
 Reports contain only inventories and observations, not execution authorization.
 
 The 19 November local check reproduced the exact 2,163-file source tree and all
-52 replacement wheel identities/RECORD inventories (9,313 files). The build pin
-remains blocked. No OCI image or external package was executed. The full C1-C8
-experiment is incomplete, and original acceptance/product source remain unchanged.
+52 replacement wheel identities/RECORD inventories (9,313 files). The corrected
+build pin now passes preflight. Preparation passes 33 standard-library Windows
+tests; two POSIX subprocess tests run on the public Linux runner. Passing inert
+checks alone does not satisfy C1-C8.
+
+## Execution boundary
+
+The isolated `fibsemos_cpu.yml` workflow accepts only pushes to
+`qualification/fibsemos-m05b1-20261119` in this repository. `run_cpu.py` refuses
+private/local execution before any fetch or launch. It uses anonymous pinned
+public inputs, an explicit Ubuntu 22.04 hosted CPU runner, read-only workflow
+permissions and the existing pinned checkout action without persisted credentials.
+
+`fetch.py` verifies exact source, wheels and OCI config/layers. `confinement.py`
+inspects every created container before execution; `probe.py` checks actual
+restrictions separately before packages run. Containers are non-root, networkless,
+read-only except fresh measured scratch/output, with dropped capabilities,
+no-new-privileges and default seccomp. No host credentials, Git directory, private
+mounts, GPU or published port enter. These controls do not prove escape resistance.
+
+`container_main.py` creates a fresh venv without pip. `pip_bootstrap.py` runs only
+verified pip 26.3 with base site disabled; base pip/ensurepip never run. Exact
+wheels install offline with hashes and no dependency resolution. `environment.py`
+inventories origins, versions, requirements and entry points. `backend_build.py`
+checks declared and dynamic build requirements before calling the actual PEP 517
+backend. There is no manual package-assembly fallback.
+
+After the builder exits, `built_wheels.py` reads its output as bounded data on the
+host. It compares source/assets, Python/dependency metadata, license and entry
+points, classifies generated metadata and rejects unrecognized members. Only
+admitted bytes enter the fresh runtime. No package-produced script or archive
+member executes on the host.
+
+`genuine.py` uses actual installed upstream classes and its unchanged Imaging
+service. Observable-only loopback fixtures exercise bindings, refusals, lease
+loss and Stop. Demo acquires 256- and 1024-pixel images; the vSEM adapter must
+refuse unqualified synchronous acquisition before exposure. Original M05A tests
+run unchanged in a separate interpreter. These gates do not qualify SEM physics,
+dose, GPU execution or real-instrument use.
+
+Child logs are bounded and emitted as base64 data with sizes, hashes and chunk
+counts. No raw external stdout becomes Actions commands or shell input. Owned
+containers and output mounts close on success/failure. Missing evidence, cleanup
+failure and failed acceptance remain failures. No third-party source, wheel,
+generated image or container payload is published as an artifact.

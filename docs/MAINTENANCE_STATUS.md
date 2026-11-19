@@ -7,7 +7,7 @@ Last verified: **19 November 2026**.
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Paused; bounded M05B1 CPU qualification approved; preparation found an incompatible product build pin requiring the choice below; M05A remains draft |
+| Continuous maintenance goal | Active after explicit owner resume; M05B1 CPU qualification and the exact packaging-pin correction approved; M05A remains draft |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
@@ -32,14 +32,16 @@ wheel advisory was returned, but older bundled components and base-image finding
 remain; this is not deployment clearance. The
 [M05B1 CPU plan](proposals/FIBSEMOS_M05B1_CPU_PLAN.md) is now approved for its
 confined disposable experiment with explicit risk acceptance. The initial
-[inert admission component](../integrations/fibsemos/qualification/README.md)
-reverifies the source tree and all 52 wheels. It found that M05A still pins
-setuptools 75.8.0 while the approved graph contains 84.2.1. The exact
-[one-line packaging correction](proposals/FIBSEMOS_M05B1_PACKAGING_DECISION.md)
-needs an owner choice because the approved plan excludes product/build-file
-changes. No execution workflow has launched and C1-C8 are not qualified.
-No external package was
-installed/imported/built/executed; #10 is unresolved and PR12 stays draft/unmerged.
+[qualification harness](../integrations/fibsemos/qualification/README.md)
+reverifies the source tree and all 52 wheels. The owner additionally approved the
+exact [one-line packaging correction](proposals/FIBSEMOS_M05B1_PACKAGING_DECISION.md)
+from setuptools 75.8.0 to the already approved 84.2.1. The isolated qualification
+branch now prepares networkless build/runtime containers, independent static
+built-wheel admission and genuine upstream C1-C8 tests. Preparation passes 33
+standard-library tests on Windows; two POSIX process tests await the public runner.
+The source/build-pin preflight passes. No external package has yet been executed;
+C1-C8 remain unqualified until the hosted results are audited. #10 is unresolved
+and PR12 stays draft/unmerged. No other product repair or main merge is approved.
 Core dependencies, API and human-review instructions remain unchanged. No service,
 worker, GPU campaign or maintenance watcher runs.
 
