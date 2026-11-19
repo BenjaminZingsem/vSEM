@@ -7,7 +7,7 @@ Last verified: **19 November 2026**.
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Paused at owner decision; M05A remains draft; M05B0 and R1 inert inspections complete; proposed M05B1 CPU execution needs approval |
+| Continuous maintenance goal | Paused; bounded M05B1 CPU qualification approved; preparation found an incompatible product build pin requiring the choice below; M05A remains draft |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
@@ -30,8 +30,15 @@ the original findings. The separately approved
 replacement wheels and the exact Python 3.12 OCI config/four layers. No top-level
 wheel advisory was returned, but older bundled components and base-image findings
 remain; this is not deployment clearance. The
-[M05B1 CPU plan](proposals/FIBSEMOS_M05B1_CPU_PLAN.md) proposes a confined disposable
-experiment with explicit risk acceptance. No external package was
+[M05B1 CPU plan](proposals/FIBSEMOS_M05B1_CPU_PLAN.md) is now approved for its
+confined disposable experiment with explicit risk acceptance. The initial
+[inert admission component](../integrations/fibsemos/qualification/README.md)
+reverifies the source tree and all 52 wheels. It found that M05A still pins
+setuptools 75.8.0 while the approved graph contains 84.2.1. The exact
+[one-line packaging correction](proposals/FIBSEMOS_M05B1_PACKAGING_DECISION.md)
+needs an owner choice because the approved plan excludes product/build-file
+changes. No execution workflow has launched and C1-C8 are not qualified.
+No external package was
 installed/imported/built/executed; #10 is unresolved and PR12 stays draft/unmerged.
 Core dependencies, API and human-review instructions remain unchanged. No service,
 worker, GPU campaign or maintenance watcher runs.
