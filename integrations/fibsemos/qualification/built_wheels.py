@@ -76,6 +76,7 @@ def expected_requirements(pyproject):
 
 
 def admit_wheel(path, source_files, plugin_files, vsem_license):
+    wheel_path = Path(path)
     contents, report = wheel_inventory(path)
     info = report['dist_info']
     require(report['name'] in ('fibsem', 'vsem-fibsemos'), 'unexpected built distribution')
@@ -140,6 +141,6 @@ def admit_wheel(path, source_files, plugin_files, vsem_license):
     report['license_evidence'] = {'declaration': report['license'], 'source_notice_sha256': sha256(license_bytes),
                                   'wheel_notice_members': license_members,
                                   'binary_redistribution_authorized': False}
-    report['filename'] = Path(path).name
+    report['filename'] = wheel_path.name
     report['status'] = 'STATIC_ADMISSION_PASS'
     return report

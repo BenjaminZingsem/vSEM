@@ -243,7 +243,7 @@ def main():
                                   ('C5', 'uncertainty_no_replay_and_stop', authority_and_stop),
                                   ('C5', 'real_periodic_lease_loss', lease_loss),
                                   ('C6', 'unchanged_demo_256_and_1024', demo),
-                                  ('C7', 'vSEM_refuses_before_exposure', honest_refusal)]:
+                                  ('C7', 'vsem_refuses_before_exposure', honest_refusal)]:
         start = time.monotonic()
         try:
             operation()

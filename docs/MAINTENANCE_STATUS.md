@@ -37,7 +37,7 @@ reverifies the source tree and all 52 wheels. The owner additionally approved th
 exact [one-line packaging correction](proposals/FIBSEMOS_M05B1_PACKAGING_DECISION.md)
 from setuptools 75.8.0 to the already approved 84.2.1. The isolated qualification
 branch now prepares networkless build/runtime containers, independent static
-built-wheel admission and genuine upstream C1-C8 tests. Preparation now passes 35
+built-wheel admission and genuine upstream C1-C8 tests. Preparation now passes 36
 standard-library tests on Windows; two POSIX process tests pass on the public runner.
 The source/build-pin preflight passes. The first
 [experiment](https://github.com/BenjaminZingsem/vSEM/actions/runs/44599900995)
@@ -46,8 +46,14 @@ the harness's one-file compressed-log setting. The owned container was removed;
 no package execution occurred. That logging configuration is corrected, and the
 metadata checker now includes the frozen source's GUI entry point and equivalent
 requirement ordering. [Ordinary CI](https://github.com/BenjaminZingsem/vSEM/actions/runs/44599900438)
-passed on `665bd65`. No external package has yet been executed;
-C1-C8 remain unqualified until the hosted results are audited. #10 is unresolved
+passed on `665bd65`. The [second experiment](https://github.com/BenjaminZingsem/vSEM/actions/runs/44600636097)
+passed the independent isolation probe, exact pip/venv inventory, both real offline
+builds and source/member/metadata inspection. Runtime installation then correctly
+refused a wheel filename corrupted by a harness loop-variable collision. That
+harness defect now has a regression test and is corrected. All three owned
+containers were removed; [ordinary CI](https://github.com/BenjaminZingsem/vSEM/actions/runs/44600636201)
+passed on `6002f1b`. Genuine runtime C3-C7 and complete C1-C8 qualification remain
+pending; prior failed evidence is preserved. #10 is unresolved
 and PR12 stays draft/unmerged. No other product repair or main merge is approved.
 Core dependencies, API and human-review instructions remain unchanged. No service,
 worker, GPU campaign or maintenance watcher runs.

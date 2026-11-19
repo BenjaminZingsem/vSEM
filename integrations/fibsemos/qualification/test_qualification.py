@@ -115,12 +115,16 @@ def synthetic_wheel(changes=None, omitted=()):
     contents.update(changes or {})
     for key in omitted:
         del contents[key]
+    return pack_wheel(contents, PREFIX)
+
+
+def pack_wheel(contents, prefix):
     rows = [[name, 'sha256=' + base64.urlsafe_b64encode(hashlib.sha256(raw).digest()).decode().rstrip('='),
              str(len(raw))] for name, raw in contents.items()]
-    rows.append([PREFIX + 'RECORD', '', ''])
+    rows.append([prefix + 'RECORD', '', ''])
     record = io.StringIO(newline='')
     csv.writer(record, lineterminator='\n').writerows(rows)
-    contents[PREFIX + 'RECORD'] = record.getvalue().encode()
+    contents[prefix + 'RECORD'] = record.getvalue().encode()
     stream = io.BytesIO()
     with zipfile.ZipFile(stream, 'w') as archive:
         for name, raw in contents.items():
@@ -190,6 +194,30 @@ class BuiltAdmissionTests(unittest.TestCase):
             with self.assertRaises(AdmissionError):
                 admit_wheel(path, {}, {'pyproject.toml': project,
                     'src/vsem_fibsemos/plugin.py': PAYLOAD}, b'MIT fixture')
+
+    def test_upstream_asset_loop_preserves_actual_wheel_filename(self):
+        project = (b'[project]\nname = "fibsem"\nversion = "0.7.0.dev0"\n'
+                   b'requires-python = ">=3.10"\ndependencies = []\n')
+        notice = b'MIT synthetic notice'
+        source = {name: ('100644', raw) for name, raw in (
+            ('pyproject.toml', project), ('LICENSE', notice), ('fibsem/demo.py', PAYLOAD),
+            ('fibsem/correlation/data/zeta_lut.npz', b'inert synthetic asset'),
+            ('.claude/skills/demo/SKILL.md', b'inert synthetic text, never an instruction'),
+            ('vite.config.ts', b'last source member must not become wheel filename'),
+        )}
+        info = 'fibsem-0.7.0.dev0.dist-info/'
+        contents = {'fibsem/demo.py': PAYLOAD,
+                    'fibsem/correlation/data/zeta_lut.npz': b'inert synthetic asset',
+                    'fibsem/ai/agent/shipped/.claude/skills/demo/SKILL.md': source['.claude/skills/demo/SKILL.md'][1],
+                    info + 'licenses/LICENSE': notice,
+                    info + 'METADATA': b'Metadata-Version: 2.4\nName: fibsem\nVersion: 0.7.0.dev0\nLicense: MIT\nRequires-Python: >=3.10\n',
+                    info + 'WHEEL': b'Wheel-Version: 1.0\nRoot-Is-Purelib: true\nTag: py3-none-any\n'}
+        with tempfile.TemporaryDirectory(prefix='vsem-filename-regression-') as directory:
+            path = Path(directory) / 'fibsem-0.7.0.dev0-py3-none-any.whl'
+            path.write_bytes(pack_wheel(contents, info))
+            result = admit_wheel(path, source, {}, notice)
+            self.assertEqual(result['filename'], path.name)
+            self.assertEqual(result['source_comparison']['compared_members'], 3)
 
 
 @unittest.skipUnless(os.name == 'posix', 'POSIX process-group supervisor; exercised on public CPU runner')

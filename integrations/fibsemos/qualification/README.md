@@ -52,7 +52,7 @@ Reports contain only inventories and observations, not execution authorization.
 
 The 19 November local check reproduced the exact 2,163-file source tree and all
 52 replacement wheel identities/RECORD inventories (9,313 files). The corrected
-build pin now passes preflight. Preparation passes 35 standard-library Windows
+build pin now passes preflight. Preparation passes 36 standard-library Windows
 tests; two POSIX subprocess tests pass on the public Linux runner. Passing inert
 checks alone does not satisfy C1-C8.
 
