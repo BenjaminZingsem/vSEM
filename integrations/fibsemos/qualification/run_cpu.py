@@ -197,7 +197,8 @@ def main():
                        '--memory-swap', str(memory), '--tmpfs',
                        '/scratch:rw,exec,nosuid,nodev,size=' + str(scratch) + ',mode=1777',
                        '--workdir', '/scratch', '--entrypoint', '/usr/bin/env',
-                       '--log-driver', 'local', '--log-opt', 'max-size=16m', '--log-opt', 'max-file=1']
+                       '--log-driver', 'local', '--log-opt', 'max-size=16m', '--log-opt', 'max-file=1',
+                       '--log-opt', 'compress=false']
             for destination, (source, writable) in mounts.items():
                 command += ['--mount', 'type=bind,src=' + source + ',dst=' + destination +
                             ',bind-propagation=rprivate' + ('' if writable else ',readonly')]
@@ -210,8 +211,8 @@ def main():
             write_json(evidence / (phase + '-configuration-check.json'), assertion)
             result, raw = execute(['docker', 'start', '--attach', name], check=False)
             ended = inspect_container(name)
-            require(not ended['State']['Running'] and ended['State']['Status'] == 'exited', 'container not terminal')
             write_json(evidence / (phase + '-terminal.json'), ended['State'])
+            require(not ended['State']['Running'] and ended['State']['Status'] == 'exited', 'container not terminal')
             report['stages'][phase] = {'exit_code': ended['State']['ExitCode'], 'oom': ended['State']['OOMKilled']}
             require(result['exit_code'] == ended['State']['ExitCode'], 'attach and container exit codes disagree')
             if phase == 'probe':

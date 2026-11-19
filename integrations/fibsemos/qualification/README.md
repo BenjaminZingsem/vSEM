@@ -27,7 +27,7 @@ is inventoried as data, not treated as an additional installed distribution.
 
 `wheel_inventory` is structural evidence, **not sufficient runtime admission**.
 The built-wheel inspector compares the entire package to frozen
-source/assets and explicitly classify generated metadata, requirements, license
+source/assets and explicitly classifies generated metadata, requirements, license
 material and entry points. Installer provenance, dynamic build requirements,
 runtime inventory and actual confinement remain separate execution gates.
 
@@ -52,8 +52,8 @@ Reports contain only inventories and observations, not execution authorization.
 
 The 19 November local check reproduced the exact 2,163-file source tree and all
 52 replacement wheel identities/RECORD inventories (9,313 files). The corrected
-build pin now passes preflight. Preparation passes 33 standard-library Windows
-tests; two POSIX subprocess tests run on the public Linux runner. Passing inert
+build pin now passes preflight. Preparation passes 35 standard-library Windows
+tests; two POSIX subprocess tests pass on the public Linux runner. Passing inert
 checks alone does not satisfy C1-C8.
 
 ## Execution boundary

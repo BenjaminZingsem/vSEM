@@ -170,6 +170,27 @@ class BuiltAdmissionTests(unittest.TestCase):
         with self.assertRaises(AdmissionError):
             canonical_requirement('demo; __import__("os").system("payload")')
 
+    def test_equivalent_requirement_order_only(self):
+        self.assertEqual(canonical_requirement('fibsem[ui,ml]>=1,<3; extra == "all"'),
+                         canonical_requirement("fibsem[ml,ui]<3,>=1; extra == 'all'"))
+        self.assertNotEqual(canonical_requirement('demo>=1,<3'), canonical_requirement('demo>=1,<4'))
+        with self.assertRaises(AdmissionError):
+            canonical_requirement('demo @ https://example.invalid/payload.whl')
+
+    def test_declared_gui_entry_point_must_match(self):
+        project = PROJECT + b'\n[project.gui-scripts]\nopen-demo = "vsem_fibsemos.plugin:open_demo"\n'
+        points = (b'[fibsem.drivers]\nvsem = vsem_fibsemos.plugin:driver_entry\n'
+                  b'[gui_scripts]\nopen-demo = vsem_fibsemos.plugin:open_demo\n')
+        with tempfile.TemporaryDirectory(prefix='vsem-gui-metadata-') as directory:
+            path = Path(directory) / 'fixture.whl'
+            path.write_bytes(synthetic_wheel({PREFIX + 'entry_points.txt': points}))
+            self.assertEqual(admit_wheel(path, {}, {'pyproject.toml': project,
+                'src/vsem_fibsemos/plugin.py': PAYLOAD}, b'MIT fixture')['status'], 'STATIC_ADMISSION_PASS')
+            path.write_bytes(synthetic_wheel())
+            with self.assertRaises(AdmissionError):
+                admit_wheel(path, {}, {'pyproject.toml': project,
+                    'src/vsem_fibsemos/plugin.py': PAYLOAD}, b'MIT fixture')
+
 
 @unittest.skipUnless(os.name == 'posix', 'POSIX process-group supervisor; exercised on public CPU runner')
 class ProcessTests(unittest.TestCase):

@@ -38,7 +38,20 @@ def canonical_requirement(raw):
     name_part, separator, marker = raw.partition(';')
     match = re.fullmatch(r'\s*([A-Za-z0-9_.-]+)(.*)', name_part)
     require(match is not None, 'invalid requirement identity')
-    name = normalized_name(match[1]) + re.sub(r'\s+', '', match[2])
+    suffix = re.sub(r'\s+', '', match[2])
+    extras = ''
+    if suffix.startswith('['):
+        extra_match = re.match(r'\[([A-Za-z0-9_.,-]+)\]', suffix)
+        require(extra_match is not None, 'invalid requirement extras')
+        extras = '[' + ','.join(sorted(normalized_name(e) for e in extra_match[1].split(','))) + ']'
+        suffix = suffix[extra_match.end():]
+    if suffix.startswith('(') and suffix.endswith(')'):
+        suffix = suffix[1:-1]
+    parts = suffix.split(',') if suffix else []
+    require(all(re.fullmatch(r'(?:===|==|!=|~=|<=|>=|<|>)[A-Za-z0-9.*+!_-]+', p) for p in parts),
+            'unexpected requirement constraint or direct URL')
+    # Constraint conjunctions and extra sets have no ordering semantics.
+    name = normalized_name(match[1]) + extras + ','.join(sorted(parts))
     if not separator:
         return (name, '')
     tree = ast.parse(marker.strip(), mode='eval')
@@ -82,6 +95,9 @@ def admit_wheel(path, source_files, plugin_files, vsem_license):
             'built extras differ from frozen source')
     scripts = literal_table(project, 'project.scripts')
     entry_points = {'console_scripts': scripts} if scripts else {}
+    gui_scripts = literal_table(project, 'project.gui-scripts')
+    if gui_scripts:
+        entry_points['gui_scripts'] = gui_scripts
     drivers = literal_table(project, 'project.entry-points."fibsem.drivers"')
     if drivers:
         entry_points['fibsem.drivers'] = drivers
