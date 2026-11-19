@@ -1,13 +1,13 @@
 # Maintenance status
 
-Last verified: **18 November 2026**.
+Last verified: **19 November 2026**.
 
 | Item | State |
 |---|---|
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Approved M05A source prototype remains draft; M05B0 artifact inspection complete, original graph rejected for execution; replacement inspection awaits owner choice |
+| Continuous maintenance goal | Paused at owner decision; M05A remains draft; M05B0 and R1 inert inspections complete; proposed M05B1 CPU execution needs approval |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
@@ -25,10 +25,16 @@ public operation/image association is absent. See the
 [M05B decision](proposals/FIBSEMOS_M05B_DECISION.md). M05B0 verified the pinned source
 and all 55 wheel payloads, but advisory/native-library findings prevent execution
 of that graph. The [inspection report](proposals/FIBSEMOS_ARTIFACT_REVIEW.md) records
-the findings and a new metadata-only 52-wheel, separate Python 3.12 client proposal.
-Replacement payload/base inspection requires a new owner choice. No external
-package was installed/imported/built/executed; #10 is unresolved and PR12 stays
-draft/unmerged. Core dependencies, API and review instructions remain unchanged.
+the original findings. The separately approved
+[R1 inspection](proposals/FIBSEMOS_R1_ARTIFACT_REVIEW.md) now verifies all 52
+replacement wheels and the exact Python 3.12 OCI config/four layers. No top-level
+wheel advisory was returned, but older bundled components and base-image findings
+remain; this is not deployment clearance. The
+[M05B1 CPU plan](proposals/FIBSEMOS_M05B1_CPU_PLAN.md) proposes a confined disposable
+experiment with explicit risk acceptance. No external package was
+installed/imported/built/executed; #10 is unresolved and PR12 stays draft/unmerged.
+Core dependencies, API and human-review instructions remain unchanged. No service,
+worker, GPU campaign or maintenance watcher runs.
 
 The owner chose procedural maintenance safeguards instead of GitHub branch
 protection. Continue reviewed PRs, the successful GitHub Actions `acceptance`

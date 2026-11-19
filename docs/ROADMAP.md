@@ -1,6 +1,6 @@
 # Project status and roadmap
 
-Last reviewed: **18 November 2026**. Released: **v0.1.0**, an MIT-licensed research
+Last reviewed: **19 November 2026**. Released: **v0.1.0**, an MIT-licensed research
 sandbox. The broader implementation goal is **retired by the owner**;
 there is no unattended maintenance service. The owner-account maintenance policy
 and launch instructions are published; initialization is complete and the owner
@@ -26,9 +26,11 @@ plugin. Its approved M05A [source prototype](../integrations/fibsemos/README.md)
 remains in draft review; genuine upstream execution and integration are unqualified.
 The [artifact inspection](proposals/FIBSEMOS_ARTIFACT_REVIEW.md) verified source and
 55 wheel identities but rejected that environment for execution. The
-[next decision packet](proposals/FIBSEMOS_M05B_DECISION.md) proposes replacement
-artifact inspection in a separate client environment; public acquisition
-correlation remains an independent feature gate.
+[replacement inspection](proposals/FIBSEMOS_R1_ARTIFACT_REVIEW.md) is also complete:
+all identities pass, with native/base risks still disclosed. The
+[next decision packet](proposals/FIBSEMOS_M05B_DECISION.md) proposes a disposable
+CPU qualification experiment; public acquisition correlation remains an
+independent feature gate. The maintenance goal is paused at this owner choice.
 Consult
 [live issues](https://github.com/BenjaminZingsem/vSEM/issues) and
 [pull requests](https://github.com/BenjaminZingsem/vSEM/pulls) for current activity;
@@ -51,7 +53,7 @@ explicit acceptance criteria when work is authorized.
 | ID | Deliverable | Current status | Required acceptance / dependencies |
 |---|---|---|---|
 | R00 | Supervised repository maintenance | Initialized; first approved repair batch merged and main verified | Use the [maintenance policy](MAINTENANCE_POLICY.md), existing owner account and explicit chat choices before external code/features. Verify account, approved revision, execution boundaries and chosen PR/CI protection. Shared-account chat approval is a procedural gate, not independently enforced by GitHub. |
-| R01 | Support a separate AI-operator project | API/example released; M05A draft; M05B0 inspected, original dependency graph rejected; replacement inspection awaits choice | [M05](proposals/FIBSEMOS_INTEROP.md) preserves raw counts, observable state and truthful outcomes in an optional SEM plugin. The prototype refuses synchronous acquisition before exposure because a public receipt/image association is missing. Exact external adoption and genuine Demo/vSEM workflow qualification remain separate gates. Reproducible focus, stigmation, stage, zoom, ROI and 1024 tasks need observable histories and documented failure cases. Agent learning/policy code belongs in its own project. |
+| R01 | Support a separate AI-operator project | API/example released; M05A draft; original graph rejected; R1 inspected; proposed M05B1 CPU experiment awaits choice | [M05](proposals/FIBSEMOS_INTEROP.md) preserves raw counts, observable state and truthful outcomes in an optional SEM plugin. The prototype refuses synchronous acquisition before exposure because a public receipt/image association is missing. Exact external adoption and genuine Demo/vSEM workflow qualification remain separate gates. Reproducible focus, stigmation, stage, zoom, ROI and 1024 tasks need observable histories and documented failure cases. Agent learning/policy code belongs in its own project. |
 | R02 | Causal charging, damage and spatial material response | Experimental, not integrated | Independently verify exposure history, conductivity/sensitivity combinations, changes within a raster, timing and numerical accuracy. Qualify full-frame performance and human-visible scenarios before integration. No decorative effects or claims based only on code presence. |
 | R03 | Performance, storage and hardware coverage | Qualified baseline; expansion planned | Measure startup, repeated scans, ROI, zoom and 1024 delivery on named hardware; improve cache/chunk/storage behavior without changing scientific bounds or dose/timing. Qualify each additional GPU explicitly. May proceed in independent slices alongside R01/R02. |
 | R04 | Crash-durable replay and bounded storage retention | Planned | Versioned records, recovery from interrupted writes, acquisition-time/partial-frame fidelity, retention controls and tested migration/rollback. Buffered development records do not meet this gate. |

@@ -1,6 +1,6 @@
 # fibsemOS next decision after M05A
 
-Revision 2, 18 November 2026. **Replacement proposal only; no execution approval.**
+Revision 3, 19 November 2026. **R1 inspection complete; no execution approval.**
 The [source prototype](../../integrations/fibsemos/README.md) is an optional draft
 for [#10](https://github.com/BenjaminZingsem/vSEM/issues/10). M05A does not install
 or execute fibsemOS, change the core API, merge main or publish a release.
@@ -8,8 +8,12 @@ or execute fibsemOS, change the core API, merge main or publish a release.
 The approved M05B0 inspection is complete. All original artifact identities pass,
 but the 55-wheel graph is **rejected for execution** because of advisory findings
 and unresolved native-library risk. See the [inspection report](FIBSEMOS_ARTIFACT_REVIEW.md).
-The next proposed choice is M05B0-R1 inert inspection of a revised, isolated client
-environment. No replacement payload or container has been fetched or run.
+The separately approved M05B0-R1 inspection is also complete: all 52 replacement
+wheels and the pinned Python 3.12 base config/layers pass identity and structural
+checks. Remaining native/OS findings are disclosed in the
+[R1 review](FIBSEMOS_R1_ARTIFACT_REVIEW.md). No external package or container ran.
+The next proposed choice is the bounded [M05B1 CPU experiment](FIBSEMOS_M05B1_CPU_PLAN.md),
+with explicit acceptance of residual risks for that disposable environment only.
 
 ## Exact proposed artifacts and known limits
 
@@ -62,24 +66,26 @@ reviewed environment, not the existing simulator environment.
 
 Proposed stages, each respecting its approval boundary:
 
-1. **M05B0 complete; M05B0-R1 proposed:** the original source/55 wheels were
+1. **M05B0 and M05B0-R1 complete:** the original source/55 wheels were
    inspected without execution. The [replacement manifest](../../integrations/fibsemos/review/replacement-artifact-proposal.json)
    freezes 52 wheels (25 reused and 27 new), pip 26.3 and the Linux/amd64
    Python 3.12.16 OCI manifest/config/four-layer identities. Its SHA256 is
    `a5e705b56adefa5ba884dbab2dba6ccaf036987648bc1498a05253ebcacd75a2`.
-   Approve inspection only of those exact new wheel/config/layer payloads, plus
-   reuse/rechecking existing data. Verify hashes, path/link/whiteout behavior,
-   hooks, licenses, native/OS packages and advisories. Do not extract onto the
-   host, load/run an image, install/import/build, change product code or substitute
-   artifacts. Produce an accepted execution candidate, or report remaining blockers.
-2. **M05B1 CPU execution, only after a separate execution approval:** stage accepted artifacts
+   The owner approved inert inspection of those exact payloads. All identities,
+   wheel records and layer compressed/decompressed hashes pass. Native/OS/license
+   and build/startup findings are recorded; no external execution occurred.
+   The proposed base's old pip must not bootstrap a test. Pillow's libpng and
+   OpenCV's embedded OpenSSL evidence remain unresolved for deployment.
+2. **M05B1 CPU execution, only after a separate execution approval:** stage the exact artifacts
    in a disposable CPU runner. No private mounts, owner/cloud tokens, real
    instrument/network route or unrelated installed entry points. Fetching and
    executing are separate phases; disable network during build/import/test.
    Fail on undeclared dynamic dependencies. Qualify genuine discovery, device
    construction, supported/refused operations and the unchanged Demo workflow.
    Record effective dependencies and built-artifact hashes. This is not yet GPU
-   or cross-stack acceptance and does not authorize merge.
+   or cross-stack acceptance and does not authorize merge. The concrete
+   [revision 1 specification](FIBSEMOS_M05B1_CPU_PLAN.md) defines allowed files,
+   confinement, clean installer bootstrap, all eight gates and failure handling.
 3. **M05B2 actual vSEM comparison:** needs the correlation change below, reviewed
    CPU evidence and a separately approved isolated GPU/HTTP plan. Use the named
    compute GPU while preserving the display GPU; expose only the authorized public
@@ -116,19 +122,27 @@ already-approved M05A repair. It requires its own trusted owner decision.
 
 ## Owner choices and rollback
 
-Recommended next choice: **approve M05B0-R1 replacement artifact inspection only**
-on the exact manifest above. Scope is 27 new wheel payloads (209,276,581 bytes),
-four OCI layers (45,269,504 bytes), one 5,681-byte config and 25 reused wheels.
-The upstream source commit is unchanged. The review includes native/OS advisories
-and a concrete offline CPU qualification plan; it includes no external execution,
-dependency adoption, product/core API change, main merge or release. Any further
-artifact substitution requires another scoped decision.
+1. **Recommended: approve M05B1 CPU qualification revision 1.** Implement its
+   maintainer-owned harness and isolated workflow, then build/import/test the exact
+   inspected artifacts on disposable public CPU infrastructure. This explicitly
+   accepts the disclosed native/base residual risks for that restricted experiment,
+   with offline execution, no root privileges, no base-pip bootstrap and the
+   limited input corpus. Correct the harness and rerun within the same scope and
+   criteria as needed. No product/API changes, artifact substitutions, private-host
+   or GPU execution, released dependency adoption, main merge or release.
+2. **Prepare a replacement/native-build plan first.** Do further read-only
+   metadata/source research to specify a base and native-library build strategy
+   addressing the residual findings. Do not fetch new payloads or execute builds.
+   Present the exact additional artifacts and costs before another scoped choice;
+   a new dependency label alone is not proof that bundled components are fixed.
+3. **Defer fibsemOS.** Preserve the unmerged prototype and evidence, leave #10 open
+   and retain the released simulator. No further external execution or feature
+   implementation is authorized by deferral.
 
-A narrower choice is **inspect the 27 replacement wheels only** and defer the OCI
-base review; execution would still lack a qualified environment. **Defer** preserves
-the unmerged source prototype and leaves #10 open. All choices preserve the
-released simulator. A passing metadata query is not a reason to execute the
-replacement before its payloads and environment are reviewed.
+The [maintenance policy](../MAINTENANCE_POLICY.md) requires the next explicit owner
+choice because installation/build/import and the new execution workflow exceed
+the inspection-only approval. Hash/structure success does not supply consent or
+establish a safe deployed environment. The inspection does not need repeating.
 
 The correlation slice can be prepared independently, but implementation needs a
 separate bounded choice. Do not bundle unfinished core semantics into external

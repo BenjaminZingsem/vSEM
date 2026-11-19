@@ -1,6 +1,6 @@
 # Optional fibsemOS source prototype
 
-**M05A draft, 18 November 2026. Not installed, release-ready or qualified against
+**M05A draft, 19 November 2026. Not installed, release-ready or qualified against
 fibsemOS.** This independently authored package explores an observable-only SEM
 adapter for [issue #10](https://github.com/BenjaminZingsem/vSEM/issues/10).
 The approved [proposal](../../docs/proposals/FIBSEMOS_INTEROP.md) separates source
@@ -107,8 +107,12 @@ The original [dependency proposal](review/dependency-proposal.json) is preserved
 but rejected for execution. [M05B0 inspection](../../docs/proposals/FIBSEMOS_ARTIFACT_REVIEW.md)
 verified the pinned source and all 55 wheels, and found affected packages and
 unresolved native-library risk. The [replacement manifest](review/replacement-artifact-proposal.json)
-proposes a separate Python 3.12 client environment; its new payloads are not
-downloaded or approved. See the [next decision](../../docs/proposals/FIBSEMOS_M05B_DECISION.md)
+proposes a separate Python 3.12 client environment. Its
+[approved inert review](../../docs/proposals/FIBSEMOS_R1_ARTIFACT_REVIEW.md) is now
+complete: all 52 wheels and the pinned base config/layers pass identity checks;
+native/base risks remain disclosed. The next choice is the bounded
+[M05B1 CPU plan](../../docs/proposals/FIBSEMOS_M05B1_CPU_PLAN.md), not adoption into
+the released environment. See the [decision](../../docs/proposals/FIBSEMOS_M05B_DECISION.md)
 for exact scope, missing public correlation and staged qualification. No upstream
 distribution was installed, imported, built or executed, no simulator GPU campaign
 ran, and no main merge/release is included.

@@ -1,6 +1,6 @@
 # M05A source and review provenance
 
-Reviewed 18 November 2026. Baseline vSEM main:
+Reviewed 19 November 2026. Baseline vSEM main:
 `0b0b907162a9ca6499bd620b6ef55ad265fafe0e`.
 Approved specification:
 [`a8412bdb`](https://github.com/BenjaminZingsem/vSEM/blob/a8412bdb165b37b50142f11f92ca40ed8f89d745/docs/proposals/FIBSEMOS_INTEROP.md).
@@ -48,5 +48,12 @@ Subsequent M05B0 approval covered inert source/archive inspection only. The comp
 source tree and all 55 wheel payload identities now pass structural checks; see
 the [artifact report](../../docs/proposals/FIBSEMOS_ARTIFACT_REVIEW.md). Advisory and
 native-library findings reject the original graph for execution. The replacement
-manifest is a metadata proposal, not adopted code. No upstream payload is added
-to Git and no built upstream wheel or genuine runtime workflow is qualified.
+manifest remains unchanged and is not adopted code. Subsequent M05B0-R1 approval
+covered its exact 27 new wheels, 25 reused wheels and OCI config/four layers as
+inert data only. All 57 identities and structural checks pass; the
+[R1 report](../../docs/proposals/FIBSEMOS_R1_ARTIFACT_REVIEW.md) and
+[machine review](review/replacement-artifact-audit.json) record native/base
+findings and their limits. All 380 original sealed evidence files were reverified.
+No upstream payload is added to Git and no built upstream wheel or genuine runtime
+workflow is qualified. The proposed CPU harness/workflow has not been implemented
+or approved. Product implementation remains exactly `ca6825fb0cdcaa8aa1c4fa176965720757c195ef`.

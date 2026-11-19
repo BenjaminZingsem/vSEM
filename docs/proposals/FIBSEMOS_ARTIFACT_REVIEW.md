@@ -8,6 +8,11 @@ executed. The optional adapter remains unqualified and unmerged. This finding
 concerns the proposed external client environment; the released simulator's two
 core dependencies remain unchanged.
 
+This is the **18 November historical inspection**. The subsequently approved
+replacement inspection is complete; see the [19 November R1 review](FIBSEMOS_R1_ARTIFACT_REVIEW.md)
+and [current decision](FIBSEMOS_M05B_DECISION.md). Statements below about unfetched
+replacement payloads describe the earlier checkpoint, not the current state.
+
 ## Artifact identity and inspection coverage
 
 | Item | Verified result |
