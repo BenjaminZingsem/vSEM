@@ -5,8 +5,9 @@
 and the exact packaging correction below. The specification at `20f8790` remains
 the frozen acceptance contract; its original proposed-status header is historical.
 This is a maintainer-owned experiment, not a production installation recipe.
-The isolated harness/workflow is prepared; genuine results remain unqualified
-until the hosted run and independent audit. PR12 stays draft.
+On 20 November the hosted experiment and independent audit passed C1-C8 at
+`db93715`; see the [result](../../../docs/proposals/FIBSEMOS_M05B1_CPU_RESULT.md).
+This qualifies only the bounded CPU software experiment. PR12 stays draft.
 
 The preflight found that the unchanged prototype requires setuptools 75.8.0,
 outside the approved replacement graph's setuptools 84.2.1. The exact proposed

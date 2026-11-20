@@ -1,7 +1,7 @@
 # Optional fibsemOS source prototype
 
-**M05A draft, 19 November 2026. Not installed, release-ready or qualified against
-fibsemOS.** This independently authored package explores an observable-only SEM
+**M05A draft, 20 November 2026. Confined M05B1 CPU qualification passed;
+not integrated or release-ready.** This independently authored package explores an observable-only SEM
 adapter for [issue #10](https://github.com/BenjaminZingsem/vSEM/issues/10).
 The approved [proposal](../../docs/proposals/FIBSEMOS_INTEROP.md) separates source
 work from external adoption, actual workflows and integration. Do not install this
@@ -17,13 +17,13 @@ upstream `SystemSettings`, device options, file, notebook output or log.
 
 | Surface | Implemented source behavior | Qualification boundary |
 |---|---|---|
-| Current, relative focus, stigmation | Whole-request validation, coherent observed optics base, serialized writes, fresh readbacks | HTTP fixture tests pass; actual image-response and upstream binding gates remain |
+| Current, relative focus, stigmation | Whole-request validation, coherent observed optics base, serialized writes, fresh readbacks | Genuine upstream/HTTP fixture bindings pass; actual vSEM image-response qualification remains |
 | Stage | Complete absolute XYZ in `vsem_specimen_xyz_m`, explicit metre units; combined focus/Z bounds | No tilt, rotation, implicit frame transform or relative stage convenience |
 | HFW, resolution, dwell | Observed current-raster readbacks; separate explicit scan requests | No standalone raster setters in the current public API; never present local intent as applied state |
 | Single/live/configure/freeze | Public receipt operations with separate meanings | These are explicit client operations, not a replacement fibsemOS acquisition workflow |
 | Stop and lease | Separate connections/locks; periodic renewal; receipt plus newer observable Stop generation | Interlock, lease loss and uncertain admission fail honestly; disconnect is not Stop |
 | Raw image | Explicit image/source/cut checks; lossless uint32 little-endian bytes and public acquisition metadata | No newest-image guessing or private operation lookup |
-| fibsemOS entry point and devices | Candidate actual `FibsemMicroscope`, `Beam`, `Stage` subclasses and builders; unchanged `Imaging` service | Statically reviewed only; M05A never imports/executes fibsemOS or these bindings |
+| fibsemOS entry point and devices | Actual `FibsemMicroscope`, `Beam`, `Stage` subclasses and builders; unchanged `Imaging` service | Genuine discovery/construction and bounded binding tests pass in the disposable M05B1 environment; private/deployed adoption remains unapproved |
 | Synchronous acquisition | Validates complete settings, then raises `QualificationRequired` before exposure | Public operation-to-image association is missing; genuine image return is not implemented |
 | Auto-functions, ion/milling and other devices | Explicit refusal/absent parameters for the supported candidate paths | No autofocus, alignment, FIB or real microscope compatibility claim |
 
@@ -35,7 +35,7 @@ relative plugin-specific setting, not absolute working distance.
 
 ## Candidate configuration and lifecycle
 
-The registry descriptor is lazy. The proposed sequence, to be qualified in M05B,
+The registry descriptor is lazy. The sequence qualified in the M05B1 experiment
 is construct `VsemMicroscope(system)`, explicitly call `configure_api(origin, token)`,
 then `connect_to_microscope('127.0.0.1', port, reset_beam_shift=False)`.
 Construction/configuration do not connect. A registry auto-connection without
@@ -86,6 +86,14 @@ not a calibrated electron-count image or a qualified `FibsemImage`. No upstream
 dtype restriction has been patched and no automatic histogram transform is used.
 
 ## Evidence and remaining work
+
+The [M05B1 result](../../docs/proposals/FIBSEMOS_M05B1_CPU_RESULT.md) records
+all C1-C8 passing at `db93715`, including real unchanged Demo 256/1024 acquisitions,
+strict binding/refusal/Stop/lease checks, source admission and cleanup. It does
+not qualify an actual vSEM image return. The proposed
+[public association prerequisite](../../docs/proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md)
+requires an owner choice before implementation; subsequent raw/view binding and
+isolated genuine Demo/vSEM GPU/HTTP comparison remain separate gates.
 
 Run the independent standard-library tests from repository root:
 

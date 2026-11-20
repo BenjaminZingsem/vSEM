@@ -1,6 +1,9 @@
 # fibsemOS next decision after M05A
 
 Revision 3, 19 November 2026. **R1 inspection complete; no execution approval.**
+Historical decision snapshot. On 20 November, the separately approved M05B1
+experiment passed its confined CPU gates; see the [result](FIBSEMOS_M05B1_CPU_RESULT.md)
+and the next proposed [M05B2A feature](FIBSEMOS_M05B2A_CORRELATION_PLAN.md).
 The [source prototype](../../integrations/fibsemos/README.md) is an optional draft
 for [#10](https://github.com/BenjaminZingsem/vSEM/issues/10). M05A does not install
 or execute fibsemOS, change the core API, merge main or publish a release.

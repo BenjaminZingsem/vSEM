@@ -7,7 +7,7 @@ Last verified: **20 November 2026**.
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Active after explicit owner resume; M05B1 CPU qualification and the exact packaging-pin correction approved; M05A remains draft |
+| Continuous maintenance goal | M05B1 CPU qualification passed; awaiting the next explicit feature choice; M05A remains draft and main unchanged |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
@@ -39,29 +39,17 @@ from setuptools 75.8.0 to the already approved 84.2.1. The isolated qualificatio
 branch now prepares networkless build/runtime containers, independent static
 built-wheel admission and genuine upstream C1-C8 tests. Preparation now passes 36
 standard-library tests on Windows; two POSIX process tests pass on the public runner.
-The source/build-pin preflight passes. The first
-[experiment](https://github.com/BenjaminZingsem/vSEM/actions/runs/44599900995)
-verified all inputs and the pre-start container configuration, then Docker refused
-the harness's one-file compressed-log setting. The owned container was removed;
-no package execution occurred. That logging configuration is corrected, and the
-metadata checker now includes the frozen source's GUI entry point and equivalent
-requirement ordering. [Ordinary CI](https://github.com/BenjaminZingsem/vSEM/actions/runs/44599900438)
-passed on `665bd65`. The [second experiment](https://github.com/BenjaminZingsem/vSEM/actions/runs/44600636097)
-passed the independent isolation probe, exact pip/venv inventory, both real offline
-builds and source/member/metadata inspection. Runtime installation then correctly
-refused a wheel filename corrupted by a harness loop-variable collision. That
-harness defect now has a regression test and is corrected. All three owned
-containers were removed; [ordinary CI](https://github.com/BenjaminZingsem/vSEM/actions/runs/44600636201)
-passed on `6002f1b`. The [third experiment](https://github.com/BenjaminZingsem/vSEM/actions/runs/44601591492)
-reached real discovery/construction, supported bindings, explicit connection,
-periodic lease loss, unchanged Demo256/1024 and pre-exposure refusal successfully.
-All original42 tests and thread/import cleanup passed. Its remaining C5 failure
-was the harness expecting `PendingOutcome` where the original Stop contract
-requires `AuthorityError` for missing observed generation confirmation. That
-expectation is corrected without changing product behavior or acceptance.
-[Ordinary CI](https://github.com/BenjaminZingsem/vSEM/actions/runs/44601591457) passed
-on `effe5d4`; all three containers were removed. Complete C1-C8 qualification
-awaits the corrected run and audit; failed evidence is preserved. #10 is unresolved
+All C1-C8 now pass at the approved experiment scope on implementation `db93715`:
+[CPU run](https://github.com/BenjaminZingsem/vSEM/actions/runs/44688299014) and
+[ordinary CI](https://github.com/BenjaminZingsem/vSEM/actions/runs/44688299105).
+The [audited result](proposals/FIBSEMOS_M05B1_CPU_RESULT.md) records exact inputs,
+real builds and source comparison, genuine discovery/bindings, authority/Stop,
+unchanged Demo 256/1024, pre-exposure refusal and complete owned cleanup.
+Original 42 tests, 38 harness tests and all eight genuine cases pass; ordinary CI
+discovers 295 tests with nine original explicit skips. Failed harness attempts
+and their corrections remain preserved. No product binding repair was needed.
+The next [M05B2A association feature](proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md)
+is proposed only and requires an owner choice before coding. #10 is unresolved
 and PR12 stays draft/unmerged. No other product repair or main merge is approved.
 Core dependencies, API and human-review instructions remain unchanged. No service,
 worker, GPU campaign or maintenance watcher runs.
