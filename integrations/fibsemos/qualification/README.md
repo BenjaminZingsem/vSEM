@@ -1,4 +1,27 @@
-# M05B1 disposable CPU qualification
+# Disposable public CPU qualification
+
+## M05B2B0 extension, 20 November
+
+The owner approved [M05B2B0 revision 1](../../../docs/proposals/FIBSEMOS_M05B2B0_IMAGE_BINDING_PLAN.md)
+for opt-in image binding, this same public CPU envelope and draft publication only.
+The workflow now admits only `qualification/fibsemos-m05b2b0-20261120`.
+`image-binding-source.json` freezes the reviewed plugin files and packaging;
+`run_cpu.py` verifies its exact digest and allows only the four named image-binding
+product changes against `f4c6922`. The original 42 contracts and unchanged
+`genuine.py` C1-C8 cases remain mandatory, including default pre-exposure refusal
+and real Demo256/1024. All original source, wheel, base, confinement and cleanup
+gates remain. No external source or dependency substitution is permitted.
+
+`image_fixture.py` is an authored HTTP data oracle, not a physical simulator.
+`genuine_images.py` adds real unchanged upstream acquisition workflows at 256/1024,
+fixed-window/raw-companion checks, acquired pixel pitch, truthful absent geometry,
+save refusal, vacuum, same-operation reconciliation, failures and independently
+responsive Stop/periodic renewal. The new standard-library image tests run in a
+separate interpreter against the installed package. Workstation checks import
+only authored stdlib modules; genuine dependencies execute only in the public
+containers. This qualifies software contracts, not GPU/physics or deployment.
+
+## Preserved M05B1 baseline
 
 19 November 2026: the owner approved
 [CPU qualification revision 1](../../../docs/proposals/FIBSEMOS_M05B1_CPU_PLAN.md)
@@ -59,8 +82,9 @@ checks alone does not satisfy C1-C8.
 
 ## Execution boundary
 
-The isolated `fibsemos_cpu.yml` workflow accepts only pushes to
-`qualification/fibsemos-m05b1-20261119` in this repository. `run_cpu.py` refuses
+The isolated `fibsemos_cpu.yml` workflow originally accepted only pushes to
+`qualification/fibsemos-m05b1-20261119`; its M05B2B0 branch admission is above.
+`run_cpu.py` refuses
 private/local execution before any fetch or launch. It uses anonymous pinned
 public inputs, an explicit Ubuntu 22.04 hosted CPU runner, read-only workflow
 permissions and the existing pinned checkout action without persisted credentials.

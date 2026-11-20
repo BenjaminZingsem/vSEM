@@ -1,7 +1,7 @@
 # Optional fibsemOS source prototype
 
-**M05A draft, 20 November 2026. Confined M05B1 CPU qualification passed;
-not integrated or release-ready.** This independently authored package explores an observable-only SEM
+**M05B2B0 draft, 20 November 2026. M05B1 CPU qualification passed;
+configured image return awaits its new public CPU gate.** This independently authored package explores an observable-only SEM
 adapter for [issue #10](https://github.com/BenjaminZingsem/vSEM/issues/10).
 The approved [proposal](../../docs/proposals/FIBSEMOS_INTEROP.md) separates source
 work from external adoption, actual workflows and integration. Do not install this
@@ -24,7 +24,8 @@ upstream `SystemSettings`, device options, file, notebook output or log.
 | Stop and lease | Separate connections/locks; periodic renewal; receipt plus newer observable Stop generation | Interlock, lease loss and uncertain admission fail honestly; disconnect is not Stop |
 | Raw image | Explicit image/source/cut checks; lossless uint32 little-endian bytes and public acquisition metadata | No newest-image guessing or private operation lookup |
 | fibsemOS entry point and devices | Actual `FibsemMicroscope`, `Beam`, `Stage` subclasses and builders; unchanged `Imaging` service | Genuine discovery/construction and bounded binding tests pass in the disposable M05B1 environment; private/deployed adoption remains unapproved |
-| Synchronous acquisition | Validates complete settings, then raises `QualificationRequired` before exposure | Public operation-to-image association is missing; genuine image return is not implemented |
+| Synchronous acquisition | Default refusal; explicit fixed-window opt-in returns an upstream image with an immutable raw companion | Exact public operation/source/raster/final-cut association is required; CPU fixture workflow qualification pending; actual vSEM GPU workflow not qualified |
+| View saving | Generic TIFF and automatic saving explicitly refused before a write/exposure | Use the raw companion's lossless save/load; no view-only save contract is qualified |
 | Auto-functions, ion/milling and other devices | Explicit refusal/absent parameters for the supported candidate paths | No autofocus, alignment, FIB or real microscope compatibility claim |
 
 Only square 64/128/256/512/1024 rasters, 20/100/1000 microsecond dwell, HFW
@@ -82,29 +83,65 @@ claimed.
 `view(black, white, bits)` derives an explicitly labelled 8/16-bit fixed linear
 window, with exact integer half-up rounding. Its provenance records source hashes,
 window, clipping, scale and orientation, with the raw companion required. It is
-not a calibrated electron-count image or a qualified `FibsemImage`. No upstream
+not a calibrated electron-count image. No upstream
 dtype restriction has been patched and no automatic histogram transform is used.
+
+For an explicitly configured connected microscope,
+`microscope.configure_image_return(black=9, white=101)` enables the single-image
+path with that fixed raw-count window (configuration is single-use). The unchanged
+pinned `fibsem.acquire.acquire_image(microscope, image_settings)` workflow then
+returns a genuine upstream `FibsemImage` subclass. `.data` is a uint16 compatibility
+view; it is not raw counts. The upstream constructor also produces a separate
+`filtered_data` display derivative; neither this derivative nor mutable `.data`
+replaces the immutable companion:
+
+- `image.vsem_result.raw_frame`: exact uint32 bytes and acquisition-time metadata;
+- `image.vsem_result.association`: defensive copy of the public operation/cut join;
+- `image.vsem_result.view_provenance`: fixed window, hashes, clipping and rounding;
+- `image.vsem_result.view_bytes`: immutable, original compatibility-view bytes.
+
+The acquired pixel pitch comes from public acquisition metadata. Image settings
+are request intent; parameter segments retain changes during exposure. Absolute
+working distance, vendor geometry and unobserved microscope fields are not
+fabricated. Upstream's pre-driver wall-clock stamp describes the call, not the
+engine's episode exposure origin. The raw companion retains that episode time.
+
+`PendingOutcome` carries a known operation ID. Explicit
+`microscope.reconcile_image(operation_id, image_settings)` reads that retained
+request without another exposure. Missing/mismatched delivery stays unresolved;
+ambiguous admission is never replayed. Renewal, interlock and epoch loss are
+explicit errors, including when they occur during raw download. Stop and lease
+renewal use independent connections outside image-wait locks. A confirmed Stop
+does not reinterpret the outcome of a physically completed acquisition.
+
+Default acquisition still refuses before exposure unless image return is
+configured and the server's association projection passes preflight. Generic
+`image.save(...)` raises before touching the filesystem; raw save/load is
+available through `image.vsem_result.raw_frame`.
 
 ## Evidence and remaining work
 
 The [M05B1 result](../../docs/proposals/FIBSEMOS_M05B1_CPU_RESULT.md) records
 all C1-C8 passing at `db93715`, including real unchanged Demo 256/1024 acquisitions,
 strict binding/refusal/Stop/lease checks, source admission and cleanup. It does
-not qualify an actual vSEM image return. The proposed
+not qualify an actual vSEM image return. The merged
 [public association prerequisite](../../docs/proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md)
-requires an owner choice before implementation; subsequent raw/view binding and
-isolated genuine Demo/vSEM GPU/HTTP comparison remain separate gates.
+is available in main. The owner approved
+[M05B2B0](../../docs/proposals/FIBSEMOS_M05B2B0_IMAGE_BINDING_PLAN.md) implementation,
+public CPU qualification and draft publication only. Its new configured-image
+gates use an authored HTTP data oracle, not the physical engine. Genuine Demo/vSEM
+GPU/HTTP comparison and optional-package adoption remain separate decisions/gates.
 
 Run the independent standard-library tests from repository root:
 
 ```text
-python -B -m unittest acceptance.test_fibsemos_contract acceptance.test_fibsemos_preflight
+python -B -m unittest acceptance.test_fibsemos_contract acceptance.test_fibsemos_preflight acceptance.test_fibsemos_image_return
 ```
 
-The 42 tests passed on Windows Python 3.10.9 and Linux Python 3.10.12. They use
+The original 42 tests and 26 new image-return tests pass on Windows Python 3.10.9. They use
 locally authored real loopback HTTP fixtures and pure request/data logic. The full
-Linux suite discovered 295 tests: 286 passed, nine existing environment/manual
-skips. Tests close their fixtures and renewal threads. AST/source checks do not
+current Linux/public runs are recorded in the qualification dossier. Tests close
+their fixtures and renewal threads. AST/source checks do not
 establish genuine plugin compatibility; no fake upstream module is used as proof.
 
 Only the unit-conversion helper was delegated to a qualified local coding model;
@@ -122,6 +159,6 @@ native/base risks remain disclosed. The separately approved
 [M05B1 CPU plan](../../docs/proposals/FIBSEMOS_M05B1_CPU_PLAN.md) has now passed
 in its disposable public environment. Upstream build/import/execution occurred
 only there; no private fibsemOS execution or simulator GPU campaign occurred.
-The next feature choice is the public association proposal linked above. Released
-dependency adoption, genuine Demo/vSEM GPU/HTTP comparison, main merge and release
-remain separate approvals and acceptance work.
+M05B2B0 keeps the same exact upstream source, 52 wheels and OCI base. Released
+dependency adoption, private external execution, genuine Demo/vSEM GPU/HTTP
+comparison, main merge and release remain separate approvals and acceptance work.

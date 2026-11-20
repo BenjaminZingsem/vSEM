@@ -320,6 +320,38 @@ class ImageTransportTests(unittest.TestCase):
         self.assertIsInstance(results[0], AcquisitionResult)
         self.assertEqual([c['action'] for c in self.fixture.commands], ['scan_single', 'stop'])
 
+    def delivery_authority_loss(self, change):
+        self.ready()
+        self.fixture.block_raw = True
+        results = []
+        def acquire():
+            try:
+                results.append(self.client.acquire_image(SETTINGS))
+            except Exception as error:
+                results.append(error)
+        thread = threading.Thread(target=acquire)
+        thread.start()
+        try:
+            self.assertTrue(self.fixture.raw_blocked.wait(2.))
+            change()
+        finally:
+            self.fixture.release_raw.set()
+            thread.join(3.)
+        self.assertFalse(thread.is_alive())
+        self.assertEqual(len(results), 1)
+        self.assertIsInstance(results[0], AuthorityError)
+        self.assertEqual(len(self.fixture.commands), 1)
+        self.assertEqual(len(self.client._image_pending), 1)
+
+    def test_renewal_failure_during_raw_delivery_cannot_return_success(self):
+        self.delivery_authority_loss(lambda: setattr(self.client, '_renew_error', OSError('fixture loss')))
+
+    def test_interlock_during_raw_delivery_cannot_return_success(self):
+        self.delivery_authority_loss(lambda: self.fixture.state.update(interlock_reason='BANK_FAILED'))
+
+    def test_epoch_change_during_raw_delivery_cannot_return_success(self):
+        self.delivery_authority_loss(lambda: self.fixture.state['control'].update(epoch=4))
+
 
 if __name__ == '__main__':
     unittest.main()

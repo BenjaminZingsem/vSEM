@@ -29,7 +29,7 @@ from processes import run_logged, write_json
 BRANCH = 'refs/heads/qualification/fibsemos-m05b2b0-20261120'
 BASE = '20f87901566b3be070fc05f7ab4d8c64b5b0fa4a'
 PRODUCT = 'f4c6922678f8c993bd8b7e7d385432c7b1b3b740'
-PRODUCT_INPUTS_SHA256 = 'FREEZE_AFTER_FRONTIER_REVIEW'
+PRODUCT_INPUTS_SHA256 = 'f84615239fbdc1950ffc9d1470ee9ba6ef3e49de693ad606d7ee4447c3a9dc2b'
 PRODUCT_CHANGES = {'src/vsem_fibsemos/client.py', 'src/vsem_fibsemos/protocol.py',
                    'src/vsem_fibsemos/bindings.py', 'src/vsem_fibsemos/image_result.py'}
 

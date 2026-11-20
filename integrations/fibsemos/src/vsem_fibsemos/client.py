@@ -467,7 +467,7 @@ class Client:
                     self._unresolved.add(operation_id)
                 raise AuthorityError('lease renewal failed; image operation pending: '+operation_id)
             try:
-                self._authority()
+                before = self._authority()
                 value = self.acquisitions(operation_id, 'scan_single')
                 observed = value['receipt']
                 with self._records_lock:
@@ -486,6 +486,13 @@ class Client:
                     frame = self.image(cut['image_id'], source_id=cut['source_id'],
                                        min_cut_elapsed_ns=cut['cut_elapsed_ns'])
                     result = AcquisitionResult.from_acquisition(frame, value, *window, parameters)
+                    # Delivery can outlast a renewal or an authority change.
+                    # Validate again after IO, without holding the Stop lock.
+                    if self._renew_error is not None:
+                        raise AuthorityError('lease renewal failed during image delivery; operation: '+operation_id)
+                    after = self._authority()
+                    if after['control']['epoch'] != before['control']['epoch']:
+                        raise AuthorityError('lease epoch changed during image delivery; operation: '+operation_id)
                     with self._records_lock:
                         self._image_pending.pop(operation_id, None)
                         self._unresolved.discard(operation_id)

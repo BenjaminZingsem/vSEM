@@ -1,5 +1,21 @@
 # M05A source and review provenance
 
+## Later scoped decisions
+
+20 November: the separately approved M05B1 experiment passed in disposable public
+CPU isolation; see [its result](../../docs/proposals/FIBSEMOS_M05B1_CPU_RESULT.md).
+The core public association prerequisite is merged separately in PR13. The owner
+then approved [M05B2B0](../../docs/proposals/FIBSEMOS_M05B2B0_IMAGE_BINDING_PLAN.md):
+independently authored optional image return, qualification in the unchanged
+public CPU envelope and draft publication only. Its client/protocol/bindings and
+new image-result module, authored data oracle and independent tests are all
+maintainer-owned. Upstream implementation remains unmodified and executes only
+in the disposable public containers. The frozen source lock records product
+bytes; the final dossier records genuine run results. This does not approve
+private external execution, actual cross-stack GPU tests, main merge or release.
+
+## Historical source-only checkpoint
+
 Reviewed 19 November 2026. Baseline vSEM main:
 `0b0b907162a9ca6499bd620b6ef55ad265fafe0e`.
 Approved specification:

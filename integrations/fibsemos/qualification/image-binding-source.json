@@ -1,0 +1,50 @@
+{
+  "baseline": "f4c6922678f8c993bd8b7e7d385432c7b1b3b740",
+  "files": {
+    "pyproject.toml": {
+      "bytes": 439,
+      "sha256": "0bf059844dc2c2fb5138f5b6fa6d43d2cb159b3e2f05f49d1f8810232becdb3e"
+    },
+    "src/vsem_fibsemos/__init__.py": {
+      "bytes": 104,
+      "sha256": "4944e8842305f2ae8a6d03460861985a416c1b065d8493e18d45b8e60231d523"
+    },
+    "src/vsem_fibsemos/bindings.py": {
+      "bytes": 13721,
+      "sha256": "c34b7c01431186b67c9031fc87f1ccf168172adf1e0d01d72289232cee2b69cf"
+    },
+    "src/vsem_fibsemos/client.py": {
+      "bytes": 27963,
+      "sha256": "3ceca1966ccaadec242a328513ead6326cc957d291af2219623f84340aef16ea"
+    },
+    "src/vsem_fibsemos/errors.py": {
+      "bytes": 895,
+      "sha256": "f230156d27c8b7aaa051db342b67dc0fde14d373bc8ac6d81b42b3c4c683c1f2"
+    },
+    "src/vsem_fibsemos/image_result.py": {
+      "bytes": 3624,
+      "sha256": "90c4ea619567d5d33029e3d008c38213da4cc7b321947bff43fcf31800bb5e95"
+    },
+    "src/vsem_fibsemos/plugin.py": {
+      "bytes": 728,
+      "sha256": "a4c0db8dfa5a6062cf3ca00d31f9d5deaf53a16500bf5df8916807f783f4d99e"
+    },
+    "src/vsem_fibsemos/preflight.py": {
+      "bytes": 2723,
+      "sha256": "67638665505128de4f805bc519d53d04e9ba3f29a791313ca240d863c77c7b16"
+    },
+    "src/vsem_fibsemos/protocol.py": {
+      "bytes": 7071,
+      "sha256": "4db134e3ad4ea405a95ce19aa09abe8be8f99ea115aa7c1885469c7739383f54"
+    },
+    "src/vsem_fibsemos/records.py": {
+      "bytes": 8663,
+      "sha256": "349bf77eb0f50c53dcc1f2d22b903d2b27c60e0c2153705aa7b1877c16963269"
+    },
+    "src/vsem_fibsemos/units.py": {
+      "bytes": 5987,
+      "sha256": "2e150321d9df15377dc8051e240342fda1a7272ce33ab41bffa7442460023034"
+    }
+  },
+  "protocol": "vsem.qualification.image-binding-source.v1"
+}
