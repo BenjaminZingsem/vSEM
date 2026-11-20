@@ -118,9 +118,10 @@ unresolved native-library risk. The [replacement manifest](review/replacement-ar
 proposes a separate Python 3.12 client environment. Its
 [approved inert review](../../docs/proposals/FIBSEMOS_R1_ARTIFACT_REVIEW.md) is now
 complete: all 52 wheels and the pinned base config/layers pass identity checks;
-native/base risks remain disclosed. The next choice is the bounded
-[M05B1 CPU plan](../../docs/proposals/FIBSEMOS_M05B1_CPU_PLAN.md), not adoption into
-the released environment. See the [decision](../../docs/proposals/FIBSEMOS_M05B_DECISION.md)
-for exact scope, missing public correlation and staged qualification. No upstream
-distribution was installed, imported, built or executed, no simulator GPU campaign
-ran, and no main merge/release is included.
+native/base risks remain disclosed. The separately approved
+[M05B1 CPU plan](../../docs/proposals/FIBSEMOS_M05B1_CPU_PLAN.md) has now passed
+in its disposable public environment. Upstream build/import/execution occurred
+only there; no private fibsemOS execution or simulator GPU campaign occurred.
+The next feature choice is the public association proposal linked above. Released
+dependency adoption, genuine Demo/vSEM GPU/HTTP comparison, main merge and release
+remain separate approvals and acceptance work.
