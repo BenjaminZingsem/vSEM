@@ -7,7 +7,7 @@ Last verified: **20 November 2026**.
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Approved M05B2A public command/image association is implemented and locally qualified; final hosted CI and reviewed core PR integration remain required |
+| Continuous maintenance goal | Approved M05B2A public command/image association implemented and qualified; [core PR13](https://github.com/BenjaminZingsem/vSEM/pull/13) records integration/check status |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
@@ -126,8 +126,11 @@ and all 8 original GPU transport cases pass. Native 1024 retains both focus segm
 and takes 125.21 s in the original release gate. All owned fixture groups close;
 the selected compute GPU returns to its initial 280 MiB. Independent evidence hashes
 and all 158 tested source-file hashes match. All 77 engine files, original tests,
-authentication predicates and image I/O remain unchanged. Final exact-head hosted
-acceptance must pass before the separately authorized core PR merge. No release.
+authentication predicates and image I/O remain unchanged. Reviewed implementation
+is `29c3f3406f56430c804fb62a4be96d84589c7f1b`; later documentation edits preserve
+its tested executable bytes. [PR13](https://github.com/BenjaminZingsem/vSEM/pull/13)
+records exact-head/integration and post-merge checks, which remain mandatory.
+This capability is separate from the unchanged v0.1.0 release.
 
 M05B2B adapter image return and genuine cross-stack GPU/HTTP qualification remain
 future owner decisions. Physical completion and correct image attribution are

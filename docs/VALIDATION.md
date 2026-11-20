@@ -136,6 +136,9 @@ The [M05B2A specification](proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md) adds a
 API-only read projection over verified causal facts and immutable numerical
 publication. Original receipts, images, authentication, all 77 engine files and
 original acceptance/workflow bytes remain unchanged. It adds no dependency.
+Reviewed implementation: `29c3f3406f56430c804fb62a4be96d84589c7f1b` in
+[PR13](https://github.com/BenjaminZingsem/vSEM/pull/13). Subsequent documentation
+edits preserve all qualified executable/test bytes.
 
 | Gate | Observed result |
 |---|---|
