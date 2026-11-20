@@ -1,8 +1,8 @@
 """Observable-only prototype transport, with independent lease and Stop paths.
 
 One trusted plugin writer per API principal is required. The public API does not
-offer compare-and-swap optics, unique client principals, or receipt/image links.
-This client cannot turn those missing guarantees into an atomic transaction.
+offer compare-and-swap optics or unique client principals. Image return requires
+the explicit verified operation/image projection and a fixed count-window policy.
 """
 import http.client
 import json
@@ -12,8 +12,9 @@ from urllib.parse import urlsplit
 
 from .errors import (AdmissionUnknown, AuthorityError, HTTPFailure, OperationFailure,
                      PendingOutcome, ProtocolError, QualificationRequired)
-from .protocol import decode, identity, integer, keys, optics, raster, real, receipt, stage
+from .protocol import acquisitions, decode, identity, integer, keys, optics, raster, real, receipt, stage
 from .records import RawFrame, MAX_METADATA, MAX_RAW, validate_metadata
+from .image_result import AcquisitionResult
 
 TERMINAL = ('COMPLETED', 'REJECTED', 'CANCELLED', 'UNKNOWN')
 STATE_FIELDS = ('protocol', 'availability', 'clock_mode', 'retention', 'calibration_status',
@@ -53,6 +54,9 @@ class Client:
         self._unresolved = set()
         self._records_lock = threading.Lock()
         self._closed = False
+        self._image_window = None
+        self._image_pending = {}
+        self._lease_operation = None
 
     def _http(self, path, value=None, *, raw=False, limit=MAX_METADATA):
         if self._closed:
@@ -252,6 +256,8 @@ class Client:
             raise AdmissionUnknown("POST outcome unknown; workflow halted") from None
         with self._records_lock:
             self._pending[result['operation_id']] = value.get('action', 'lease')
+            if path == '/lease':
+                self._lease_operation = result['operation_id']
         return result
 
     def acquire_control(self, timeout_s=20.):
@@ -350,6 +356,7 @@ class Client:
             state = self._ready()
             with self._records_lock:
                 scans = [op for op, action in self._pending.items() if action in ('scan_single', 'scan_live')]
+                scans += list(self._image_pending)
             if scans and mode != 'CONFIGURE_LIVE':
                 raise PendingOutcome(scans[0])
             return self._command({'SINGLE': 'scan_single', 'LIVE': 'scan_live',
@@ -398,9 +405,99 @@ class Client:
         raw = self._http('/image/' + image_id + '/SE', raw=True, limit=MAX_RAW)
         return RawFrame.from_observation(raw, metadata)
 
-    def acquire_image(self, settings):
-        raster(settings)
-        raise QualificationRequired("No public operation-to-image link: synchronous fibsemOS acquisition remains unqualified before exposure")
+    def configure_image_return(self, black, white):
+        integer(black, 0, 2**32-1)
+        integer(white, black+1, 2**32-1)
+        with self._writes:
+            if self._image_window is not None:
+                raise RuntimeError('image return policy is single-use configuration')
+            self._image_window = (black, white)
+
+    def acquisitions(self, operation_id, expected_command=None):
+        identity(operation_id)
+        return acquisitions(self._http('/operation/'+operation_id+'/acquisitions'),
+                            operation_id, expected_command)
+
+    def acquire_image(self, settings, timeout_s=300.):
+        parameters = raster(settings)
+        timeout_s = real(timeout_s, .001, 86400.)
+        with self._writes:
+            if self._image_window is None:
+                raise QualificationRequired('Configure the fixed raw-count window explicitly before image acquisition')
+            before = self._ready()
+            with self._records_lock:
+                pending = list(self._image_pending)
+                pending += [op for op, action in self._pending.items() if action in ('scan_single', 'scan_live')]
+                lease = self._lease_operation
+            if pending:
+                raise PendingOutcome(pending[0])
+            if lease is None:
+                raise AuthorityError('known lease operation required before image acquisition')
+            try:
+                probe = self.acquisitions(lease, 'lease')
+            except HTTPFailure as error:
+                if error.status == 404:
+                    raise QualificationRequired('server lacks public operation/image association') from None
+                raise
+            if any(probe[key] is not None for key in ('association', 'latest_cut', 'final_cut')):
+                raise ProtocolError('lease falsely claims an acquisition')
+            current = self._authority()
+            if current['control']['epoch'] != before['control']['epoch']:
+                raise AuthorityError('lease epoch changed before image admission')
+            result = self._command('scan_single', parameters, current)
+            with self._records_lock:
+                self._image_pending[result['operation_id']] = (dict(parameters), self._image_window)
+        # No write/safety lock is held during image delivery or reconciliation.
+        return self.reconcile_image(result['operation_id'], timeout_s)
+
+    def reconcile_image(self, operation_id, timeout_s=300., *, settings=None):
+        identity(operation_id)
+        timeout_s = real(timeout_s, .001, 86400.)
+        with self._records_lock:
+            pending = self._image_pending.get(operation_id)
+        if pending is None:
+            raise ValueError('no retained image request for this operation')
+        parameters, window = pending
+        if settings is not None and raster(settings) != parameters:
+            raise ValueError('reconciliation settings differ from the admitted request')
+        deadline = time.monotonic()+timeout_s
+        while True:
+            if self._renew_error is not None:
+                with self._records_lock:
+                    self._unresolved.add(operation_id)
+                raise AuthorityError('lease renewal failed; image operation pending: '+operation_id)
+            try:
+                self._authority()
+                value = self.acquisitions(operation_id, 'scan_single')
+                observed = value['receipt']
+                with self._records_lock:
+                    if observed['status'] in TERMINAL and observed['status'] != 'UNKNOWN':
+                        self._pending.pop(operation_id, None)
+                    if observed['status'] == 'UNKNOWN':
+                        self._unresolved.add(operation_id)
+                if observed['status'] in ('REJECTED', 'CANCELLED', 'UNKNOWN'):
+                    if observed['status'] != 'UNKNOWN':
+                        with self._records_lock:
+                            self._image_pending.pop(operation_id, None)
+                            self._unresolved.discard(operation_id)
+                    raise OperationFailure(observed)
+                cut = value['final_cut']
+                if observed['status'] == 'COMPLETED' and cut is not None:
+                    frame = self.image(cut['image_id'], source_id=cut['source_id'],
+                                       min_cut_elapsed_ns=cut['cut_elapsed_ns'])
+                    result = AcquisitionResult.from_acquisition(frame, value, *window, parameters)
+                    with self._records_lock:
+                        self._image_pending.pop(operation_id, None)
+                        self._unresolved.discard(operation_id)
+                    return result
+            except (OSError, http.client.HTTPException, ProtocolError, HTTPFailure, ValueError, KeyError):
+                with self._records_lock:
+                    self._unresolved.add(operation_id)
+                raise PendingOutcome(operation_id) from None
+            if time.monotonic() >= deadline or self._halt.wait(self._poll):
+                with self._records_lock:
+                    self._unresolved.add(operation_id)
+                raise PendingOutcome(operation_id)
 
     def close(self):
         # Disconnect is not Stop; caller must explicitly confirm Stop first.

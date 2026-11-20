@@ -1,7 +1,7 @@
-name: Approved fibsemOS disposable CPU qualification
+name: Approved fibsemOS image-return CPU qualification
 on:
   push:
-    branches: [qualification/fibsemos-m05b1-20261119]
+    branches: [qualification/fibsemos-m05b2b0-20261120]
 permissions:
   contents: read
 jobs:

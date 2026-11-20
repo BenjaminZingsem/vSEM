@@ -5,6 +5,8 @@ this module: genuine discovery, construction and unchanged service workflows are
 M05B gates. No vendor SDK, hidden engine state, environment or config-token lookup.
 """
 from dataclasses import fields
+from copy import deepcopy
+import numpy as np
 
 from fibsem.microscope import FibsemMicroscope
 from fibsem.devices.beam import Beam
@@ -13,6 +15,7 @@ from fibsem.devices.core import BoundParameter, ParameterReadOnly, ParameterUnav
 from fibsem.structures.params import ParameterMetadata, RangeLimit
 from fibsem.structures.settings import BeamType, FibsemStagePosition, ImageSettings, Point
 from fibsem.services.imaging import Imaging, bind_imaging
+from fibsem.structures.image import FibsemImage, FibsemImageMetadata
 
 from .client import Client
 from .preflight import FRAME, IMAGE_FIELDS, beam_write, image_request, stage_position
@@ -22,6 +25,26 @@ from .units import ns_to_dwell, pa_to_current
 
 def unsupported(*args, **kwargs):
     raise NotImplementedError('operation is unavailable in the vSEM source prototype')
+
+
+class VsemImage(FibsemImage):
+    """Real upstream image with an immutable raw companion and labelled view."""
+    def __init__(self, result, image_settings):
+        acquired = result.raw_frame.metadata
+        metadata = FibsemImageMetadata(image_settings=deepcopy(image_settings),
+            pixel_size=Point(acquired['pixel_pitch_m'], acquired['pixel_pitch_m']),
+            microscope_state=None, system_info=None, hardware_geometry=None)
+        data = np.frombuffer(result.view_bytes, dtype='<u2').reshape(
+            acquired['height_px'], acquired['width_px']).copy()
+        super().__init__(data, metadata)
+        self._vsem_result = result
+
+    @property
+    def vsem_result(self):
+        return self._vsem_result
+
+    def save(self, *args, **kwargs):
+        raise NotImplementedError('TIFF save has no qualified raw-companion contract; use vsem_result.raw_frame.save explicitly')
 
 
 def _image_request(settings):
@@ -143,7 +166,8 @@ class VsemBeam(Beam):
         return super().acquire(image_settings)
 
     def _acquire(self, image_settings):
-        return self._vsem_client.acquire_image(_image_request(image_settings))
+        result = self._vsem_client.acquire_image(_image_request(image_settings))
+        return VsemImage(result, image_settings)
 
     def available_live(self):
         return False
@@ -221,6 +245,19 @@ class VsemMicroscope(FibsemMicroscope):
             raise RuntimeError('connection configuration is single-use')
         self._vsem_api = Client(origin, token)
         self._vsem_origin = origin
+
+    def configure_image_return(self, black, white):
+        return self._client().configure_image_return(black, white)
+
+    def hardware_geometry(self):
+        # The generic sandbox has no calibrated vendor column/stage geometry.
+        # Upstream metadata stamping must preserve that absence.
+        return None
+
+    def reconcile_image(self, operation_id, image_settings, timeout_s=300.):
+        request = _image_request(image_settings)
+        result = self._client().reconcile_image(operation_id, timeout_s, settings=request)
+        return VsemImage(result, image_settings)
 
     def _client(self):
         if self._vsem_api is None:

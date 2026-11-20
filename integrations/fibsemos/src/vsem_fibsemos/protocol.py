@@ -97,3 +97,56 @@ def receipt(value, expected_id=None):
         return dict(value)
     except (ValueError, TypeError):
         raise ProtocolError("invalid operation receipt") from None
+
+
+def acquisitions(value, expected_id, expected_command=None):
+    """Closed public v1 association; never search an image list or infer IDs."""
+    relations = {'scan_single': ('started_single',), 'scan_live': ('live_session',),
+                 'configure_live': ('configuration_applied', 'already_active'),
+                 'freeze': ('freeze_of',)}
+    try:
+        identity(expected_id)
+        keys(value, ('protocol', 'operation_id', 'command', 'receipt',
+                     'association', 'latest_cut', 'final_cut'))
+        if value['protocol'] != 'vsem.operation-acquisitions.v1' or value['operation_id'] != expected_id:
+            raise ValueError('association protocol/operation mismatch')
+        command = value['command']
+        if command not in ('lease', 'scan_single', 'scan_live', 'configure_live',
+                           'freeze', 'optics', 'stage_move', 'stop'):
+            raise ValueError('unknown association command')
+        if expected_command is not None and command != expected_command:
+            raise ValueError('association command mismatch')
+        observed_receipt = receipt(value['receipt'], expected_id)
+        association = value['association']
+        if association is not None:
+            keys(association, ('relation', 'source_id', 'raster_id', 'applied_at_ns'))
+            if association['relation'] not in relations.get(command, ()):
+                raise ValueError('wrong acquisition relation')
+            identity(association['source_id'])
+            identity(association['raster_id'])
+            integer(association['applied_at_ns'])
+            if command == 'scan_single' and association['source_id'] != association['raster_id']:
+                raise ValueError('single source is not its raster')
+            association = dict(association)
+        cuts = {}
+        for name in ('latest_cut', 'final_cut'):
+            cut = value[name]
+            if cut is not None:
+                keys(cut, ('image_id', 'source_id', 'raster_id', 'cut_elapsed_ns', 'outcome'))
+                for field in ('image_id', 'source_id', 'raster_id'):
+                    identity(cut[field])
+                integer(cut['cut_elapsed_ns'])
+                if cut['outcome'] not in ('ACQUIRING', 'COMPLETED', 'CANCELLED'):
+                    raise ValueError('unknown cut outcome')
+                if association is None or cut['source_id'] != association['source_id']:
+                    raise ValueError('cut lacks the observed source association')
+                if (name == 'final_cut' or command not in ('scan_live', 'freeze')) and cut['raster_id'] != association['raster_id']:
+                    raise ValueError('cut differs from associated raster')
+                if name == 'final_cut' and cut['outcome'] == 'ACQUIRING':
+                    raise ValueError('partial cut is not final')
+                cut = dict(cut)
+            cuts[name] = cut
+        return dict(protocol=value['protocol'], operation_id=expected_id, command=command,
+                    receipt=observed_receipt, association=association, **cuts)
+    except (KeyError, ValueError, TypeError):
+        raise ProtocolError('invalid public acquisition association') from None

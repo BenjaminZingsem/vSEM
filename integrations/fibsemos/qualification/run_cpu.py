@@ -26,9 +26,12 @@ from confinement import entry_command, verify_container
 from fetch import fetch_inputs
 from processes import run_logged, write_json
 
-BRANCH = 'refs/heads/qualification/fibsemos-m05b1-20261119'
+BRANCH = 'refs/heads/qualification/fibsemos-m05b2b0-20261120'
 BASE = '20f87901566b3be070fc05f7ab4d8c64b5b0fa4a'
-PRODUCT = 'ca6825fb0cdcaa8aa1c4fa176965720757c195ef'
+PRODUCT = 'f4c6922678f8c993bd8b7e7d385432c7b1b3b740'
+PRODUCT_INPUTS_SHA256 = 'FREEZE_AFTER_FRONTIER_REVIEW'
+PRODUCT_CHANGES = {'src/vsem_fibsemos/client.py', 'src/vsem_fibsemos/protocol.py',
+                   'src/vsem_fibsemos/bindings.py', 'src/vsem_fibsemos/image_result.py'}
 
 
 def emit(value):
@@ -92,19 +95,27 @@ def main():
     try:
         require(git('rev-parse', 'HEAD').decode().strip() == host['source_sha'], 'checkout/head mismatch')
         require(not git('status', '--porcelain'), 'dirty public qualification checkout')
-        # Runtime product remains exact M05A; the owner approved precisely this packaging exception.
+        # Only the explicitly approved image-binding files may differ. The
+        # maintainer freezes their reviewed bytes before public execution.
+        source_lock = read_regular(Path(__file__).parent/'image-binding-source.json',
+                                   expected_sha=PRODUCT_INPUTS_SHA256, limit=65536)
+        source_lock = json.loads(source_lock)
+        require(source_lock['protocol'] == 'vsem.qualification.image-binding-source.v1'
+                and source_lock['baseline'] == PRODUCT, 'wrong product source lock')
         product_paths = git('ls-tree', '-r', '--name-only', PRODUCT, 'integrations/fibsemos/src').decode().splitlines()
-        require(git('ls-files', 'integrations/fibsemos/src').decode().splitlines() == product_paths,
+        expected_paths = sorted(product_paths+['integrations/fibsemos/src/vsem_fibsemos/image_result.py'])
+        require(git('ls-files', 'integrations/fibsemos/src').decode().splitlines() == expected_paths,
                 'runtime plugin source file set changed')
+        require(set(source_lock['files']) == {p.removeprefix('integrations/fibsemos/')
+                for p in expected_paths+['integrations/fibsemos/pyproject.toml']}, 'source lock file set mismatch')
         plugin_files = {}
-        for name in [*product_paths, 'integrations/fibsemos/pyproject.toml']:
+        for name in [*expected_paths, 'integrations/fibsemos/pyproject.toml']:
             raw = (root / name).read_bytes()
-            frozen = git('show', PRODUCT + ':' + name)
-            if name.endswith('pyproject.toml'):
-                require(frozen.count(b'setuptools==75.8.0') == 1, 'unexpected original build pin')
-                frozen = frozen.replace(b'setuptools==75.8.0', b'setuptools==84.2.1')
-            require(raw == frozen, 'product exceeds approved packaging exception')
             relative = name.removeprefix('integrations/fibsemos/')
+            pin = source_lock['files'][relative]
+            require(len(raw) == pin['bytes'] and sha256(raw) == pin['sha256'], 'reviewed product source hash mismatch')
+            if relative not in PRODUCT_CHANGES:
+                require(raw == git('show', PRODUCT+':'+name), 'product exceeds approved image-binding scope')
             plugin_files[relative] = raw
             target = inputs / 'plugin' / relative
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -123,6 +134,8 @@ def main():
         shutil.copyfile(root / 'integrations/fibsemos/review/replacement-artifact-proposal.json', inputs / 'manifest.json')
         for path in Path(__file__).parent.glob('*.py'):
             shutil.copyfile(path, tests / path.name)
+        shutil.copyfile(root/'acceptance/test_fibsemos_image_return.py', tests/'test_image_return.py')
+        write_json(evidence/'image-binding-source.json', source_lock)
         fetch_report, config = fetch_inputs(approved, inputs)
         write_json(evidence / 'fetch.json', fetch_report)
         source_files, source_report = source_inventory(inputs / 'upstream.zip')

@@ -86,7 +86,14 @@ def runtime():
     genuine = run_logged([PYTHON, '-I', '-B', '/tests/genuine.py'],
                          '/out/genuine.log', env=dict(os.environ))
     write_json('/out/genuine-process.json', genuine)
-    require(legacy['exit_code'] == 0 and genuine['exit_code'] == 0, 'CPU acceptance failed')
+    image_contracts = run_logged([PYTHON, '-I', '-B', '/tests/test_image_return.py', '-v'],
+                                '/out/image-contracts.log', env=dict(os.environ))
+    write_json('/out/image-contracts-process.json', image_contracts)
+    genuine_images = run_logged([PYTHON, '-I', '-B', '/tests/genuine_images.py'],
+                               '/out/genuine-images.log', env=dict(os.environ))
+    write_json('/out/genuine-images-process.json', genuine_images)
+    require(all(result['exit_code'] == 0 for result in (legacy, genuine, image_contracts, genuine_images)),
+            'CPU acceptance failed')
 
 
 if __name__ == '__main__':
