@@ -1,6 +1,6 @@
 # Maintenance status
 
-Last verified: **19 November 2026**.
+Last verified: **20 November 2026**.
 
 | Item | State |
 |---|---|
@@ -16,10 +16,10 @@ Last verified: **19 November 2026**.
 
 M05A adds an optional source-only fibsemOS adapter and independent CPU contracts.
 All 42 new tests pass on Windows/Linux; full Linux discovery is 295 tests with
-286 passing and nine existing explicit skips. No fibsemOS distribution was
-installed/imported/executed, no core runtime/workflow/dependency or original test
-changed, and no new GPU qualification is claimed. Candidate device bindings are
-statically reviewed; synchronous acquisition refuses before exposure while the
+286 passing and nine existing explicit skips. That source-only phase did not
+install/import/execute fibsemOS or change the core runtime/workflow/dependencies
+or original tests. The subsequent confined M05B1 experiment is described below;
+no new GPU qualification is claimed. Synchronous acquisition refuses before exposure while the
 public operation/image association is absent. See the
 [prototype](../integrations/fibsemos/README.md) and
 [M05B decision](proposals/FIBSEMOS_M05B_DECISION.md). M05B0 verified the pinned source
@@ -52,8 +52,16 @@ builds and source/member/metadata inspection. Runtime installation then correctl
 refused a wheel filename corrupted by a harness loop-variable collision. That
 harness defect now has a regression test and is corrected. All three owned
 containers were removed; [ordinary CI](https://github.com/BenjaminZingsem/vSEM/actions/runs/44600636201)
-passed on `6002f1b`. Genuine runtime C3-C7 and complete C1-C8 qualification remain
-pending; prior failed evidence is preserved. #10 is unresolved
+passed on `6002f1b`. The [third experiment](https://github.com/BenjaminZingsem/vSEM/actions/runs/44601591492)
+reached real discovery/construction, supported bindings, explicit connection,
+periodic lease loss, unchanged Demo256/1024 and pre-exposure refusal successfully.
+All original42 tests and thread/import cleanup passed. Its remaining C5 failure
+was the harness expecting `PendingOutcome` where the original Stop contract
+requires `AuthorityError` for missing observed generation confirmation. That
+expectation is corrected without changing product behavior or acceptance.
+[Ordinary CI](https://github.com/BenjaminZingsem/vSEM/actions/runs/44601591457) passed
+on `effe5d4`; all three containers were removed. Complete C1-C8 qualification
+awaits the corrected run and audit; failed evidence is preserved. #10 is unresolved
 and PR12 stays draft/unmerged. No other product repair or main merge is approved.
 Core dependencies, API and human-review instructions remain unchanged. No service,
 worker, GPU campaign or maintenance watcher runs.

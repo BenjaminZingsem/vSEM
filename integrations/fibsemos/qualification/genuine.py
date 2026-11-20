@@ -165,7 +165,7 @@ def connection_refusals():
 
 
 def authority_and_stop():
-    from vsem_fibsemos.errors import AdmissionUnknown, PendingOutcome
+    from vsem_fibsemos.errors import AdmissionUnknown, AuthorityError
     with connected() as (microscope, fixture):
         fixture.drop_next_command = True
         request = {'width_px': 256, 'height_px': 256, 'hfw_m': 80e-6, 'dwell_s': 20e-6}
@@ -178,9 +178,15 @@ def authority_and_stop():
         expect(AdmissionUnknown, lambda: microscope.submit_scan(request))
         require([c['action'] for c in fixture.commands] == ['scan_single', 'stop'], 'unexpected command replay')
         fixture.confirm_stop = False
-        expect(PendingOutcome, lambda: microscope._client().stop(timeout_s=.1))
+        # The original contract distinguishes missing generation confirmation
+        # (AuthorityError) from a still-pending operation receipt (PendingOutcome).
+        expect(AuthorityError, lambda: microscope._client().stop(timeout_s=.1))
+        require(fixture.state['stop_generation'] == before + 1, 'unconfirmed Stop invented a new generation')
+        require([c['action'] for c in fixture.commands] == ['scan_single', 'stop', 'stop'],
+                'unconfirmed Stop replayed an earlier acquisition')
         EVIDENCE['uncertain_admission_and_stop'] = {'commands': fixture.commands,
-                                                   'stop_generation': fixture.state['stop_generation']}
+                                                   'stop_generation': fixture.state['stop_generation'],
+                                                   'unconfirmed_stop_refusal': 'AuthorityError'}
 
 
 def lease_loss():
