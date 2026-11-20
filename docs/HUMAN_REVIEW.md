@@ -10,8 +10,11 @@ Ctrl+C stops the server and closes its owned processes. Use a new run directory
 for each launch. Do not send run credentials or invitation URLs in issue reports.
 
 For automation, the configure/freeze completion rules and terminal-fault limits
-are documented in [the API guide](API.md). A completed physical operation can
-precede image delivery; compare applied readbacks and acquisition timestamps. If
+are documented in [the API guide](API.md). The instrument API's
+`/operation/<operation_id>/acquisitions` projection identifies the verified source,
+raster and published cuts for its own commands. A completed physical operation can
+precede image delivery; wait for the exact `final_cut` and inspect its outcome,
+applied readbacks and acquisition timestamps. If
 the episode interlocks, preserve evidence and close the instance. Blanking after
 a terminal fault is not a new Stop acknowledgement or permission to resume.
 
