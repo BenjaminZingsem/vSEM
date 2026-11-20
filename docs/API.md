@@ -21,6 +21,8 @@ own session, exact Origin and CSRF token. There is no truth/evaluator/admin rout
    physical scan progress, delivery age, stop generation and available images.
 3. `POST /command` submits exactly the object shown below. It returns an
    `operation_id`; use `GET /operation/ID` to observe its disposition.
+   `GET /operation/ID/acquisitions` identifies that API command's verified source,
+   raster and delivered cuts; see [association semantics](#command-to-image-association).
 4. Image metadata is `GET /image/ID`; raw SE data is `GET /image/ID/SE`.
    The count plane is row-major, little-endian uint32, four bytes per pixel.
    Columns increase toward positive specimen X; rows increase toward negative Y.
@@ -66,6 +68,46 @@ has advanced. Match source/image identifiers and inspect `outcome`, completed
 pixels, acquisition times, parameter segments and blank holds. Single-frame
 terminal images are listed in `recorded_images`; live scans reuse their source.
 Raw counts and metadata can be stored directly, as the example client does.
+
+### Command-to-image association
+
+For an instrument-API operation returned by this runtime, read
+`GET /operation/<operation_id>/acquisitions` with the same API bearer credentials.
+This read-only endpoint returns protocol `vsem.operation-acquisitions.v1` with
+exactly `protocol`, `operation_id`, `command`, `receipt`, `association`,
+`latest_cut` and `final_cut`. The four-key `receipt` is the ordinary operation
+receipt. `command` is the requested public action, or `lease`.
+
+`association` is null until verified physical facts establish a relation. Its
+keys are `relation`, `source_id`, `raster_id` and `applied_at_ns` (observed episode
+nanoseconds). Single scans use `started_single`; live scans use `live_session`
+and identify the current verified raster. Configure-live uses
+`configuration_applied` for the first matching raster, or `already_active` when
+the accepted configuration is already in use. In the latter case the timestamp
+is when that fact was observed, without implying a new exposure. Freeze uses
+`freeze_of` for the existing source and the session's final raster.
+
+Each non-null cut reference has exactly `image_id`, `source_id`, `raster_id`,
+`cut_elapsed_ns` and `outcome`. Retrieve its existing `/image/<image_id>` metadata
+and `/image/<image_id>/SE` raw counts. A live `latest_cut` can explicitly name an
+older raster while the association names a newer sweep. Do not treat it as the
+current sweep. Configure-live keeps its first applied raster association even
+when the live session advances.
+
+`final_cut` stays null until the exact terminal numerical cut is published.
+For single/configure it belongs to the associated raster; for live/freeze it
+belongs to the session's final raster, not an earlier completed sweep. Physical
+`COMPLETED` can precede this publication. A terminal cut with outcome `CANCELLED`
+is interrupted evidence, not a successful acquisition. Rejected, superseded or
+cancelled-before-application commands have no association. Non-acquisition
+commands have null association and cut references.
+
+Unknown/removed operations, GUI-owned operations and legacy profiles without
+this projection return 404. A failed service returns 503 for its own known
+operations. A missing image is not replaced by a newer one. This endpoint adds
+no durable history or retention policy and never drives physical evolution.
+The GUI BFF does not expose it. All existing authentication and path restrictions
+apply; queries, extra components and encoded substitutes are refused.
 
 ### Live command completion
 

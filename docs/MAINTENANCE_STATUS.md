@@ -7,52 +7,12 @@ Last verified: **20 November 2026**.
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | M05B1 CPU qualification passed; awaiting the next explicit feature choice; M05A remains draft and main unchanged |
+| Maintenance phase | M05B2A merged; owner approved M05B2B0 optional image return, disposable public CPU qualification and draft publication only |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
 | Human-review instance / local coding wave | No persistent human instance or local coding wave; qualification uses owned transient fixtures |
-| Queue | #5-#8 resolved by merged PR9; #4 closed following its reporter correction. #10 remains open: source prototype approved, external adoption and integration pending. |
-
-M05A adds an optional source-only fibsemOS adapter and independent CPU contracts.
-All 42 new tests pass on Windows/Linux; full Linux discovery is 295 tests with
-286 passing and nine existing explicit skips. That source-only phase did not
-install/import/execute fibsemOS or change the core runtime/workflow/dependencies
-or original tests. The subsequent confined M05B1 experiment is described below;
-no new GPU qualification is claimed. Synchronous acquisition refuses before exposure while the
-public operation/image association is absent. See the
-[prototype](../integrations/fibsemos/README.md) and
-[M05B decision](proposals/FIBSEMOS_M05B_DECISION.md). M05B0 verified the pinned source
-and all 55 wheel payloads, but advisory/native-library findings prevent execution
-of that graph. The [inspection report](proposals/FIBSEMOS_ARTIFACT_REVIEW.md) records
-the original findings. The separately approved
-[R1 inspection](proposals/FIBSEMOS_R1_ARTIFACT_REVIEW.md) now verifies all 52
-replacement wheels and the exact Python 3.12 OCI config/four layers. No top-level
-wheel advisory was returned, but older bundled components and base-image findings
-remain; this is not deployment clearance. The
-[M05B1 CPU plan](proposals/FIBSEMOS_M05B1_CPU_PLAN.md) is now approved for its
-confined disposable experiment with explicit risk acceptance. The initial
-[qualification harness](../integrations/fibsemos/qualification/README.md)
-reverifies the source tree and all 52 wheels. The owner additionally approved the
-exact [one-line packaging correction](proposals/FIBSEMOS_M05B1_PACKAGING_DECISION.md)
-from setuptools 75.8.0 to the already approved 84.2.1. The isolated qualification
-branch now prepares networkless build/runtime containers, independent static
-built-wheel admission and genuine upstream C1-C8 tests. Preparation now passes 36
-standard-library tests on Windows; two POSIX process tests pass on the public runner.
-All C1-C8 now pass at the approved experiment scope on implementation `db93715`:
-[CPU run](https://github.com/BenjaminZingsem/vSEM/actions/runs/44688299014) and
-[ordinary CI](https://github.com/BenjaminZingsem/vSEM/actions/runs/44688299105).
-The [audited result](proposals/FIBSEMOS_M05B1_CPU_RESULT.md) records exact inputs,
-real builds and source comparison, genuine discovery/bindings, authority/Stop,
-unchanged Demo 256/1024, pre-exposure refusal and complete owned cleanup.
-Original 42 tests, 38 harness tests and all eight genuine cases pass; ordinary CI
-discovers 295 tests with nine original explicit skips. Failed harness attempts
-and their corrections remain preserved. No product binding repair was needed.
-The next [M05B2A association feature](proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md)
-is proposed only and requires an owner choice before coding. #10 is unresolved
-and PR12 stays draft/unmerged. No other product repair or main merge is approved.
-Core dependencies, API and human-review instructions remain unchanged. No service,
-worker, GPU campaign or maintenance watcher runs.
+| Queue | #5-#8 resolved by merged PR9; #4 closed. #10 remains open. Optional adapter PR12 stays draft; core association is a separate approved prerequisite. |
 
 The owner chose procedural maintenance safeguards instead of GitHub branch
 protection. Continue reviewed PRs, the successful GitHub Actions `acceptance`
@@ -143,6 +103,49 @@ coverage gaps, not clean scan results. No setting or credential scope was change
 [Issue #10](https://github.com/BenjaminZingsem/vSEM/issues/10) received static
 contract review against its exact fibsemOS pin. The proposed optional SEM plugin
 and staged acceptance are in [M05 revision 1](proposals/FIBSEMOS_INTEROP.md).
-Source-prototype implementation needs an owner choice; external dependencies and
-cross-stack execution require a subsequent concrete adoption decision. No external
-code was executed or adopted, and no plugin implementation or service was launched.
+At that checkpoint source implementation and external execution were unapproved.
+Subsequent scoped decisions and results are recorded below; that historical
+inspection is not the current execution status.
+
+## M05 interoperability progress, 20 November
+
+The optional M05A source prototype remains in draft
+[PR12](https://github.com/BenjaminZingsem/vSEM/pull/12). Its separately approved
+M05B1 disposable CPU experiment passed genuine discovery, supported/refused
+bindings, authority/failure/Stop checks and unchanged Demo256/1024 acquisition.
+The [audited dossier](https://github.com/BenjaminZingsem/vSEM/blob/b8b2e2019945c1d66ae463efa6977b178402c409/docs/proposals/FIBSEMOS_M05B1_CPU_RESULT.md)
+records exact source/artifact pins, original tests, isolation and cleanup. These
+results do not authorize private fibsemOS execution or merge its draft adapter.
+
+The owner approved [M05B2A revision 1](proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md):
+an independently authored, read-only public operation/source/raster/cut association.
+It adds no dependency and preserves GUI/API separation and observable state.
+Linux CPU: 277 discovered, 267 passed, 10 explicit skips. Display and source/content
+checks pass. The new actual GPU association test, all 11 original release checks
+and all 8 original GPU transport cases pass. Native 1024 retains both focus segments
+and takes 125.21 s in the original release gate. All owned fixture groups close;
+the selected compute GPU returns to its initial 280 MiB. Independent evidence hashes
+and all 158 tested source-file hashes match. All 77 engine files, original tests,
+authentication predicates and image I/O remain unchanged. Reviewed implementation
+is `29c3f3406f56430c804fb62a4be96d84589c7f1b`; later documentation edits preserve
+its tested executable bytes. [PR13](https://github.com/BenjaminZingsem/vSEM/pull/13)
+records exact-head/integration and post-merge checks, which remain mandatory.
+This capability is separate from the unchanged v0.1.0 release.
+
+PR13 merged at `2e18bdafadab22c56a64cc16cc344bcd5a0bb0c1`; its exact
+post-merge [acceptance run](https://github.com/BenjaminZingsem/vSEM/actions/runs/44750777826)
+passed. The optional adapter remains unmerged.
+
+The owner subsequently approved [M05B2B0 revision 1](proposals/FIBSEMOS_M05B2B0_IMAGE_BINDING_PLAN.md):
+opt-in raw-preserving image return and genuine upstream workflow qualification
+against authored HTTP fixtures in the unchanged disposable public CPU envelope,
+followed by draft publication only. The implementation retains default refusal,
+fixed-window provenance, exact operation/cut attribution and explicit same-operation
+reconciliation. Original M05A and C1-C8 gates stay protected. Source-level contract
+tests pass; genuine configured image qualification is pending its new public run.
+See the [adapter](../integrations/fibsemos/README.md) for capabilities and limits.
+
+This approval does not permit a main/PR12 merge, private external-payload execution,
+actual cross-stack GPU qualification, dependency substitutions or release.
+M05B2B1 requires a separate available-isolation plan and owner decision. No
+human-review server, local coding wave or persistent watcher was started.

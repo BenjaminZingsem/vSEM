@@ -14,7 +14,7 @@ approved the now-merged repair batch described below. See [setup](MAINTENANCE_SE
 | Core imaging and control | Released | Stage XYZ, focus, two-axis stigmation, physical field width/zoom, live scans, alignment ROI and native 1024 acquisition. [GUI walkthrough](GUI_WALKTHROUGH.md). |
 | Acquisition semantics | Released | Timed exposure, partial images, applied-parameter segments, dose accounting and Stop. Numerical delivery may take longer than modeled exposure. [Validation](VALIDATION.md). |
 | Specimen | Released, bounded scope | Finite offline-prepared 1.28 mm procedural specimen; exterior vacuum; runtime generation disabled. |
-| GUI and instrument API | Released for trusted development | Separate principals/transports over one causal engine; observable-only API. This is not OS confinement for hostile agents. [API](API.md). |
+| GUI and instrument API | Released baseline; additive API association qualified | Separate principals/transports over one causal engine; observable-only API. [API](API.md) documents verified operation/source/raster/cut links. This is not OS confinement for hostile agents. |
 | Documentation and CI | Released | Setup, API example, review checklist, seven real GUI screenshots, CPU/display/content checks. GPU qualification is a separate manual gate. |
 | Charging and beam damage | Not active in the release | Experimental work exists separately and still needs integration/qualification. Spatial material codes alone are not physical feedback. |
 | Calibration, persistent replay and hostile-agent confinement | Not delivered | See R04–R06 below and [scientific scope](SCIENCE.md). |
@@ -22,22 +22,13 @@ approved the now-merged repair batch described below. See [setup](MAINTENANCE_SE
 Reports #5-#8 are resolved by merged [PR9](https://github.com/BenjaminZingsem/vSEM/pull/9)
 with passing post-merge CI. #4 is closed following its reporter correction.
 [Issue #10](https://github.com/BenjaminZingsem/vSEM/issues/10) requests a fibsemOS
-plugin. Its approved M05A [source prototype](../integrations/fibsemos/README.md)
-remains in draft review. Confined upstream CPU qualification now passes;
-actual vSEM image return and integration remain unqualified.
-The [artifact inspection](proposals/FIBSEMOS_ARTIFACT_REVIEW.md) verified source and
-55 wheel identities but rejected that environment for execution. The
-[replacement inspection](proposals/FIBSEMOS_R1_ARTIFACT_REVIEW.md) is also complete:
-all identities pass, with native/base risks still disclosed. The
-[CPU qualification experiment](proposals/FIBSEMOS_M05B1_CPU_PLAN.md) is approved.
-Its initial inert admission checks reproduce the frozen source and all 52 wheel
-inventories. The owner approved the exact
-[packaging correction](proposals/FIBSEMOS_M05B1_PACKAGING_DECISION.md), and the
-isolated CPU experiment passes all C1-C8 gates at `db93715`; see the
-[audited result](proposals/FIBSEMOS_M05B1_CPU_RESULT.md). No main merge, deployment
-clearance or private fibsemOS execution follows from that result. The next
-[public acquisition association](proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md)
-is a concrete proposal awaiting an owner feature choice before coding.
+plugin. The optional prototype remains draft; its confined CPU qualification
+passed. The separately approved [M05B2A core prerequisite](proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md)
+is implemented and qualified in [PR13](https://github.com/BenjaminZingsem/vSEM/pull/13),
+merged with passing post-merge acceptance. M05B2B0 image return and confined
+public CPU qualification are now approved for draft publication only; see its
+[bounded plan](proposals/FIBSEMOS_M05B2B0_IMAGE_BINDING_PLAN.md) and dated
+[maintenance status](MAINTENANCE_STATUS.md).
 Consult
 [live issues](https://github.com/BenjaminZingsem/vSEM/issues) and
 [pull requests](https://github.com/BenjaminZingsem/vSEM/pulls) for current activity;
@@ -60,7 +51,7 @@ explicit acceptance criteria when work is authorized.
 | ID | Deliverable | Current status | Required acceptance / dependencies |
 |---|---|---|---|
 | R00 | Supervised repository maintenance | Initialized; first approved repair batch merged and main verified | Use the [maintenance policy](MAINTENANCE_POLICY.md), existing owner account and explicit chat choices before external code/features. Verify account, approved revision, execution boundaries and chosen PR/CI protection. Shared-account chat approval is a procedural gate, not independently enforced by GitHub. |
-| R01 | Support a separate AI-operator project | API/example released; M05A draft; M05B1 confined CPU qualified; M05B2A association feature awaits choice | [M05](proposals/FIBSEMOS_INTEROP.md) preserves raw counts, observable state and truthful outcomes in an optional SEM plugin. The prototype refuses synchronous acquisition before exposure because a public receipt/image association is missing. Exact external adoption and genuine Demo/vSEM workflow qualification remain separate gates. Reproducible focus, stigmation, stage, zoom, ROI and 1024 tasks need observable histories and documented failure cases. Agent learning/policy code belongs in its own project. |
+| R01 | Support a separate AI-operator project | API/example released; M05A optional prototype draft; M05B1 confined CPU qualified; M05B2A merged; M05B2B0 image return/public CPU qualification approved, draft only | [M05B2A](proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md) links verified operations to source/raster/cuts without guessing an image. M05B2B0 qualifies configured raw/view return against authored CPU fixtures; private external adoption and genuine Demo/vSEM GPU workflow remain separate decisions and gates. [M05](proposals/FIBSEMOS_INTEROP.md) preserves raw counts, observable state and truthful outcomes. Agent learning/policy code belongs in its own project. |
 | R02 | Causal charging, damage and spatial material response | Experimental, not integrated | Independently verify exposure history, conductivity/sensitivity combinations, changes within a raster, timing and numerical accuracy. Qualify full-frame performance and human-visible scenarios before integration. No decorative effects or claims based only on code presence. |
 | R03 | Performance, storage and hardware coverage | Qualified baseline; expansion planned | Measure startup, repeated scans, ROI, zoom and 1024 delivery on named hardware; improve cache/chunk/storage behavior without changing scientific bounds or dose/timing. Qualify each additional GPU explicitly. May proceed in independent slices alongside R01/R02. |
 | R04 | Crash-durable replay and bounded storage retention | Planned | Versioned records, recovery from interrupted writes, acquisition-time/partial-frame fidelity, retention controls and tested migration/rollback. Buffered development records do not meet this gate. |

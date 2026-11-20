@@ -13,6 +13,7 @@ from .hierarchical_human_kernel import LiveRealtimeKernel,LiveKernelConfiguratio
 from .human_realtime_records import TickEnd
 from .hierarchical_public_protocol import observable_state,image_observation,validate_command,make_input
 from .live_operation_receipts import LiveOperationReceipts
+from .operation_acquisitions import OperationAcquisitions
 
 
 class ObservedKernel(LiveRealtimeKernel):
@@ -48,14 +49,18 @@ class InteractiveHumanService:
         elif kind != 'lease':raise ValueError('unsupported_request')
         operation_id = 'op-'+secrets.token_hex(12)
         record = {'operation_id':operation_id,'status':'RECEIVED','reason':None,'observed_at_ns':None}
-        with self.lock:self.operations[operation_id] = dict(record)
+        with self.lock:
+            self.operations[operation_id] = dict(record)
+            self._acquisitions_locked().register(operation_id,principal,kind,value)
         work = (principal,kind,value,operation_id)
         target = self.safety if kind == 'command' and value['action'] == 'stop' else self.normal
         try:target.put_nowait(work)
         except queue.Full:
             # No receipt was admitted or returned. Keep admitted records visible
             # before their consumer runs, but retain nothing for queue refusal.
-            with self.lock:del self.operations[operation_id]
+            with self.lock:
+                del self.operations[operation_id]
+                self._acquisitions_locked().discard(operation_id)
             raise BufferError('ingress_capacity')
         return record
 
@@ -107,6 +112,7 @@ class InteractiveHumanService:
                     if prior in ('COMPLETED','CANCELLED','REJECTED'):continue
                     if status == 'ACCEPTED' and prior == 'RUNNING':continue
                     self.operations[operation].update(status=status,reason=reason,observed_at_ns=fact.event_at_ns)
+            self._acquisitions_locked().observe(fact,self.operations)
 
     def _run(self):
         try:
@@ -120,6 +126,7 @@ class InteractiveHumanService:
                     metadata,_ = self.kernel.read_image(ready); observation = image_observation(metadata)
                     with self.lock:
                         self.image_records[ready.image_id] = (ready,observation)
+                        self._acquisitions_locked().publish(ready,observation)
                         self.latest_image = observation
                         if metadata['mode'] == 'SINGLE' and metadata['outcome'] != 'ACQUIRING':self.history.append(observation)
                 for source in (self.safety,self.normal):
@@ -146,6 +153,23 @@ class InteractiveHumanService:
         with self.lock:
             if operation_id not in self.operations:raise KeyError('not_found')
             return dict(self.operations[operation_id])
+
+    def _acquisitions_locked(self):
+        # FiniteHumanService inherits these methods but has its own constructor.
+        # Initialize on admitted work/facts, never on a read-only GET.
+        if not hasattr(self,'_operation_acquisitions'):
+            self._operation_acquisitions = OperationAcquisitions()
+        return self._operation_acquisitions
+
+    def operation_acquisitions(self,principal,operation_id):
+        with self.lock:
+            if operation_id not in self.operations:raise KeyError('not_found')
+            tracker = getattr(self,'_operation_acquisitions',None)
+            if tracker is None:raise KeyError('not_found')
+            result = tracker.projection(operation_id,principal,self.operations[operation_id],self.image_records)
+            if self.failure or self.kernel.causal_error or self.stop_event.is_set():
+                raise BufferError('service_unavailable')
+            return result
 
     def image(self,image_id):
         with self.lock:
