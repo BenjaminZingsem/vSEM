@@ -1,18 +1,18 @@
 # Maintenance status
 
-Last verified: **11 November 2026**.
+Last verified: **20 November 2026**.
 
 | Item | State |
 |---|---|
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Approved repairs merged and post-merge CI verified; issue #10 triaged as a new feature awaiting owner choice |
+| Continuous maintenance goal | Approved M05B2A public command/image association is implemented and locally qualified; final hosted CI and reviewed core PR integration remain required |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
 | Human-review instance / local coding wave | No persistent human instance or local coding wave; qualification uses owned transient fixtures |
-| Queue | #5-#8 resolved by merged PR9; #4 closed following its reporter correction. #10 proposes fibsemOS interoperability; implementation and external adoption are not approved. |
+| Queue | #5-#8 resolved by merged PR9; #4 closed. #10 remains open. Optional adapter PR12 stays draft; core association is a separate approved prerequisite. |
 
 The owner chose procedural maintenance safeguards instead of GitHub branch
 protection. Continue reviewed PRs, the successful GitHub Actions `acceptance`
@@ -103,6 +103,33 @@ coverage gaps, not clean scan results. No setting or credential scope was change
 [Issue #10](https://github.com/BenjaminZingsem/vSEM/issues/10) received static
 contract review against its exact fibsemOS pin. The proposed optional SEM plugin
 and staged acceptance are in [M05 revision 1](proposals/FIBSEMOS_INTEROP.md).
-Source-prototype implementation needs an owner choice; external dependencies and
-cross-stack execution require a subsequent concrete adoption decision. No external
-code was executed or adopted, and no plugin implementation or service was launched.
+At that checkpoint source implementation and external execution were unapproved.
+Subsequent scoped decisions and results are recorded below; that historical
+inspection is not the current execution status.
+
+## M05 interoperability progress, 20 November
+
+The optional M05A source prototype remains in draft
+[PR12](https://github.com/BenjaminZingsem/vSEM/pull/12). Its separately approved
+M05B1 disposable CPU experiment passed genuine discovery, supported/refused
+bindings, authority/failure/Stop checks and unchanged Demo256/1024 acquisition.
+The [audited dossier](https://github.com/BenjaminZingsem/vSEM/blob/b8b2e2019945c1d66ae463efa6977b178402c409/docs/proposals/FIBSEMOS_M05B1_CPU_RESULT.md)
+records exact source/artifact pins, original tests, isolation and cleanup. These
+results do not authorize private fibsemOS execution or merge its draft adapter.
+
+The owner approved [M05B2A revision 1](proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md):
+an independently authored, read-only public operation/source/raster/cut association.
+It adds no dependency and preserves GUI/API separation and observable state.
+Linux CPU: 277 discovered, 267 passed, 10 explicit skips. Display and source/content
+checks pass. The new actual GPU association test, all 11 original release checks
+and all 8 original GPU transport cases pass. Native 1024 retains both focus segments
+and takes 125.21 s in the original release gate. All owned fixture groups close;
+the selected compute GPU returns to its initial 280 MiB. Independent evidence hashes
+and all 158 tested source-file hashes match. All 77 engine files, original tests,
+authentication predicates and image I/O remain unchanged. Final exact-head hosted
+acceptance must pass before the separately authorized core PR merge. No release.
+
+M05B2B adapter image return and genuine cross-stack GPU/HTTP qualification remain
+future owner decisions. Physical completion and correct image attribution are
+separate conditions; the optional adapter still refuses unqualified acquisition.
+No human-review server or persistent watcher was started.

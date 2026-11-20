@@ -85,6 +85,20 @@ class GUIGateway(CoreGateway):
 
 
 class APIGateway(CoreGateway):
+    def dispatch_get(self,path):
+        pieces = path.split('/')
+        if len(pieces) == 4 and pieces[1] == 'operation' and pieces[3] == 'acquisitions':
+            operation = pieces[2]
+            if (not operation.startswith('op-') or len(operation) != 27
+                    or any(c not in '0123456789abcdef' for c in operation[3:])):
+                return self.error(404,'not_found')
+            project = getattr(self.server.service,'operation_acquisitions',None)
+            if project is None:return self.error(404,'not_found')
+            try:return self.reply(200,project(self.server.principal,operation))
+            except KeyError:return self.error(404,'not_found')
+            except Exception:return self.error(503,'service_unavailable')
+        return super().dispatch_get(path)
+
     def authenticated(self):
         headers = self.headers.get_all('Authorization')
         return (self.valid_host() and self.headers.get_all('Cookie') is None and self.headers.get_all('Origin') is None and
