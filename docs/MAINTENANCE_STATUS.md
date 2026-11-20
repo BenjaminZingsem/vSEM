@@ -141,8 +141,9 @@ opt-in raw-preserving image return and genuine upstream workflow qualification
 against authored HTTP fixtures in the unchanged disposable public CPU envelope,
 followed by draft publication only. The implementation retains default refusal,
 fixed-window provenance, exact operation/cut attribution and explicit same-operation
-reconciliation. Original M05A and C1-C8 gates stay protected. Source-level contract
-tests pass; genuine configured image qualification is pending its new public run.
+reconciliation. Original M05A and C1-C8 gates stay protected. All source and genuine configured-image CPU gates pass at `192a6e4`;
+see the [audited result](proposals/FIBSEMOS_M05B2B0_CPU_RESULT.md).
+[PR14](https://github.com/BenjaminZingsem/vSEM/pull/14) remains draft/unmerged.
 See the [adapter](../integrations/fibsemos/README.md) for capabilities and limits.
 
 This approval does not permit a main/PR12 merge, private external-payload execution,

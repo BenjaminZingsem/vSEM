@@ -1,7 +1,7 @@
 # Optional fibsemOS source prototype
 
 **M05B2B0 draft, 20 November 2026. M05B1 CPU qualification passed;
-configured image return awaits its new public CPU gate.** This independently authored package explores an observable-only SEM
+configured image return passes its public CPU fixture gates; unmerged.** This independently authored package explores an observable-only SEM
 adapter for [issue #10](https://github.com/BenjaminZingsem/vSEM/issues/10).
 The approved [proposal](../../docs/proposals/FIBSEMOS_INTEROP.md) separates source
 work from external adoption, actual workflows and integration. Do not install this
@@ -24,7 +24,7 @@ upstream `SystemSettings`, device options, file, notebook output or log.
 | Stop and lease | Separate connections/locks; periodic renewal; receipt plus newer observable Stop generation | Interlock, lease loss and uncertain admission fail honestly; disconnect is not Stop |
 | Raw image | Explicit image/source/cut checks; lossless uint32 little-endian bytes and public acquisition metadata | No newest-image guessing or private operation lookup |
 | fibsemOS entry point and devices | Actual `FibsemMicroscope`, `Beam`, `Stage` subclasses and builders; unchanged `Imaging` service | Genuine discovery/construction and bounded binding tests pass in the disposable M05B1 environment; private/deployed adoption remains unapproved |
-| Synchronous acquisition | Default refusal; explicit fixed-window opt-in returns an upstream image with an immutable raw companion | Exact public operation/source/raster/final-cut association is required; CPU fixture workflow qualification pending; actual vSEM GPU workflow not qualified |
+| Synchronous acquisition | Default refusal; explicit fixed-window opt-in returns an upstream image with an immutable raw companion | Exact public operation/source/raster/final-cut association is required; CPU fixture workflow qualification passed; actual vSEM GPU workflow not qualified |
 | View saving | Generic TIFF and automatic saving explicitly refused before a write/exposure | Use the raw companion's lossless save/load; no view-only save contract is qualified |
 | Auto-functions, ion/milling and other devices | Explicit refusal/absent parameters for the supported candidate paths | No autofocus, alignment, FIB or real microscope compatibility claim |
 
@@ -124,7 +124,8 @@ available through `image.vsem_result.raw_frame`.
 The [M05B1 result](../../docs/proposals/FIBSEMOS_M05B1_CPU_RESULT.md) records
 all C1-C8 passing at `db93715`, including real unchanged Demo 256/1024 acquisitions,
 strict binding/refusal/Stop/lease checks, source admission and cleanup. It does
-not qualify an actual vSEM image return. The merged
+not qualify an actual vSEM image return. The later [M05B2B0 result](../../docs/proposals/FIBSEMOS_M05B2B0_CPU_RESULT.md)
+qualifies configured return against authored CPU HTTP fixtures only. The merged
 [public association prerequisite](../../docs/proposals/FIBSEMOS_M05B2A_CORRELATION_PLAN.md)
 is available in main. The owner approved
 [M05B2B0](../../docs/proposals/FIBSEMOS_M05B2B0_IMAGE_BINDING_PLAN.md) implementation,

@@ -21,6 +21,10 @@ separate interpreter against the installed package. Workstation checks import
 only authored stdlib modules; genuine dependencies execute only in the public
 containers. This qualifies software contracts, not GPU/physics or deployment.
 
+All new and original gates now pass on the frozen image-binding candidate; see
+[the independently audited result](../../../docs/proposals/FIBSEMOS_M05B2B0_CPU_RESULT.md).
+No private/GPU execution or merge follows.
+
 ## Preserved M05B1 baseline
 
 19 November 2026: the owner approved
