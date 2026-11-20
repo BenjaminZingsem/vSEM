@@ -1,0 +1,20 @@
+name: Approved fibsemOS image-return CPU qualification
+on:
+  push:
+    branches: [qualification/fibsemos-m05b2b0-20261120]
+permissions:
+  contents: read
+jobs:
+  fibsemos-cpu:
+    if: github.repository == 'BenjaminZingsem/vSEM' && github.event_name == 'push'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # existing approved action
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Validate maintainer admission checks
+        run: python3 -I -B -m unittest discover -s integrations/fibsemos/qualification -p 'test_*.py' -v
+      - name: Qualify frozen inputs without private connectivity
+        run: python3 -I -B integrations/fibsemos/qualification/run_cpu.py

@@ -7,7 +7,7 @@ Last verified: **20 November 2026**.
 | Simulator | v0.1.0 research release; generic/uncalibrated; charging and damage inactive |
 | Policy | Owner-account mode selected; external-code incorporation and feature implementation require owner choices in chat |
 | Account | Existing `BenjaminZingsem` GitHub login verified; no separate bot required |
-| Continuous maintenance goal | Approved M05B2A public command/image association implemented and qualified; [core PR13](https://github.com/BenjaminZingsem/vSEM/pull/13) records integration/check status |
+| Maintenance phase | M05B2A merged; owner approved M05B2B0 optional image return, disposable public CPU qualification and draft publication only |
 | Earlier experimental goal | Retired by the owner on 6 November; preserve source/evidence; clearing its interface entry is user-controlled |
 | Main protection | Owner chose to leave permissions unchanged on 6 November: main remains unprotected and direct pushes remain available; prepared configuration is not applied |
 | CI | Catalogue read-ahead fix and two new regressions included; local CPU and actual GPU/HTTP gates pass; hosted results are in [Actions](https://github.com/BenjaminZingsem/vSEM/actions/workflows/ci.yml) |
@@ -132,7 +132,21 @@ its tested executable bytes. [PR13](https://github.com/BenjaminZingsem/vSEM/pull
 records exact-head/integration and post-merge checks, which remain mandatory.
 This capability is separate from the unchanged v0.1.0 release.
 
-M05B2B adapter image return and genuine cross-stack GPU/HTTP qualification remain
-future owner decisions. Physical completion and correct image attribution are
-separate conditions; the optional adapter still refuses unqualified acquisition.
-No human-review server or persistent watcher was started.
+PR13 merged at `2e18bdafadab22c56a64cc16cc344bcd5a0bb0c1`; its exact
+post-merge [acceptance run](https://github.com/BenjaminZingsem/vSEM/actions/runs/44750777826)
+passed. The optional adapter remains unmerged.
+
+The owner subsequently approved [M05B2B0 revision 1](proposals/FIBSEMOS_M05B2B0_IMAGE_BINDING_PLAN.md):
+opt-in raw-preserving image return and genuine upstream workflow qualification
+against authored HTTP fixtures in the unchanged disposable public CPU envelope,
+followed by draft publication only. The implementation retains default refusal,
+fixed-window provenance, exact operation/cut attribution and explicit same-operation
+reconciliation. Original M05A and C1-C8 gates stay protected. All source and genuine configured-image CPU gates pass at `192a6e4`;
+see the [audited result](proposals/FIBSEMOS_M05B2B0_CPU_RESULT.md).
+[PR14](https://github.com/BenjaminZingsem/vSEM/pull/14) remains draft/unmerged.
+See the [adapter](../integrations/fibsemos/README.md) for capabilities and limits.
+
+This approval does not permit a main/PR12 merge, private external-payload execution,
+actual cross-stack GPU qualification, dependency substitutions or release.
+M05B2B1 requires a separate available-isolation plan and owner decision. No
+human-review server, local coding wave or persistent watcher was started.
