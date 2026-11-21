@@ -2,6 +2,13 @@
 
 Last verified: **21 November 2026**.
 
+The owner selected M05B2B1A option 1 at proposal revision
+`5cf12538d3ff7752e1d45eb96a511a8b827c0451`. Cold preservation is in progress;
+the update remains held. No local runtime or fresh store is admitted. See the
+[execution checkpoint](proposals/FIBSEMOS_M05B2B1A_RESULT.md) and the unapproved
+[separate VM prerequisite choice](proposals/FIBSEMOS_M05B2B1A_VM_EXTENSION.md).
+No private external/actual GPU experiment, adapter merge or release is approved.
+
 ## Latest interoperability checkpoint
 
 The optional image-return candidate is qualified in disposable public CPU
@@ -20,12 +27,13 @@ remain unqualified. Advisory and secret-scanning queues accessible to this accou
 were empty; Dependabot is disabled and code scanning has no analysis. These are
 coverage gaps, not clean scan results. No settings or permissions changed.
 
-The next [M05B2B1A proposal](proposals/FIBSEMOS_M05B2B1A_ISOLATION_DECISION.md)
-requests a toolchain-preservation/update and isolation-only decision. Its exact
-vendor installer was inspected as inert data, not executed. Private external
-payload/GPU experiments, main/PR12/PR14 merge and release are not authorized by
-that proposal. No service, model wave or watcher was launched. Historical dated
-checkpoints below describe earlier stages, not a later approval.
+The original [M05B2B1A proposal](proposals/FIBSEMOS_M05B2B1A_ISOLATION_DECISION.md)
+is approved within its stated limits. Its exact vendor installer was inspected
+and identically staged, not executed. Fresh-store/WSL prerequisites prevent local
+admission; a backend/Windows-feature change requires the new owner choice above.
+Private external payload/GPU experiments, main/PR12/PR14 merge and release remain
+unapproved. No service, model wave or watcher was launched. The only active job is
+the bounded preservation copy/readback. Historical checkpoints describe earlier stages.
 
 | Item | State |
 |---|---|
