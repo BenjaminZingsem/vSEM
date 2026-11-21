@@ -30,7 +30,9 @@ Actual GPU-engine interoperability still needs an admitted private execution
 envelope and a separate owner choice. Approved
 [M05B2B1A preservation](proposals/FIBSEMOS_M05B2B1A_RESULT.md) is running;
 the [VM prerequisite extension](proposals/FIBSEMOS_M05B2B1A_VM_EXTENSION.md)
-needs an owner choice before feature/backend changes. Neither phase approves
+is now approved at its exact revision 2, with preservation still required before
+the named feature/backend step and a manual owner checkpoint for any reboot.
+No host change has begun. Neither phase approves
 external payload execution or adapter adoption. See the dated
 [maintenance status](MAINTENANCE_STATUS.md).
 Consult

@@ -5,8 +5,13 @@ Last verified: **21 November 2026**.
 The owner selected M05B2B1A option 1 at proposal revision
 `5cf12538d3ff7752e1d45eb96a511a8b827c0451`. Cold preservation is in progress;
 the update remains held. No local runtime or fresh store is admitted. See the
-[execution checkpoint](proposals/FIBSEMOS_M05B2B1A_RESULT.md) and the unapproved
-[separate VM prerequisite choice](proposals/FIBSEMOS_M05B2B1A_VM_EXTENSION.md).
+[execution checkpoint](proposals/FIBSEMOS_M05B2B1A_RESULT.md). The owner also
+approved option 1 of the exact
+[revision 2 VM extension at56466de](https://github.com/BenjaminZingsem/vSEM/blob/56466dea1ce8c25e7051b6608d51ca294c9f8f72/docs/proposals/FIBSEMOS_M05B2B1A_VM_EXTENSION.md).
+Its named feature/backend step remains gated on complete audited preservation;
+a required reboot stops for manual owner restart and explicit return. No feature,
+installer or engine has run. Seventeen authored feature-boundary cases pass;
+actual incomplete-backup refusal was verified without requesting elevation.
 No private external/actual GPU experiment, adapter merge or release is approved.
 
 ## Latest interoperability checkpoint
@@ -30,7 +35,8 @@ coverage gaps, not clean scan results. No settings or permissions changed.
 The original [M05B2B1A proposal](proposals/FIBSEMOS_M05B2B1A_ISOLATION_DECISION.md)
 is approved within its stated limits. Its exact vendor installer was inspected
 and identically staged, not executed. Fresh-store/WSL prerequisites prevent local
-admission; a backend/Windows-feature change requires the new owner choice above.
+admission; the separately approved VM extension above addresses only the named
+backend/Windows-feature scope and does not waive admission or negative tests.
 Private external payload/GPU experiments, main/PR12/PR14 merge and release remain
 unapproved. No service, model wave or watcher was launched. The only active job is
 the bounded preservation copy/readback. Historical checkpoints describe earlier stages.

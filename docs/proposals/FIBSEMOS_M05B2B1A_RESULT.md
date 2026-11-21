@@ -10,12 +10,20 @@ It permits draft evidence publication only. It does not admit private fibsemOS
 execution, wheel installation, actual vSEM/GPU experiments, adapter integration,
 main/PR12/PR14 merge or a release.
 
+The owner subsequently approved option 1 of the immutable
+[revision 2 VM extension](https://github.com/BenjaminZingsem/vSEM/blob/56466dea1ce8c25e7051b6608d51ca294c9f8f72/docs/proposals/FIBSEMOS_M05B2B1A_VM_EXTENSION.md).
+This adds only the named Windows feature and Docker VMM backend selection, after
+complete preservation passes. A required reboot is a manual owner checkpoint:
+stop, preserve evidence and wait for explicit return. No automatic continuation
+or reboot is attached to the preservation job. The proposal itself is unchanged.
+
 ## Observed state
 
 | Gate | Current evidence |
 |---|---|
 | Preserve existing data | Cold copy running with native source write/delete exclusion; separate full destination readback required before acceptance |
 | Preservation acceptance | Six native Windows copy/locking/readback cases pass; 17 independent receipt/ACL cases pass; actual complete backup still pending |
+| VM prerequisite | Revision 2 approved; 17 feature-boundary cases and native script parsing pass; actual incomplete-backup rejection observed without UAC or host change; feature enablement not attempted |
 | Vendor update | Exact approved installer identity rechecked as data; execution held until complete preservation passes |
 | Fresh owned store | Not admitted; a default path or a CLI context alone is insufficient |
 | Local confinement probe | Not run; requires admitted updated runtime and empty owned store |
@@ -25,7 +33,8 @@ Authored preservation/audit scripts and detailed receipts remain private because
 they contain machine-specific paths and identify opaque existing data. No backup
 payload, private configuration, credentials or host vulnerability inventory is
 included here. The updater will not accept a new license, reboot, install an
-additional dependency or silently change WSL/kernel/backend/network settings.
+additional dependency or change WSL/kernel/network settings. Only the explicitly
+approved Docker VMM backend selection is allowed; fresh-store proof remains a gate.
 
 ## Admission findings
 
@@ -40,13 +49,16 @@ The current [vendor release notes](https://docs.docker.com/desktop/release-notes
 also identify a WSL-specific AF_VSOCK isolation fix with a separate WSL version
 prerequisite. The approved Desktop artifact alone cannot be assumed to satisfy
 that prerequisite. No exploit or external package has been executed to test it.
-A newly required WSL/backend change needs a separate owner choice.
+A WSL change remains outside scope. The owner selected the separate VM alternative
+below; this does not qualify its execution boundary before the remaining gates.
 
 The [separate VM prerequisite proposal](FIBSEMOS_M05B2B1A_VM_EXTENSION.md)
-offers the concrete next choice. Its feature/backend/reboot scope is unapproved.
-Keep the original installer held while that choice is pending; preservation
-continues independently. Do not weaken acceptance or treat an authentic installer
-as proof of isolation. No other process automatically applies the update.
+now has the bounded owner approval linked above. Keep the original installer held
+until complete preservation and the named feature/reboot checkpoint pass.
+Preservation continues independently. Do not weaken acceptance or treat an
+authentic installer as proof of isolation. No other process automatically applies
+the update. A failed gate, extra dependency or unsupported fresh-store setting
+stops the affected work; it does not authorize a fallback.
 
 ## Preserved integration boundary
 
