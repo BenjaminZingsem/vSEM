@@ -1,6 +1,31 @@
 # Maintenance status
 
-Last verified: **20 November 2026**.
+Last verified: **21 November 2026**.
+
+## Latest interoperability checkpoint
+
+The optional image-return candidate is qualified in disposable public CPU
+isolation and remains unmerged in [draft PR14](https://github.com/BenjaminZingsem/vSEM/pull/14)
+at `354e851115d2afe746c8f199b256aea713e10747`. Final isolated44775392511 and
+head/integration acceptance44775392645/44775403532 passed from App15368.
+Its [audited result](https://github.com/BenjaminZingsem/vSEM/blob/354e851115d2afe746c8f199b256aea713e10747/docs/proposals/FIBSEMOS_M05B2B0_CPU_RESULT.md)
+records genuine configured256/1024 return against authored HTTP fixtures,
+68 original/new contracts,38 harness tests,8 preserved plus6 new genuine cases,
+345 CPU cases with10 explicit skips, raw/view provenance and verified cleanup.
+All reviewed source/52wheel/OCI identities remain pinned. PR12 is unchanged.
+
+The21November queue inspection found no new reports, reviews or comments. Issue10
+is still open; actual GPU-engine interoperability and optional-package adoption
+remain unqualified. Advisory and secret-scanning queues accessible to this account
+were empty; Dependabot is disabled and code scanning has no analysis. These are
+coverage gaps, not clean scan results. No settings or permissions changed.
+
+The next [M05B2B1A proposal](proposals/FIBSEMOS_M05B2B1A_ISOLATION_DECISION.md)
+requests a toolchain-preservation/update and isolation-only decision. Its exact
+vendor installer was inspected as inert data, not executed. Private external
+payload/GPU experiments, main/PR12/PR14 merge and release are not authorized by
+that proposal. No service, model wave or watcher was launched. Historical dated
+checkpoints below describe earlier stages, not a later approval.
 
 | Item | State |
 |---|---|
