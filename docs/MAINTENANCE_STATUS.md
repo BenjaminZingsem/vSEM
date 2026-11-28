@@ -1,6 +1,50 @@
 # Maintenance status
 
-Last verified: **20 November 2026**.
+Last verified: **28 November 2026**.
+
+The owner rejected Docker VMM on 22 November and approved updating WSL while
+retaining the native CUDA core with a separately isolated CPU adapter. WSL is now
+3.0.5.0 with running kernel 6.18.58.1-microsoft-standard-WSL2. The owner completed
+the one-directory Git ownership repair; ordinary owner-context Git and unchanged
+sampled access rules/file hashes are verified. Maintenance has resumed. Native
+core CPU/GPU/HTTP requalification passed: 267 CPU passes with 10 explicit skips,
+one GPU association case, all 11 release checks and all eight transport cases.
+Native 1024 retained two focus segments; owned fixtures closed and all 158 tested
+source-file hashes match. Private adapter placement and its execution envelope
+remain pending. See the updated
+[execution checkpoint](proposals/FIBSEMOS_M05B2B1A_RESULT.md).
+No VMM feature/backend change, private external adapter execution, merge or
+release follows from these steps.
+
+## Latest interoperability checkpoint
+
+The optional image-return candidate is qualified in disposable public CPU
+isolation and remains unmerged in [draft PR14](https://github.com/BenjaminZingsem/vSEM/pull/14)
+at `354e851115d2afe746c8f199b256aea713e10747`. Final isolated44775392511 and
+head/integration acceptance44775392645/44775403532 passed from App15368.
+Its [audited result](https://github.com/BenjaminZingsem/vSEM/blob/354e851115d2afe746c8f199b256aea713e10747/docs/proposals/FIBSEMOS_M05B2B0_CPU_RESULT.md)
+records genuine configured256/1024 return against authored HTTP fixtures,
+68 original/new contracts,38 harness tests,8 preserved plus6 new genuine cases,
+345 CPU cases with10 explicit skips, raw/view provenance and verified cleanup.
+All reviewed source/52wheel/OCI identities remain pinned. PR12 is unchanged.
+
+The 28 November queue inspection found no newer reports, reviews or comments. Issue10
+is still open; actual GPU-engine interoperability and optional-package adoption
+remain unqualified. Advisory and secret-scanning queues accessible to this account
+were empty; Dependabot is disabled and code scanning has no analysis. These are
+coverage gaps, not clean scan results. No GitHub settings or repository permissions
+changed.
+
+The historical preservation copy/readback completed and remains retained. The
+original store later changed, so the receipt does not establish a current matching
+backup. The exact vendor installer remains staged and unused; no Docker runtime
+or fresh store is admitted. The original proposals remain immutable historical
+records, with their VMM approval superseded by the later rejection. Native
+qualification used reviewed core source and existing qualified dependencies only;
+it cannot qualify the external adapter or its confinement. PR12, PR14 and PR15
+remain draft; adapter integration and release are unapproved. No persistent human
+service, model wave or watcher was launched. Historical checkpoints below describe
+earlier stages.
 
 | Item | State |
 |---|---|
@@ -132,7 +176,8 @@ its tested executable bytes. [PR13](https://github.com/BenjaminZingsem/vSEM/pull
 records exact-head/integration and post-merge checks, which remain mandatory.
 This capability is separate from the unchanged v0.1.0 release.
 
-M05B2B adapter image return and genuine cross-stack GPU/HTTP qualification remain
-future owner decisions. Physical completion and correct image attribution are
-separate conditions; the optional adapter still refuses unqualified acquisition.
-No human-review server or persistent watcher was started.
+Subsequent M05B2B image return is implemented and CPU-fixture-qualified in draft
+PR14, as recorded above. Genuine cross-stack GPU/HTTP qualification, private
+external execution and adapter integration remain pending. Physical completion
+and correct image attribution are separate conditions. No human-review server or
+persistent watcher was started.
